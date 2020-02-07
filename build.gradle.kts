@@ -26,8 +26,7 @@ sourceSets {
     }
 }
 dependencies {
-    // it is highly recommended to replace the '+' symbol with a fixed version
-    implementation("it.unibo.alchemist:alchemist:+")
+    implementation("it.unibo.alchemist:alchemist:9.3.0")
 }
 
 val alchemistGroup = "Run Alchemist"
