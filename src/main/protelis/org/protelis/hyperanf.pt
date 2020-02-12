@@ -1,0 +1,40 @@
+module org:protelis:hyperanf
+import it.unibo.hll.HyperLogLog.*
+
+def myself() = rep (x <- hyperLogLogFor([self.getDeviceUID().getId()])) { x }
+def empty() = rep (x <- hyperLogLogFor([])) { x }
+def hyperANF(depth, source) =
+  if (depth == 0) {
+    [myself(), [myself().getCardinality()]]
+  } else {
+    let recursion = hyperANF(depth - 1, source)
+    let union = foldHoodPlusSelf(nbr(recursion.get(0))) { a, b ->
+      a.union(b)
+    }
+    [union, recursion.get(1).append(union.getCardinality())]
+  }
+
+def hyperANFaccumulate(currentDepth, finalDepth, accumulator) =
+  if (currentDepth == 0) {
+    hyperANFaccumulate(1, finalDepth, [myself()])
+  } else {
+    let accumulated = accumulator.size()
+    let previousLevel = accumulator.get(accumulated - 1)
+    let twoLevelsAgo =  if (accumulated >= 2) { accumulator.get(accumulated - 2) } else { EMPTY_HLL }
+    // Check for early stop
+    if (previousLevel.getCardinality() <= twoLevelsAgo.getCardinality()) {
+        accumulator
+    } else {
+      let thisLevel = foldHoodPlusSelf(nbr(previousLevel)) { a, b -> a.union(b) }
+      let newAccumulator = accumulator.append(thisLevel)
+      if (currentDepth == finalDepth) {
+        newAccumulator
+      } else {
+        hyperANFaccumulate(currentDepth + 1, finalDepth, newAccumulator)
+      }
+    }
+  }
+
+def hyperANF2(depth) = if (depth < 0) { [] } else { hyperANFaccumulate(0, depth, []) }
+
+hyperANF2(500)

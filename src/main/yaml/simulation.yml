@@ -4,7 +4,7 @@ network-model:
   type: ConnectWithinDistance
   parameters: [0.5]
 
-gradient: &gradient
+hyperanf: &hyperanf
   - time-distribution: 1
     # Writing Protelis programs within a YAML file is a bad experience
     # (some characters need escaping, no syntax highlight, no code suggestions...)
@@ -12,7 +12,7 @@ gradient: &gradient
     # Loading the code as a module within Alchemist
     # In order to run this example, make sure that src/main/protelis is part of
     # your classpath (the Gradle script is already properly configured).
-    program: org:protelis:tutorial:distanceTo
+    program: org:protelis:hyperanf
   - program: send
 
 displacements:
@@ -26,4 +26,4 @@ displacements:
         molecule: source
         concentration: true
     programs:
-      - *gradient
+      - *hyperanf

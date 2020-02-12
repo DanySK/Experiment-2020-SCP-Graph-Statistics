@@ -4,6 +4,7 @@
 
 plugins {
     application
+    kotlin("jvm") version "1.3.61"
 }
 
 repositories {
@@ -27,6 +28,9 @@ sourceSets {
 }
 dependencies {
     implementation("it.unibo.alchemist:alchemist:9.3.0")
+    implementation("net.agkn:hll:1.6.0")
+    implementation("org.jgrapht:jgrapht-core:1.3.1")
+    implementation(kotlin("stdlib-jdk8"))
 }
 
 val alchemistGroup = "Run Alchemist"
