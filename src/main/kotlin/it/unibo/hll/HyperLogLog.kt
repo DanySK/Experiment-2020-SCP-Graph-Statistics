@@ -1,7 +1,12 @@
 package it.unibo.hll
 
+import it.unibo.alchemist.model.implementations.molecules.SimpleMolecule
+import it.unibo.alchemist.model.interfaces.Node
+import it.unibo.alchemist.protelis.AlchemistExecutionContext
 import net.agkn.hll.HLL
 import net.agkn.hll.HLLType
+import org.jgrapht.Graph
+import org.jgrapht.graph.SimpleGraph
 
 data class HyperLogLog private constructor(val hll: HLL) {
 
@@ -25,6 +30,38 @@ data class HyperLogLog private constructor(val hll: HLL) {
             emptyHLL(log2m, regwidth).apply { id.forEach { addRaw(rrmxmx(it.toULong()).toLong()) } }
         )
 
+    }
+}
+
+object HarmonicCentrality {
+
+    @JvmStatic fun harmonicCentralityFromHLL(cardinalities: Iterable<HyperLogLog>): Double = cardinalities.asSequence()
+        .map { it.cardinality }
+        .zipWithNext { a, b -> b - a }
+        .withIndex()
+        .map { it.value.toDouble() / (it.index + 1) } // / (it.index + 2) }
+        .sum()
+
+    @JvmStatic fun recomputeHarmonicCentrality(context: AlchemistExecutionContext<*>) {
+        val environment = context.getEnvironmentAccess()
+        val graph: Graph<Node<Any>, *> = SimpleGraph(Any::class.java)
+        environment.getNodes().asSequence()
+            .onEach { graph.addVertex(it) }
+            .map{ environment.getNeighborhood(it) }
+            .map { neighborhood -> Pair(
+                neighborhood.center,
+                neighborhood.neighbors.asSequence()
+                    // Only keep links from higher ids to lower ones.
+                    // Also ensures that the vertex is added before each edge
+                    .filter { it.id < neighborhood.center.id })
+            }
+            .flatMap { (center, neighbors) -> neighbors.map { center to it } }
+//            .onEach { (_, node) -> graph.addVertex(node) }
+            .forEach { (n1, n2) -> graph.addEdge(n1, n2) }
+        // Compute scores and inject in every node
+        org.jgrapht.alg.scoring.HarmonicCentrality(graph).scores.forEach { (node, value) ->
+            node.setConcentration(SimpleMolecule("actualCentrality"), value)
+        }
     }
 }
 

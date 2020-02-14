@@ -12,18 +12,30 @@ hyperanf: &hyperanf
     # Loading the code as a module within Alchemist
     # In order to run this example, make sure that src/main/protelis is part of
     # your classpath (the Gradle script is already properly configured).
-    program: org:protelis:hyperanf
+    program: org:protelis:armonicCentralityHLL
   - program: send
+harmonicOracle: &harmonicOracle
+  - type: ChemicalReaction
+    actions:
+      - type: ComputeHarmonicCentrality
+    conditions:
+      - type: NeighborhoodChanged
+        parameters: [true]
 
 displacements:
   - in:
-      type: Grid
-      parameters: [-5, -5, 5, 5, 0.25, 0.25, 0.1, 0.1]
-    contents:
-      - in:
-          type: Rectangle
-          parameters: [-6, -6, 2, 2]
-        molecule: source
-        concentration: true
+      type: Point
+      parameters: [0, 0]
     programs:
       - *hyperanf
+      - *harmonicOracle
+  - in:
+      type: Rectangle
+      parameters: [999, -10, -10, 10, 10]
+    programs:
+      - *hyperanf
+      - *harmonicOracle
+
+terminators:
+  - type: StableForSteps
+    parameters: [100000, 3]

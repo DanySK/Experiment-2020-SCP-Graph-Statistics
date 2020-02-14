@@ -1,5 +1,6 @@
-module org:protelis:hyperanf
+module org:protelis:armonicCentralityHLL
 import it.unibo.hll.HyperLogLog.*
+import it.unibo.hll.HarmonicCentrality.*
 
 def myself() = rep (x <- hyperLogLogFor([self.getDeviceUID().getId()])) { x }
 def empty() = rep (x <- hyperLogLogFor([])) { x }
@@ -37,4 +38,7 @@ def hyperANFaccumulate(currentDepth, finalDepth, accumulator) =
 
 def hyperANF2(depth) = if (depth < 0) { [] } else { hyperANFaccumulate(0, depth, []) }
 
-hyperANF2(500)
+// recomputeHarmonicCentrality()
+let hyperanf = hyperANF2(500)
+env.put("hyperanf", hyperanf)
+harmonicCentralityFromHLL(hyperanf)
