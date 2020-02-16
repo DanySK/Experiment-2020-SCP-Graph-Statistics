@@ -1,5 +1,11 @@
 incarnation: protelis
 
+variables:
+  nodeCount: &nodeCount
+    formula: 1000
+  stepsCheck: &stepsCheck
+    formula: 3 * nodeCount
+
 network-model:
   type: ConnectWithinDistance
   parameters: [0.5]
@@ -24,18 +30,12 @@ harmonicOracle: &harmonicOracle
 
 displacements:
   - in:
-      type: Point
-      parameters: [0, 0]
-    programs:
-      - *hyperanf
-      - *harmonicOracle
-  - in:
       type: Rectangle
-      parameters: [999, -10, -10, 10, 10]
+      parameters: [*nodeCount, -10, -10, 10, 10]
     programs:
       - *hyperanf
       - *harmonicOracle
 
-terminators:
+terminate:
   - type: StableForSteps
-    parameters: [100000, 3]
+    parameters: [*stepsCheck, 3]
