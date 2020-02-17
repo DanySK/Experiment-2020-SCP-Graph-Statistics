@@ -11,6 +11,8 @@ import net.agkn.hll.HLL
 import net.agkn.hll.HLLType
 import org.jgrapht.Graph
 import org.jgrapht.graph.SimpleGraph
+import org.protelis.lang.datatype.Field
+import org.protelis.vm.ExecutionContext
 
 class HyperLogLog private constructor(val hll: HLL) {
 
@@ -28,7 +30,7 @@ class HyperLogLog private constructor(val hll: HLL) {
     }
 
     override fun equals(other: Any?): Boolean {
-        return other is HyperLogLog && bytes == other.bytes
+        return other is HyperLogLog && bytes.contentEquals(other.bytes)
     }
 
     override fun hashCode() = hashCode
@@ -48,9 +50,22 @@ class HyperLogLog private constructor(val hll: HLL) {
 //            })
 
         fun emptyHLL(log2m: Int = 11, regwidth: Int = 5) = HLL(log2m, regwidth)
+        fun AlchemistExecutionContext<*>.intFromEnviroment(id: String, orElse: Int): Int =
+            (getExecutionEnvironment().get(id, orElse) as Number).toInt()
 
         @JvmOverloads @JvmStatic fun hyperLogLogFor(id: Iterable<Long>, log2m: Int = 11, regwidth: Int = 5) = HyperLogLog(
             emptyHLL(log2m, regwidth).apply { id.forEach { addRaw(rrmxmx(it.toULong()).toLong()) } }
+        )
+
+        @JvmOverloads @JvmStatic fun myself(
+            context: AlchemistExecutionContext<*>,
+            log2m: Int = context.intFromEnviroment("log2m", 11),
+            regwidth: Int = context.intFromEnviroment("regwidth", 5)
+        ) = HyperLogLog(
+            HLL(log2m, regwidth).apply {
+                val node = context.getDeviceUID() as Node<*>
+                addRaw(rrmxmx(node.id.toULong()).toLong())
+            }
         )
 
 //        @JvmOverloads @JvmStatic fun printStats() = println(cache.stats())
@@ -67,7 +82,7 @@ object HarmonicCentrality {
         .map { it.value.toDouble() / (it.index + 1) } // / (it.index + 2) }
         .sum()
 
-    @JvmStatic fun recomputeHarmonicCentrality(context: AlchemistExecutionContext<*>) {
+    @JvmStatic fun recomputeHarmonicCentrality(context: AlchemistExecutionContext<*>): Unit {
         val environment = context.getEnvironmentAccess()
         val graph: Graph<Node<Any>, *> = SimpleGraph(Any::class.java)
         environment.getNodes().asSequence()
@@ -84,10 +99,16 @@ object HarmonicCentrality {
 //            .onEach { (_, node) -> graph.addVertex(node) }
             .forEach { (n1, n2) -> graph.addEdge(n1, n2) }
         // Compute scores and inject in every node
-        org.jgrapht.alg.scoring.HarmonicCentrality(graph).scores.forEach { (node, value) ->
-            node.setConcentration(SimpleMolecule("actualCentrality"), value)
-        }
+        org.jgrapht.alg.scoring.HarmonicCentrality(graph, false, false)
+            .scores
+            .forEach { (node, value) ->
+                node.setConcentration(SimpleMolecule("actualCentrality"), value)
+            }
     }
+}
+
+object FieldUtil {
+    @JvmStatic fun <T> foldToMap(f: Field<T>) = f.toMap()
 }
 
 val M: ULong = 0x4fb21c651e98df25L.toULong() + 0x5000000000000000L.toULong()

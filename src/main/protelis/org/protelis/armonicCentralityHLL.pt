@@ -1,9 +1,12 @@
 module org:protelis:armonicCentralityHLL
 import it.unibo.hll.HyperLogLog.*
 import it.unibo.hll.HarmonicCentrality.*
+import it.unibo.hll.FieldUtil.*
+import java.util.Collections.emptyMap
+import java.lang.System.out
 
-def myself() = rep (x <- hyperLogLogFor([self.getDeviceUID().getId()])) { x }
-def empty() = rep (x <- hyperLogLogFor([])) { x }
+// def myself() = rep (x <- hyperLogLogFor([self.getDeviceUID().getId()])) { x }
+
 def hyperANF(depth, source) =
   if (depth == 0) {
     [myself(), [myself().getCardinality()]]
@@ -15,39 +18,39 @@ def hyperANF(depth, source) =
     [union, recursion.get(1).append(union.getCardinality())]
   }
 
+def lastRound(initial, target) = rep (x <- [initial, initial]) {
+    [x.get(1), target]
+  }.get(0)
+
 def hyperANFaccumulate(currentDepth, finalDepth, accumulator) =
   if (currentDepth == 0) {
     hyperANFaccumulate(1, finalDepth, [myself()])
   } else {
-    let accumulated = accumulator.size()
-    let previousLevel = accumulator.get(accumulated - 1)
-    let twoLevelsAgo =  if (accumulated >= 2) { accumulator.get(accumulated - 2) } else { EMPTY_HLL }
+    let previousLevel = if (currentDepth >= 1 ) { accumulator.get(currentDepth - 1) } else { NaN }
+    let twoLevelsAgo =  if (currentDepth >= 2) { accumulator.get(currentDepth - 2) } else { NaN }
+//    let threeLevelsAgo =  if (currentDepth >= 3) { accumulator.get(currentDepth - 3) } else { NaN }
+//    env.put("d" + currentDepth + "-b1", previousLevel)
+//    env.put("d" + currentDepth + "-b2", twoLevelsAgo)
+//    env.put("d" + currentDepth + "-b3", threeLevelsAgo)
     // Check for early stop
-    if (previousLevel.getCardinality() <= twoLevelsAgo.getCardinality()) {
+    if (previousLevel == twoLevelsAgo) {
         accumulator
     } else {
-/*
-      let thisLevel = rep(lastTime <- empty()) {
-        let local = [previousLevel]
-        rep(previousRound <- []) {
-          let slower = nbr(previousRound)
-          let fastFold = foldUnion(nbr(local))
-//          env.put("fast", fastFold)
-          let slowFold = foldUnion(slower)
-//          env.put("slow", slowFold)
-          local
-        } yield {
-//          env.put("cached", fastFold == slowFold)
-          if (fastFold == slowFold) {
-            lastTime
-          } else {
-            fastFold.reduce(previousLevel) { a, b -> a.union(b) }
-          }
+      let previousLevelNbr = nbr(previousLevel)
+      /*
+      let previousAsMap = foldToMap(previousLevelNbr)
+      let lastRoundNbr = lastRound(emptyMap(), previousAsMap)
+//      env.put(self.getCurrentTime() + "depth-" + currentDepth + "-cur", previousAsMap)
+//      env.put(self.getCurrentTime() + "depth-" + currentDepth + "-old", lastRoundNbr)
+      let thisLevel = rep(x <- EMPTY_HLL) {
+        if (previousAsMap == lastRoundNbr) {
+          x
+        } else {
+          foldUnion(previousLevelNbr)
         }
       }
-*/
-//      env.put("thisLevel", thisLevel)
-      let thisLevel = foldHoodPlusSelf(nbr(previousLevel)) { a, b -> a.union(b) }
+      */
+      let thisLevel = foldUnion(previousLevelNbr)
       let newAccumulator = accumulator.append(thisLevel)
       if (currentDepth == finalDepth) {
         newAccumulator
@@ -62,5 +65,5 @@ def hyperANF2(depth) = if (depth < 0) { [] } else { hyperANFaccumulate(0, depth,
 // recomputeHarmonicCentrality()
 // if (self.getDeviceUID().getId() == 0) { printStats() }
 let hyperanf = hyperANF2(500)
-env.put("hyperanf", hyperanf)
+//env.put("hyperanf", hyperanf)
 harmonicCentralityFromHLL(hyperanf)

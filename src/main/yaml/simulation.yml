@@ -2,13 +2,41 @@ incarnation: protelis
 
 variables:
   nodeCount: &nodeCount
-    formula: 1000
+    formula: 1000-1
+  speed: &speed
+    formula: 10
+  log2m: &log2m
+    formula: 11
+  regsize: &regsize
+    formula: 5
   stepsCheck: &stepsCheck
     formula: 3 * nodeCount
+  samplingRate: &samplingRate
+    formula: 1
+
+environment:
+  type: ImageEnvironment
+  parameters: [square.png]
 
 network-model:
   type: ConnectWithinDistance
-  parameters: [0.5]
+  parameters: [30]
+
+export:
+  - time
+  - type: NumberOfNodes
+  - molecule: "org:protelis:armonicCentralityHLL"
+    value-filter: onlyfinite
+    aggregators: [mean]
+  - molecule: "actualCentrality"
+    value-filter: onlyfinite
+    aggregators: [mean]
+  - molecule: actualCentrality
+    property: |
+      // msqer
+      sqrt((optionally(<value>).orElse(0) - env.get("org:protelis:armonicCentralityHLL", 0)) ^ 2)
+    value-filter: onlyfinite
+    aggregators: [mean, max, min]
 
 hyperanf: &hyperanf
   - time-distribution: 1
@@ -27,14 +55,40 @@ harmonicOracle: &harmonicOracle
     conditions:
       - type: NeighborhoodChanged
         parameters: [true]
+move: &move
+  - time-distribution:
+      type: ExponentialTime
+      parameters: [0.1]
+    type: Event
+    actions:
+      - type: LevyWalk
+        parameters: [*speed]
+staticOracle: &staticOracle
+  - time-distribution:
+      type: DiracComb
+      parameters: [*samplingRate]
+    program: "import it.unibo.hll.HarmonicCentrality.* recomputeHarmonicCentrality()"
 
 displacements:
   - in:
       type: Rectangle
-      parameters: [*nodeCount, -10, -10, 10, 10]
+      parameters: [1, 1, 1, 498, 498]
     programs:
       - *hyperanf
-      - *harmonicOracle
+      - *staticOracle
+      - *move
+  - in:
+      type: Rectangle
+      parameters: [*nodeCount, 1, 1, 498, 498]
+    programs:
+      - *hyperanf
+#      - *harmonicOracle
+      - *move
+    contents:
+      - molecule: regsize
+        concentration: *regsize
+      - molecule: log2m
+        concentration: *log2m
 
 terminate:
   - type: StableForSteps
