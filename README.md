@@ -1,62 +1,80 @@
-# Alchemist Primer
+# Aggregate Graph Statistics
 
-This is a template project to spawn projects using the [Alchemist Simulator](https://github.com/AlchemistSimulator/Alchemist).
-It provides a pre-configured gradle build.
+## Experimental results of the third case study
 
-This project is a quick start for the [Alchemist](https://github.com/AlchemistSimulator/Alchemist) simulator, it shows how to use the simulator via [Gradle](https://gradle.org) to run a simple simulation. More information can be found on [the official Alchemist website](https://alchemistsimulator.github.io).
+This repository contains code and instruction to reproduce the experiments presented in the paper "Engineering Collective Intelligence at the Edge with Aggregate Processes" by Roberto Casadei, Danilo Pianini, Mirko Viroli, Giorgio Audrito, and Ferruccio Damiani; submitted to Elsevier's [Engineering Applications of Artificial Intelligence](https://www.journals.elsevier.com/engineering-applications-of-artificial-intelligence) journal.
 
-## Prerequisites
+## Requirements
 
-Alchemist's prerequisites can be found [here](https://alchemistsimulator.github.io/wiki/usage/installation/).
+Simulating 5000 mobile devices with 10 neighbors each requires up to 13GB of memory.
+Underequipped hardware may not be able to complete the execution successfully.
 
-## How to launch
+In order to run the experiments, the Java Development Kit 11 is required.
+It is very likely that they can run on any later version, but it is not guaranteed.
+We test using OpenJ9 11 and latest, and OpenJDK 11 and latest.
+Original testing was performed with OpenJDK 13.
 
-To run the example you can rely on the pre-configured [Gradle](https://gradle.org) build script.
-It will automatically download all the required libraries, set up the environment, and execute the simulator via command line for you.
-As first step, use `git` to locally clone this repository.
+In order to produce the charts, Python 3 is required.
+We recommend Python 3.8.1,
+but it is very likely that any Python 3 version,
+and in particular any later version will serve the purpose just as well.
+The recommended way to obtain it is via [pyenv](https://github.com/pyenv/pyenv).
 
-Simulations can be included in the `src/main/yaml` folder,
-and executed via the `runAll` Gradle task.
+The experiments have been designed and tested under Linux.
+However, we have some muliplatform build automation in place.
+Everything should run on any recent Linux, MacOS X, and Windows setup.
 
-For each YAML file in `src/main/yaml` a task `runFileName` will be created.
+### Reference machine
 
-In order to launch, open a terminal and move to the project root folder, then on UNIX:
+We provide a reference Travis CI configuration to maintain reproducibility over time.
+While this image: [![Build Status](https://travis-ci.org/DanySK/Experiment-2019-SCP-Graph-Statistics.svg?branch=master)](https://travis-ci.org/DanySK/Experiment-2019-EAAI-Processes)
+is green, the experiment is being maintained and,
+by copying the configuration steps we perform for Travis CI in the `.travis.yml` file,
+you should be able to re-run the experiment entirely.
+
+### Automatic releases
+
+Charts are remotely generated and made available on the project release page.
+[The latest release](https://github.com/DanySK/Experiment-2019-SCP-Graph-Statistics/releases/latest)
+allows for quick retrieval of the latest version of the charts.
+
+## Running the simulations
+
+A graphical execution of the simulation can be started by issuing the following command
+`./gradlew runAllGraphic`.
+Parameter defaults can be tuned in the `simulation.yml` file
+Windows users may try using the `gradlew.bat` script as a replacement for `gradlew`.
+
+The whole simulation batch can be executed by issuing `./gradlew runAllBatch`.
+**Be aware that it may take a very long time**, from several hours to weeks, depending on your hardware.
+If you are under Linux, the system tries to detect the available memory and CPUs automatically, and parallelize the work.
+
+## Generating the charts
+
+In order to speed up the process for those interested in observing and manipulating the existing data,
+we provide simulation-generated data directly in the repository.
+Generating the charts is matter of executing the `process.py` script.
+The enviroment is designed to be used in conjunction with pyenv.
+
+### Python environment configuration
+
+The following guide will start from the assumption that pyenv is installed on your system.
+First, install Python by issuing
+
+``pyenv install --skip-existing 3.8.1``
+
+Now, configure the project to be interpreted with exactly that version:
+
+``pyenv local 3.8.1``
+
+Update the `pip` package manager and install the required dependencies.
+
 ```bash
-./gradlew runAlchemist
-```
-On Windows:
-```
-gradlew.bat runAlchemist
+pip install --upgrade pip
+pip install -r requirements.txt
 ```
 
-Press <kb>P</kb> to start the simulation.
-For further information about the gui, see the [graphical interface shortcuts](https://alchemistsimulator.github.io/wiki/usage/gui/).
+### Data processing and chart creation
 
-Note that the first launch will be rather slow, since Gradle will download all the required files.
-They will get cached in the user's home folder (as per Gradle normal behavior).
-
-## Command line interface
-
-The CLI supports the following options
-
-| Option                                     | Effect                                                                                                                                                                            |
-|--------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| -b,--batch                                 | Runs in batch mode. If one or more -var parameters are specified, multiple simulation runs will be executed in parallel with all the combinations of values.                      |
-| -bmk,--benchmark \<file>                    | Performs a benchmark with the provided simulation, measuring the total execution time. Saves result in given file.                                                                |
-| -cc,--comment-char                         | Sets the char that will be used to mark a data file line as commented. Defaults to #. (To be implemented)                                                                         |
-| -d,--distributed \<file>                    | Distribute simulations in computer grid                                                                                                                                           |
-| -e,--export \<file>                         | Exports the results onto a file                                                                                                                                                   |
-| -g,--effect-stack \<file>                   | Loads an effect stack from file. Does nothing if in headless mode (because --batch and/or --headless are enabled)                                                                 |
-| -h,--help                                  | Print this help and quits the program                                                                                                                                             |
-| -hl,--headless                             | Disable the graphical interface (automatic in batch mode)                                                                                                                         |
-| -i,--interval \<interval>                   | Used when exporting data. Specifies how much simulated time units should pass between two samplings. Defaults to 1.                                                               |
-| -p,--parallelism \<arg>                     | Sets how many threads will be used in batch mode (default to the number of cores of your CPU).                                                                                    |
-| -q,--quiet                                 | Quiet mode: print only error-level informations.                                                                                                                                  |
-| -qq,--quiet-quiet                          | Super quiet mode: the simulator does not log anything. Go cry somewhere else if something goes wrong and you have no clue what.                                                   |
-| -s,--serv \<Ignite note configuration file> | Start Ignite cluster node on local machine                                                                                                                                        |
-| -t,--end-time \<Time>                       | The simulation will be concluded at the specified time. Defaults to infinity.                                                                                                     |
-| -v,--verbose                               | Verbose mode: prints info-level informations. Slows the simulator down.                                                                                                           |
-| -var,--variable \<var1 var2 ... varN>       | Used with -b. If the specified variable exists in the Alchemist YAML file, it is added to the pool of  variables. Be wary: complexity quickly grows with the number of variables. |
-| -vv,--vverbose                             | Very verbose mode: prints debug-level informations. Slows the simulator down. A lot.                                                                                              |
-| -vvv,--vvverbose                           | Very very verbose mode: prints trace-level informations. Slows the simulator down. An awful lot.                                                                                  |
-| -y,--yaml \<file>                           | Load the specified Alchemist YAML file                                                                                                                                            |
+This section assumes you correctly completed the required configuration described in the previous section.
+In order for the script to execute, you only need to launch the actual process by issuing `python process.py`
