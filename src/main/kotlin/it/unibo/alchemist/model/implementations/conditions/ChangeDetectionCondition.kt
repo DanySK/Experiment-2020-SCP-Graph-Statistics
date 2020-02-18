@@ -2,7 +2,7 @@ package it.unibo.alchemist.model.implementations.conditions
 
 import it.unibo.alchemist.model.interfaces.Node
 
-abstract class ChangeDetectionCondition<T, X> @JvmOverloads constructor(
+abstract class ChangeDetectionCondition<T, X>(
     node: Node<T>
 ) : AbstractCondition<T>(node) {
 
