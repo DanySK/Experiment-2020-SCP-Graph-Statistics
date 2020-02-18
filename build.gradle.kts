@@ -94,7 +94,7 @@ File(rootProject.rootDir.path + "/src/main/yaml").listFiles()
             maxHeapSize = "${minOf(heap.toInt(), threadCount * taskSize)}m"
             File("data").mkdirs()
             args(
-                "-e", "data/",
+                "-e", "data/${it.nameWithoutExtension}",
                 "-b",
                 "-var", "seed", "speed", "meanNeighbors", "nodeCount",
                 "-p", threadCount,
