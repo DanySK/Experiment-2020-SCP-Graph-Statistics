@@ -1,14 +1,27 @@
 incarnation: protelis
 
 variables:
+  seed: &seed
+    min: 0
+    max: 100
+    step: 1
+    default: 0
   nodeCount: &nodeCount
-    formula: 5
+# 2000 ~ 10*60 ~ 600
+# 1000 ~ 3*60 ~ 180
+# 500 ~ 60
+    type: ArbitraryVariable
+    parameters: [500, [10, 20, 50, 100, 200, 500, 1000, 2000, 5000]]
+  groupCount: &groupCount
+    formula: nodeCount - 1
   meanNeighbors:
-    formula: 10
+    type: ArbitraryVariable
+    parameters: [10, [2, 3, 5, 7, 10]]
   commRange: &commRange
     formula: 500 * Math.sqrt(meanNeighbors / Math.PI / nodeCount)
   speed: &speed
-    formula: 10
+    type: ArbitraryVariable
+    parameters: [10, [0, 1, 2, 5, 10]]
   log2m: &log2m
     formula: 11
   regsize: &regsize
@@ -16,7 +29,11 @@ variables:
   stepsCheck: &stepsCheck
     formula: 3 * nodeCount
   samplingRate: &samplingRate
-    formula: 1/2
+    formula: 2
+
+seeds:
+  simulation: *seed
+  scenario: *seed
 
 environment:
   type: ImageEnvironment
@@ -68,7 +85,7 @@ move: &move
     type: Event
     actions:
       - type: LevyWalk
-        parameters: [*speed, 100, 1]
+        parameters: [*speed, 50, 1]
 
 staticOracle: &staticOracle
   - time-distribution:
@@ -77,19 +94,19 @@ staticOracle: &staticOracle
     program: "import it.unibo.hll.HarmonicCentrality.* recomputeHarmonicCentrality()"
 
 displacements:
-#  - in:
-#      type: Rectangle
-#      parameters: [1, 1, 1, 498, 498]
-#    programs:
-#      - *hyperanf
-#      - *staticOracle
-#      - *move
   - in:
       type: Rectangle
-      parameters: [*nodeCount, 1, 1, 498, 498]
+      parameters: [1, 1, 1, 498, 498]
     programs:
       - *hyperanf
-      - *harmonicOracle
+      - *staticOracle
+      - *move
+  - in:
+      type: Rectangle
+      parameters: [*groupCount, 1, 1, 498, 498]
+    programs:
+      - *hyperanf
+#      - *harmonicOracle
       - *move
     contents:
       - molecule: regsize
@@ -101,4 +118,4 @@ terminate:
   - type: StableForSteps
     parameters: [*stepsCheck, 3]
   - type: AfterTime
-    parameters: [500000]
+    parameters: [50]
