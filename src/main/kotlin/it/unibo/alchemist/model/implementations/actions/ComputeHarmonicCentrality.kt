@@ -43,10 +43,10 @@ private typealias Environment = it.unibo.alchemist.model.interfaces.Environment<
  *
  * @param node
  */
-class ComputeHarmonicCentrality @JvmOverloads constructor(
+class ComputeHarmonicCentrality(
     val environment: Environment,
     node: Node<Double>,
-    val targetMolecule: Molecule
+    val targetMolecule: Molecule =
 ) : AbstractAction<Double>(node) {
 
     constructor(
