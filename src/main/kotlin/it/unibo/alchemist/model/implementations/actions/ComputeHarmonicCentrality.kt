@@ -59,22 +59,6 @@ class ComputeHarmonicCentrality @JvmOverloads constructor(
 
     override fun execute() {
         node.setConcentration(targetMolecule, environment.harmonicCentralityOf(node))
-//        val (graph, lastUpdate) = environment.asGraph
-//        val previousNeighborhood = graph.neighborsOf(nodeRef)
-//        graph.repopulate(nodeRef, environment.getNeighborhood(node).asSequence().map { it.toRef })
-//        val newNeighborhood = graph.neighborsOf(nodeRef)
-//        /*
-//         * Check if there has actually been a change, if not, do not run expensive computations
-//         */
-//        if (lastUpdate < DoubleTime.ZERO_TIME || previousNeighborhood != newNeighborhood) {
-//            val currentTime = environment.getSimulation().getTime()
-//            envToGraph.put(environment, graph to currentTime)
-//            org.jgrapht.alg.scoring.HarmonicCentrality(graph, false, false)
-//                .scores
-//                .forEach { (node, value) ->
-//                    node.setConcentration(targetMolecule, value)
-//                }
-//        }
     }
 
     /**
