@@ -83,10 +83,11 @@ object HarmonicCentrality {
         .map { it.value.toDouble() / (it.index + 1) } // / (it.index + 2) }
         .sum()
 
+    private val hCMol = SimpleMolecule("harmonicCentrality")
     @JvmStatic fun recomputeHarmonicCentrality(context: AlchemistExecutionContext<*>): Unit {
         with (context.getEnvironmentAccess()) {
             getNodes().forEach {
-                context.getExecutionEnvironment().put("harmonicCentrality", harmonicCentralityOf(it))
+                it.setConcentration(hCMol, harmonicCentralityOf(it))
             }
         }
 //        val environment = context.getEnvironmentAccess()
