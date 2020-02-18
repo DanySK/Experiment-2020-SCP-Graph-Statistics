@@ -122,6 +122,7 @@ val M: ULong = 0x4fb21c651e98df25L.toULong() + 0x5000000000000000L.toULong()
 const val S = 28
 const val R1 = 49
 const val R2 = 24
+@ExperimentalUnsignedTypes
 fun rrmxmx(v: ULong): ULong {
     var a: ULong = v xor ((v ror R1) xor (v ror R2))
     a *= M
