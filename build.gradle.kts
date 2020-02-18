@@ -96,7 +96,7 @@ File(rootProject.rootDir.path + "/src/main/yaml").listFiles()
             args(
                 "-e", "data/",
                 "-b",
-                "-var", "seed",
+                "-var", "seed", "speed", "meanNeighbors", "nodeCount",
                 "-p", threadCount,
                 "-i", 0.5
             )
