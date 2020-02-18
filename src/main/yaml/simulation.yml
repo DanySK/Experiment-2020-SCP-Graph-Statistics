@@ -57,7 +57,7 @@ export:
       // msqer
       sqrt((optionally(<value>).orElse(0) - env.get("org:protelis:armonicCentralityHLL", 0)) ^ 2)
     value-filter: onlyfinite
-    aggregators: [mean, max, min]
+    aggregators: [mean, max, min, standarddeviation]
 
 hyperanf: &hyperanf
   - time-distribution: 1
