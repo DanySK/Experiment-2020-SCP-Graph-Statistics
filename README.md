@@ -27,7 +27,7 @@ Everything should run on any recent Linux, MacOS X, and Windows setup.
 ### Reference machine
 
 We provide a reference Travis CI configuration to maintain reproducibility over time.
-While this image: [![Build Status](https://travis-ci.org/DanySK/Experiment-2019-SCP-Graph-Statistics.svg?branch=master)](https://travis-ci.org/DanySK/DanySK/Experiment-2019-SCP-Graph-Statistics)
+While this image: [![Build Status](https://travis-ci.org/DanySK/Experiment-2019-SCP-Graph-Statistics.svg?branch=master)](https://travis-ci.org/DanySK/Experiment-2019-SCP-Graph-Statistics)
 is green, the experiment is being maintained and,
 by copying the configuration steps we perform for Travis CI in the `.travis.yml` file,
 you should be able to re-run the experiment entirely.
