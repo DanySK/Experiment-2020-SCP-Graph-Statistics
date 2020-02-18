@@ -15,6 +15,7 @@ import org.protelis.lang.datatype.Field
 import org.protelis.vm.ExecutionContext
 import it.unibo.alchemist.model.HarmonicCentrality.harmonicCentralityOf
 
+@ExperimentalUnsignedTypes
 class HyperLogLog private constructor(val hll: HLL) {
 
     val cardinality by lazy { hll.cardinality() }
@@ -74,6 +75,7 @@ class HyperLogLog private constructor(val hll: HLL) {
     }
 }
 
+@ExperimentalUnsignedTypes
 object HarmonicCentrality {
 
     @JvmStatic fun harmonicCentralityFromHLL(cardinalities: Iterable<HyperLogLog>): Double = cardinalities.asSequence()
@@ -118,10 +120,11 @@ object FieldUtil {
     @JvmStatic fun <T> foldToMap(f: Field<T>) = f.toMap()
 }
 
-val M: ULong = 0x4fb21c651e98df25L.toULong() + 0x5000000000000000L.toULong()
-const val S = 28
-const val R1 = 49
-const val R2 = 24
+@ExperimentalUnsignedTypes
+private val M: ULong = 0x4fb21c651e98df25L.toULong() + 0x5000000000000000L.toULong()
+private const val S = 28
+private const val R1 = 49
+private const val R2 = 24
 @ExperimentalUnsignedTypes
 fun rrmxmx(v: ULong): ULong {
     var a: ULong = v xor ((v ror R1) xor (v ror R2))
