@@ -42,7 +42,9 @@ allows for quick retrieval of the latest version of the charts.
 
 A graphical execution of the simulation can be started by issuing the following command
 `./gradlew runAllGraphic`.
-Parameter defaults can be tuned in the `simulation.yml` file
+Parameter defaults can be tuned in the `simulation.yml` file.
+Simulation on the graphical interface can be started with <kbd>P</kbd>,
+for further details please refer to the Alchemist Simulator guide.
 Windows users may try using the `gradlew.bat` script as a replacement for `gradlew`.
 
 The whole simulation batch can be executed by issuing `./gradlew runAllBatch`.
