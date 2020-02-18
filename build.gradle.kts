@@ -49,7 +49,7 @@ if (System.getProperty("os.name").toLowerCase().contains("linux")) {
     14 * 1024L
 }
 val taskSizeFromProject: Int? by project
-val taskSize = taskSizeFromProject ?: 512
+val taskSize = taskSizeFromProject ?: 12 * 1024 // 5K nodes require about 12GB
 val threadCount = maxOf(1, minOf(Runtime.getRuntime().availableProcessors(), heap.toInt() / taskSize ))
 
 val alchemistGroup = "Run Alchemist"
@@ -60,7 +60,7 @@ val runAllGraphic by tasks.register<DefaultTask>("runAllGraphic") {
     group = alchemistGroup
     description = "Launches all simulations with the graphic subsystem enabled"
 }
-val runBatch by tasks.register<DefaultTask>("runAllGraphic") {
+val runAllBatch by tasks.register<DefaultTask>("runAllBatch") {
     group = alchemistGroup
     description = "Launches all experiments"
 }
@@ -98,9 +98,9 @@ File(rootProject.rootDir.path + "/src/main/yaml").listFiles()
                 "-b",
                 "-var", "seed",
                 "-p", threadCount,
-                "-i", 10
+                "-i", 0.5
             )
         }
-
+        runAllBatch.dependsOn(batch)
     }
 
