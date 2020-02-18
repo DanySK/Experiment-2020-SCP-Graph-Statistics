@@ -19,7 +19,7 @@ before_install:
   - travis_retry git clone --depth 1 $GRAVIS_REPO $GRAVIS
   - source $GRAVIS/install-jdk
 script:
-  - travis_retry ./gradlew clean runAllBatch
+  - travis_retry ./gradlew clean runAllGraphic
 before_cache:
   - $GRAVIS/clean-gradle-cache
 cache:
