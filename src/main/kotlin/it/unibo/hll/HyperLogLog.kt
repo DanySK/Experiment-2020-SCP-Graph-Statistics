@@ -13,6 +13,7 @@ import org.jgrapht.Graph
 import org.jgrapht.graph.SimpleGraph
 import org.protelis.lang.datatype.Field
 import org.protelis.vm.ExecutionContext
+import it.unibo.alchemist.model.HarmonicCentrality.harmonicCentralityOf
 
 class HyperLogLog private constructor(val hll: HLL) {
 
@@ -83,27 +84,32 @@ object HarmonicCentrality {
         .sum()
 
     @JvmStatic fun recomputeHarmonicCentrality(context: AlchemistExecutionContext<*>): Unit {
-        val environment = context.getEnvironmentAccess()
-        val graph: Graph<Node<Any>, *> = SimpleGraph(Any::class.java)
-        environment.getNodes().asSequence()
-            .onEach { graph.addVertex(it) }
-            .map{ environment.getNeighborhood(it) }
-            .map { neighborhood -> Pair(
-                neighborhood.center,
-                neighborhood.neighbors.asSequence()
-                    // Only keep links from higher ids to lower ones.
-                    // Also ensures that the vertex is added before each edge
-                    .filter { it.id < neighborhood.center.id })
+        with (context.getEnvironmentAccess()) {
+            getNodes().forEach {
+                context.getExecutionEnvironment().put("harmonicCentrality", harmonicCentralityOf(it))
             }
-            .flatMap { (center, neighbors) -> neighbors.map { center to it } }
-//            .onEach { (_, node) -> graph.addVertex(node) }
-            .forEach { (n1, n2) -> graph.addEdge(n1, n2) }
-        // Compute scores and inject in every node
-        org.jgrapht.alg.scoring.HarmonicCentrality(graph, false, false)
-            .scores
-            .forEach { (node, value) ->
-                node.setConcentration(SimpleMolecule("actualCentrality"), value)
-            }
+        }
+//        val environment = context.getEnvironmentAccess()
+//        val graph: Graph<Node<Any>, *> = SimpleGraph(Any::class.java)
+//        environment.getNodes().asSequence()
+//            .onEach { graph.addVertex(it) }
+//            .map{ environment.getNeighborhood(it) }
+//            .map { neighborhood -> Pair(
+//                neighborhood.center,
+//                neighborhood.neighbors.asSequence()
+//                    // Only keep links from higher ids to lower ones.
+//                    // Also ensures that the vertex is added before each edge
+//                    .filter { it.id < neighborhood.center.id })
+//            }
+//            .flatMap { (center, neighbors) -> neighbors.map { center to it } }
+////            .onEach { (_, node) -> graph.addVertex(node) }
+//            .forEach { (n1, n2) -> graph.addEdge(n1, n2) }
+//        // Compute scores and inject in every node
+//        org.jgrapht.alg.scoring.HarmonicCentrality(graph, false, false)
+//            .scores
+//            .forEach { (node, value) ->
+//                node.setConcentration(SimpleMolecule("actualCentrality"), value)
+//            }
     }
 }
 

@@ -13,6 +13,7 @@ import org.jgrapht.Graph
 import org.jgrapht.graph.SimpleGraph
 import java.lang.ref.WeakReference
 import java.util.WeakHashMap
+import it.unibo.alchemist.model.HarmonicCentrality.harmonicCentralityOf
 
 
 private class NodeRef(node: Node<Double>) {
@@ -57,28 +58,29 @@ class ComputeHarmonicCentrality @JvmOverloads constructor(
     private val nodeRef = node.toRef
 
     override fun execute() {
-        val (graph, lastUpdate) = environment.asGraph
-        val previousNeighborhood = graph.neighborsOf(nodeRef)
-        graph.repopulate(nodeRef, environment.getNeighborhood(node).asSequence().map { it.toRef })
-        val newNeighborhood = graph.neighborsOf(nodeRef)
-        /*
-         * Check if there has actually been a change, if not, do not run expensive computations
-         */
-        if (lastUpdate < DoubleTime.ZERO_TIME || previousNeighborhood != newNeighborhood) {
-            val currentTime = environment.getSimulation().getTime()
-            envToGraph.put(environment, graph to currentTime)
-            org.jgrapht.alg.scoring.HarmonicCentrality(graph, false, false)
-                .scores
-                .forEach { (node, value) ->
-                    node.setConcentration(targetMolecule, value)
-                }
-        }
+        node.setConcentration(targetMolecule, environment.harmonicCentralityOf(node))
+//        val (graph, lastUpdate) = environment.asGraph
+//        val previousNeighborhood = graph.neighborsOf(nodeRef)
+//        graph.repopulate(nodeRef, environment.getNeighborhood(node).asSequence().map { it.toRef })
+//        val newNeighborhood = graph.neighborsOf(nodeRef)
+//        /*
+//         * Check if there has actually been a change, if not, do not run expensive computations
+//         */
+//        if (lastUpdate < DoubleTime.ZERO_TIME || previousNeighborhood != newNeighborhood) {
+//            val currentTime = environment.getSimulation().getTime()
+//            envToGraph.put(environment, graph to currentTime)
+//            org.jgrapht.alg.scoring.HarmonicCentrality(graph, false, false)
+//                .scores
+//                .forEach { (node, value) ->
+//                    node.setConcentration(targetMolecule, value)
+//                }
+//        }
     }
 
     /**
      * @return The context for this action.
      */
-    override fun getContext() = Context.GLOBAL
+    override fun getContext() = Context.LOCAL
 
     /**
      * This method allows to clone this action on a new node. It may result
