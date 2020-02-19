@@ -1,6 +1,5 @@
 # Ignore Gradle project-specific cache directory
 .gradle
-
 # Ignore Gradle build output directory
 build
 .idea/
@@ -11,3 +10,4 @@ charts/
 timeprocessed
 data_summary_mean
 data_summary_std
+.DS_Store
