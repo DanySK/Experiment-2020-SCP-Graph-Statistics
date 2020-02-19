@@ -8,3 +8,6 @@ out/
 test.txt
 data/
 charts/
+timeprocessed
+data_summary_mean
+data_summary_std
