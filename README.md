@@ -2,7 +2,7 @@
 
 ## Experimental results of the third case study
 
-This repository contains code and instruction to reproduce the experiments presented in the paper "Engineering Collective Intelligence at the Edge with Aggregate Processes" by Roberto Casadei, Danilo Pianini, Mirko Viroli, Giorgio Audrito, and Ferruccio Damiani; submitted to Elsevier's [Engineering Applications of Artificial Intelligence](https://www.journals.elsevier.com/engineering-applications-of-artificial-intelligence) journal.
+This repository contains code and instruction to reproduce the experiments presented in the paper "Aggregate Graph Statistics" by Giorgio Audrito, Danilo Pianini, Mirko Viroli, and Ferruccio Damiani; submitted to Elsevier's [Science of Computer Programming](https://www.journals.elsevier.com/science-of-computer-programming) journal.
 
 ## Requirements
 
@@ -27,7 +27,7 @@ Everything should run on any recent Linux, MacOS X, and Windows setup.
 ### Reference machine
 
 We provide a reference Travis CI configuration to maintain reproducibility over time.
-While this image: [![Build Status](https://travis-ci.org/DanySK/Experiment-2019-SCP-Graph-Statistics.svg?branch=master)](https://travis-ci.org/DanySK/Experiment-2019-EAAI-Processes)
+While this image: [![Build Status](https://travis-ci.org/DanySK/Experiment-2020-SCP-Graph-Statistics.svg?branch=master)](https://travis-ci.org/DanySK/Experiment-2020-SCP-Graph-Statistics)
 is green, the experiment is being maintained and,
 by copying the configuration steps we perform for Travis CI in the `.travis.yml` file,
 you should be able to re-run the experiment entirely.
@@ -35,14 +35,16 @@ you should be able to re-run the experiment entirely.
 ### Automatic releases
 
 Charts are remotely generated and made available on the project release page.
-[The latest release](https://github.com/DanySK/Experiment-2019-SCP-Graph-Statistics/releases/latest)
+[The latest release](https://github.com/DanySK/Experiment-2020-SCP-Graph-Statistics/releases/latest)
 allows for quick retrieval of the latest version of the charts.
 
 ## Running the simulations
 
 A graphical execution of the simulation can be started by issuing the following command
 `./gradlew runAllGraphic`.
-Parameter defaults can be tuned in the `simulation.yml` file
+Parameter defaults can be tuned in the `simulation.yml` file.
+Simulation on the graphical interface can be started with <kbd>P</kbd>,
+for further details please refer to the Alchemist Simulator guide.
 Windows users may try using the `gradlew.bat` script as a replacement for `gradlew`.
 
 The whole simulation batch can be executed by issuing `./gradlew runAllBatch`.
