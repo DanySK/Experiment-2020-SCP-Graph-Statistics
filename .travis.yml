@@ -44,7 +44,7 @@ before_cache:
   - $GRAVIS/clean-gradle-cache
 cache:
   directories:
-    - $PYENV_ROOT
+    - $HOME/.pyenv
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
 
@@ -56,9 +56,11 @@ stages:
     # otherwise, run if there is no tag and the commit does not point to sole changes to data and charts
     if: type = cron OR tag is blank AND NOT commit_message =~ /\[(AUTOMATIC|CHARTS|DATA).*\].*/
   - name: charts
+    # Always run if it's a cron job
     # Always run if there is no tag
     # Also run for tags if the commit message is custom (it's not a data generation commit)
-    if: tag is blank OR NOT commit_message =~ /\[AUTOMATIC.*\].*/
+    if: cron OR tag is blank AND NOT commit_message =~ /\[(AUTOMATIC|DATA).*\].*/
+  - name: deploy
 
 # Operations
 
@@ -73,13 +75,20 @@ _make_charts: &make_charts
   stage: charts
   install:
     - source $GRAVIS/install-python
-    - pip install --upgrade pip
-    - pip install -r requirements.txt
+    - pip install --upgrade pip --user
+    - pip install -r requirements.txt --user
   script: travis_wait 50 python process.py
 
 _test_charts: &test_charts
   <<: *make_charts
   <<: *reduce_data_size
+
+_deploy_base: &deploy_base
+  provider: releases
+  edge: true
+  file:
+    - "${TRAVIS_BUILD_DIR}/*.tar.gz"
+    - "${TRAVIS_BUILD_DIR}/charts/*.pdf"
 
 _deploy: &deploy
   before_deploy:
@@ -90,13 +99,14 @@ _deploy: &deploy
     - git config --local user.email "danilo.pianini@gmail.com"
     - $GRAVIS/autotag
   deploy:
-    provider: releases
-    edge: true
-    file:
-      - "${TRAVIS_BUILD_DIR}/*.tar.gz"
-      - "${TRAVIS_BUILD_DIR}/charts/*.pdf"
-    on:
-      <<: *repo_filter
+    - <<: *deploy_base
+      on:
+        <<: *repo_filter
+        tags: true
+    - <<: *deploy_base
+      on:
+        <<: *repo_filter
+        tags: false
 
 jobs:
   include:
@@ -104,6 +114,7 @@ jobs:
     - <<: *make_charts
       <<: *deploy
       <<: *python_reference_environment
+      stage: deploy
     # Test on latest Python
     - *test_charts
     # Test on both reference and latest Python on OSX and Windows
