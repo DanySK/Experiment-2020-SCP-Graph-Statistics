@@ -1,6 +1,3 @@
-# Skip build if commit message explicitly says so
-if: NOT commit_message =~ /\[\s*SKIP(_|-|\s*)BUILD.*\].*/
-
 # Configuration
 
 _python_reference_version: &python_reference_version PYTHON="3.8.1"
@@ -54,13 +51,15 @@ stages:
   - name: test
     # Always run if it's a cron job
     # otherwise, run if there is no tag and the commit does not point to sole changes to data and charts
-    if: type = cron OR tag is blank AND NOT commit_message =~ /\[(AUTOMATIC|CHARTS|DATA).*\].*/
+    if: type = cron OR tag is blank AND NOT commit_message =~ /\[\s*(AUTOMATIC|CHARTS|DATA|DEPLOY).*\].*/
   - name: charts
     # Always run if it's a cron job
     # Always run if there is no tag
     # Also run for tags if the commit message is custom (it's not a data generation commit)
-    if: cron OR tag is blank AND NOT commit_message =~ /\[(AUTOMATIC|DATA).*\].*/
+    if: type = cron OR tag is blank AND NOT commit_message =~ /\[\s*(AUTOMATIC|DATA|DEPLOY).*\].*/
   - name: deploy
+    # Run always, unless it's a deployment created by auto-tag (the task has already been successfully completed)
+    if: tag is blank OR tag =~ /.*-\d{4}-\d{2}-\d{2}T\d*/
 
 # Operations
 
@@ -102,11 +101,6 @@ _deploy: &deploy
     - <<: *deploy_base
       on:
         <<: *repo_filter
-        tags: true
-    - <<: *deploy_base
-      on:
-        <<: *repo_filter
-        tags: false
 
 jobs:
   include:
