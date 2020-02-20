@@ -26,11 +26,20 @@ env:
     - TERM=dumb
     - GRAVIS_REPO="https://github.com/DanySK/Gravis-CI.git"
     - GRAVIS="$HOME/gravis"
+  matrix:
+    - JDK="adopt@1.11"
+    - JDK="adopt-openj9@1.11"
+    - JDK="adopt@"
+    - JDK="adopt-openj9@"
 
-# Shared configuration
+# Base configuration
 
 before_install:
   - travis_retry git clone --depth 1 $GRAVIS_REPO $GRAVIS
+install:
+  - source $GRAVIS/install-jdk
+script:
+  - travis_retry ./gradlew clean runAllGraphic
 before_cache:
   - $GRAVIS/clean-gradle-cache
 cache:
@@ -51,17 +60,7 @@ stages:
     # Also run for tags if the commit message is custom (it's not a data generation commit)
     if: tag is blank OR NOT commit_message =~ /\[AUTOMATIC.*\].*/
 
-# Shared phases
-
-
 # Operations
-
-
-_check_execution: &check_execution
-  install:
-    - source $GRAVIS/install-jdk
-  script:
-    - travis_retry ./gradlew clean runAllGraphic
 
 _reduce_data_size: &reduce_data_size
   before_script:
@@ -79,6 +78,10 @@ _make_charts: &make_charts
     - pip install --upgrade pip
     - pip install -r requirements.txt
   script: travis_wait 50 python process.py
+
+_test_charts: &test_charts
+  <<: *make_charts
+  <<: *reduce_data_size
 
 _deploy: &deploy
   before_deploy:
@@ -99,25 +102,20 @@ _deploy: &deploy
 
 jobs:
   include:
-    - <<: *check_execution
-      env:
-      - JDK="adopt@1.11"
-    - <<: *check_execution
-      env:
-      - JDK="adopt-openj9@1.11"
-    - <<: *check_execution
-      env:
-      - JDK="adopt"
-    - <<: *check_execution
-      env:
-      - JDK="adopt-openj9"
+    # Make and deploy charts with reference python
     - <<: *make_charts
       <<: *deploy
       <<: *python_reference_environment
-    - <<: *reduce_data_size
-      <<: *make_charts
+    # Test on latest Python
+    - *test_charts
+    # Test on both reference and latest Python on OSX and Windows
+    - <<: *test_charts
       <<: *python_reference_environment
-    - <<: *reduce_data_size
-      <<: *make_charts
-    - <<: *reduce_data_size
-      <<: *make_charts
+      os: osx
+    - <<: *test_charts
+      os: osx
+    - <<: *test_charts
+      <<: *python_reference_environment
+      os: windows
+    - <<: *test_charts
+      os: windows
