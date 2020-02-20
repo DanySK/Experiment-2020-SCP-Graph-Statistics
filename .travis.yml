@@ -1,28 +1,123 @@
-language: bash
+# Skip build if commit message explicitly says so
+if: NOT commit_message =~ /\[\s*SKIP(_|-|\s*)BUILD.*\].*/
+
+# Configuration
+
+_python_reference_version: &python_reference_version PYTHON="3.8.1"
+
+_python_reference_environment: &python_reference_environment
+  env: *python_reference_version
+
+_repo_filter: &repo_filter
+  repo: DanySK/Experiment-2019-FGCS-Self-Integration
+
+# System
+
+language: minimal
 git:
   depth: false
 os:
   - osx
   - windows
   - linux
+
 env:
   global:
     - TERM=dumb
     - GRAVIS_REPO="https://github.com/DanySK/Gravis-CI.git"
     - GRAVIS="$HOME/gravis"
-  matrix:
-    - JDK="adopt@1.11"
-    - JDK="adopt-openj9@1.11"
-    - JDK="adopt"
-    - JDK="adopt-openj9"
+
+# Shared configuration
+
 before_install:
   - travis_retry git clone --depth 1 $GRAVIS_REPO $GRAVIS
-  - source $GRAVIS/install-jdk
-script:
-  - travis_retry ./gradlew clean runAllGraphic
 before_cache:
   - $GRAVIS/clean-gradle-cache
 cache:
   directories:
+    - $PYENV_ROOT
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
+
+# Stages
+
+stages:
+  - name: test
+    # Always run if it's a cron job
+    # otherwise, run if there is no tag and the commit does not point to sole changes to data and charts
+    if: type = cron OR tag is blank AND NOT commit_message =~ /\[(AUTOMATIC|CHARTS|DATA).*\].*/
+  - name: charts
+    # Always run if there is no tag
+    # Also run for tags if the commit message is custom (it's not a data generation commit)
+    if: tag is blank OR NOT commit_message =~ /\[AUTOMATIC.*\].*/
+
+# Shared phases
+
+
+# Operations
+
+
+_check_execution: &check_execution
+  install:
+    - source $GRAVIS/install-jdk
+  script:
+    - travis_retry ./gradlew clean runAllGraphic
+
+_reduce_data_size: &reduce_data_size
+  before_script:
+    - echo Reducing data size to two seeds for quicker testing
+    - find data -name simulation*seed-[!01].0_*.txt | xargs rm
+
+_make_charts: &make_charts
+  os: linux
+  language: minimal
+  stage: charts
+  install:
+    - curl "${GRAVIS}.install-python.sh" --output ~/.install-python.sh
+    - travis_retry source ~/.install-python.sh
+    - pyenv versions
+    - pip install --upgrade pip
+    - pip install -r requirements.txt
+  script: travis_wait 50 python process.py
+
+_deploy: &deploy
+  before_deploy:
+    # The script requires appropriate git configuration.
+    # This README's got my name so it's quicker for me to copy/paste. You want to change it.
+    - tar -czvf "charts.tar.gz" -C $TRAVIS_BUILD_DIR/charts/ .
+    - git config --local user.name "Danilo Pianini"
+    - git config --local user.email "danilo.pianini@gmail.com"
+    - $GRAVIS/autotag
+  deploy:
+    provider: releases
+    edge: true
+    file:
+      - "${TRAVIS_BUILD_DIR}/*.tar.gz"
+      - "${TRAVIS_BUILD_DIR}/charts/*.pdf"
+    on:
+      <<: *repo_filter
+
+jobs:
+  include:
+    - <<: *check_execution
+      env:
+      - JDK="adopt@1.11"
+    - <<: *check_execution
+      env:
+      - JDK="adopt-openj9@1.11"
+    - <<: *check_execution
+      env:
+      - JDK="adopt"
+    - <<: *check_execution
+      env:
+      - JDK="adopt-openj9"
+    - <<: *make_charts
+      <<: *deploy
+      <<: *python_reference_environment
+    - <<: *reduce_data_size
+      <<: *make_charts
+      <<: *python_reference_environment
+    - <<: *reduce_data_size
+      <<: *make_charts
+    - <<: *reduce_data_size
+      <<: *make_charts
