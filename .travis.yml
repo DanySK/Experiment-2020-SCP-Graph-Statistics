@@ -9,7 +9,7 @@ _python_reference_environment: &python_reference_environment
   env: *python_reference_version
 
 _repo_filter: &repo_filter
-  repo: DanySK/Experiment-2019-FGCS-Self-Integration
+  repo: DanySK/Experiment-2020-SCP-Graph-Statistics
 
 # System
 
