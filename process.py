@@ -391,7 +391,8 @@ if __name__ == '__main__':
                             by_time_output_directory = f'{output_directory}/{basedir}/{comparison_variable}'
                             Path(by_time_output_directory).mkdir(parents=True, exist_ok=True)
                             figname = f'{comparison_variable}_{current_metric}_{current_coordinate}_{beautified_value}{"_err" if withErrors else ""}'
-                            figname = figname.replace('.', '_').replace('[', '').replace(']', '')
+                            for symbol in r".[]\/@:":
+                                figname = figname.replace(symbol, '_')
                             fig.savefig(f'{by_time_output_directory}/{figname}.pdf')
                             plt.close(fig)
     for experiment in experiments:
