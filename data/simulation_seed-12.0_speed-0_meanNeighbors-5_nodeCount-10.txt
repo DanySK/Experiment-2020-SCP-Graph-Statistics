@@ -1,0 +1,21 @@
+#####################################################################
+# Alchemist log file - simulation started at: 2020-02-20T21:16+0000 #
+#####################################################################
+# seed = 12.0, speed = 0, meanNeighbors = 5, nodeCount = 10
+#
+# The columns have the following meaning: 
+# time nodes org:protelis:armonicCentralityHLL[Mean] harmonicCentrality[Mean] msqer@harmonicCentrality[Mean] msqer@harmonicCentrality[Max] msqer@harmonicCentrality[Min] msqer@harmonicCentrality[StandardDeviation] 
+0.0 10.0 NaN NaN 0.0 0.0 0.0 0.0 
+0.5 10.0 0.5 6.2 6.0 8.0 0.0 2.273030282830976 
+1.0 10.0 2.95 6.2 3.25 7.0 0.0 2.497220677295283 
+1.5 10.0 4.6 6.2 1.5999999999999999 5.0 0.0 1.5951314818673865 
+2.0 10.0 6.0 6.2 0.2 1.0 0.0 0.42163702135578396 
+2.5 10.0 6.2 6.2 0.0 0.0 0.0 0.0 
+3.0 10.0 6.2 6.2 0.0 0.0 0.0 0.0 
+3.5 10.0 6.2 6.2 0.0 0.0 0.0 0.0 
+4.0 10.0 6.2 6.2 0.0 0.0 0.0 0.0 
+4.5 10.0 6.2 6.2 0.0 0.0 0.0 0.0 
+5.0 10.0 6.2 6.2 0.0 0.0 0.0 0.0 
+#####################################################################
+# End of data export. Simulation finished at: 2020-02-20T21:16+0000 #
+#####################################################################
