@@ -44,7 +44,7 @@ before_cache:
   - $GRAVIS/clean-gradle-cache
 cache:
   directories:
-    - $PYENV_ROOT
+    - $HOME/.pyenv
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
 
