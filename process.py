@@ -239,16 +239,6 @@ if __name__ == '__main__':
         'msqer@harmonicCentrality[Mean]': Measure(f'${expected(mse(centrality_label))}$'),
         'msqer@harmonicCentrality[StandardDeviation]': Measure(f'${stdev_of(mse(centrality_label))}$'),
         'org:protelis:armonicCentralityHLL[Mean]': Measure(f'${expected(centrality_label)}$'),
-#        'freeCapacity[Mean]': Measure(r"$\mathbf{E}[P_f]$", "MIPS"),
-#        'capacity[Mean]': Measure(r"$\mathbf{E}[P_p]$", "MIPS"),
-#        'done[Sum]': Measure(r"$T_s$", "tasks"),
-#        'drop[Sum]': Measure(r"$T_d$", "tasks"),
-#        'waiting[Sum]': Measure(r"$T_w$", "tasks"),
-#        'isLeader[Sum]': Measure("A", "alliances"),
-#        'time': Measure("time", "s"),
-#        'grain': Measure(r'$g$', "MIPS"),
-#        'peakFrequency': Measure(r'$\lambda_P$', "Hz"),
-#        'meanTaskSize': Measure(r'$s$', "Hz"),
     }
     def derivativeOrMeasure(variable_name):
         if variable_name.endswith('dt'):
