@@ -9,4 +9,5 @@ COMMIT_MESSAGE="[AUTOMATIC ${USER}@${HOSTNAME}] - `date --iso-8601=minutes` data
 git commit -m "${COMMIT_MESSAGE}"
 git fetch
 git merge FETCH_HEAD -m "$COMMIT_MESSAGE (merge commit)"
+git commit  -m "$COMMIT_MESSAGE (merge commit)"
 git push
