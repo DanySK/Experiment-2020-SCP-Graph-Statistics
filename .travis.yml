@@ -72,9 +72,7 @@ _make_charts: &make_charts
   language: minimal
   stage: charts
   install:
-    - curl "${GRAVIS}.install-python.sh" --output ~/.install-python.sh
-    - travis_retry source ~/.install-python.sh
-    - pyenv versions
+    - source $GRAVIS/install-python
     - pip install --upgrade pip
     - pip install -r requirements.txt
   script: travis_wait 50 python process.py
