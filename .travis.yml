@@ -101,6 +101,11 @@ _deploy: &deploy
     - <<: *deploy_base
       on:
         <<: *repo_filter
+        tags: true
+    - <<: *deploy_base
+      on:
+        <<: *repo_filter
+        tags: false
 
 jobs:
   include:
