@@ -74,8 +74,8 @@ _make_charts: &make_charts
   stage: charts
   install:
     - source $GRAVIS/install-python
-    - pip install --upgrade pip --user
-    - pip install -r requirements.txt --user
+    - travis_retry pip install --upgrade pip --user
+    - travis_retry pip install -r requirements.txt --user
   script: travis_wait 50 python process.py
 
 _test_charts: &test_charts
