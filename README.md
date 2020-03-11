@@ -1,6 +1,6 @@
 # Aggregate Graph Statistics
 
-## Experimental results of the third case study
+## Experimental results
 
 This repository contains code and instruction to reproduce the experiments presented in the paper "Aggregate Graph Statistics" by Giorgio Audrito, Danilo Pianini, Mirko Viroli, and Ferruccio Damiani; submitted to Elsevier's [Science of Computer Programming](https://www.journals.elsevier.com/science-of-computer-programming) journal.
 
