@@ -219,24 +219,26 @@ if __name__ == '__main__':
         def __str__(self):
             return f'{self.description()} {self.unit()}'
     
-    centrality_label = 'H_a(x)'
+    centrality_label = 'H_a'
     def expected(x):
         return r'\mathbf{E}[' + x + ']'
     def stdev_of(x):
         return r'\sigma{}[' + x + ']'
     def mse(x):
         return 'MSE[' + x + ']'
+    def mae(x):
+        return 'MAE[' + x + ']'
     def cardinality(x):
         return r'\|' + x + r'\|'
 
     labels = {
         'nodeCount': Measure(r'$n$', 'nodes'),
-        'harmonicCentrality[Mean]': Measure(f'${expected("H(x)")}$'),
-        'meanNeighbors': Measure(f'${expected(cardinality("N"))}$', 'nodes'),
+        'harmonicCentrality[Mean]': Measure(f'${expected("H")}$'),
+        'meanNeighbors': Measure(f'${expected("N")}$', 'nodes'),
         'speed': Measure(r'$\|\vec{v}\|$', r'$m/s$'),
         'msqer@harmonicCentrality[Max]': Measure(r'$\max{(' + mse(centrality_label) + ')}$'),
         'msqer@harmonicCentrality[Min]': Measure(r'$\min{(' + mse(centrality_label) + ')}$'),
-        'msqer@harmonicCentrality[Mean]': Measure(f'${expected(mse(centrality_label))}$'),
+        'msqer@harmonicCentrality[Mean]': Measure(f'${mae(centrality_label)}$'),
         'msqer@harmonicCentrality[StandardDeviation]': Measure(f'${stdev_of(mse(centrality_label))}$'),
         'org:protelis:armonicCentralityHLL[Mean]': Measure(f'${expected(centrality_label)}$'),
     }
