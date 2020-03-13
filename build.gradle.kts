@@ -25,9 +25,12 @@ sourceSets {
     }
 }
 dependencies {
+    implementation("com.codepoetics:protonpack:1.13")
     implementation("it.unibo.alchemist:alchemist:9.3.0")
     implementation("net.agkn:hll:1.6.0")
+    implementation("org.apache.commons:commons-lang3:3.9")
     implementation("org.jgrapht:jgrapht-core:1.3.1")
+    implementation("org.protelis:protelis-lang:13.1.0")
     implementation(kotlin("stdlib-jdk8"))
 }
 
@@ -67,6 +70,10 @@ val runAllBatch by tasks.register<DefaultTask>("runAllBatch") {
 /*
  * Scan the folder with the simulation files, and create a task for each one of them.
  */
+val variables = mapOf(
+    "simulation" to arrayOf("seed", "speed", "meanNeighbors", "nodeCount"),
+    "converge" to arrayOf("diameter")
+)
 File(rootProject.rootDir.path + "/src/main/yaml").listFiles()
     ?.filter { it.extension == "yml" }
     ?.sortedBy { it.nameWithoutExtension }
@@ -96,7 +103,7 @@ File(rootProject.rootDir.path + "/src/main/yaml").listFiles()
             args(
                 "-e", "data/${it.nameWithoutExtension}",
                 "-b",
-                "-var", "seed", "speed", "meanNeighbors", "nodeCount",
+                "-var", "seed", *variables[it.nameWithoutExtension]!!,
                 "-p", threadCount,
                 "-i", 0.5
             )

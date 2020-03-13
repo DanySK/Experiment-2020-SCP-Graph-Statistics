@@ -1,0 +1,75 @@
+incarnation: protelis
+
+variables:
+  seed: &seed
+    min: 0
+    max: 100
+    step: 1
+    default: 0
+  nodeCount:
+    formula: 1000
+  diameter: &diameter
+    type: ArbitraryVariable
+    parameters: [10, [10, 20, 25, 40, 50, 100, 125, 200, 250, 500, 1000]]
+  height: &height
+    formula: nodeCount / diameter
+  commRange: &commRange
+    formula: 1.1
+  log2m: &log2m
+    formula: 11
+  regsize: &regsize
+    formula: 5
+  stepsCheck: &stepsCheck
+    formula: 3 * nodeCount
+
+seeds:
+  simulation: *seed
+  scenario: *seed
+
+network-model:
+  type: ConnectWithinDistance
+  parameters: [*commRange]
+
+export:
+  - time
+  - molecule: "org:protelis:armonicCentralityHLL"
+    value-filter: onlyfinite
+    aggregators: [mean]
+  - molecule: "harmonicCentrality"
+    value-filter: onlyfinite
+    aggregators: [mean]
+  - molecule: harmonicCentrality
+    property: |
+      // msqer
+      sqrt((optionally(<value>).orElse(0) - env.get("org:protelis:armonicCentralityHLL", 0)) ^ 2)
+    value-filter: onlyfinite
+    aggregators: [mean, max, min, standarddeviation]
+
+converge: &converge
+  - time-distribution: 1
+    # Writing Protelis programs within a YAML file is a bad experience
+    # (some characters need escaping, no syntax highlight, no code suggestions...)
+    # We recommend using the Protelis Eclipse plugin to write your code, then
+    # Loading the code as a module within Alchemist
+    # In order to run this example, make sure that src/main/protelis is part of
+    # your classpath (the Gradle script is already properly configured).
+    program: org:protelis:convergeExperiment
+  - program: send
+
+displacements:
+  - in:
+      type: Grid
+      parameters: [0, 0, *height, *diameter, 1, 1, 0, 0, 0, 0]
+    programs:
+      - *converge
+    contents:
+      - molecule: regsize
+        concentration: *regsize
+      - molecule: log2m
+        concentration: *log2m
+
+terminate:
+  - type: StableForSteps
+    parameters: [*stepsCheck, 3]
+  - type: AfterTime
+    parameters: [5000]

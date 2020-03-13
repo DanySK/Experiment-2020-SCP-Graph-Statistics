@@ -1,0 +1,54 @@
+module org:protelis:convergeExperiment
+import org:protelis:armonicCentralityHLL
+import protelis:coord:nonselfstabilizing:accumulation
+import protelis:coord:meta
+import protelis:coord:spreading
+
+def pageRank() {
+  // Giorgio write here
+  1
+}
+
+def closeness() {
+  // Giorgio write here
+  1
+}
+
+def degree() {
+  // Giorgio write here
+  1
+}
+
+def diameterBoundGossip(value, diameter, merge) {
+    let local = [value, 0]
+    share (field <- local) {
+        let options = mux (field.get(1) < diameter) { field } else { local }
+        let folded = foldHoodPlusSelf(options, merge)
+        folded.set(1, folded.get(1) + 1)
+    }.get(0)
+}
+
+let myId = self.getDeviceUID().getId()
+let centrality = [
+    ["central", if(myId == 500) { 1 } else { 0 }],
+    ["extreme", myId],
+    ["random", rep(c <- self.nextRandomDouble()) { c }],
+    ["pageRank", pageRank()],
+    ["hyperanf", hyperANF2(1000)],
+    ["closeness", closeness()],
+    ["degree", degree()]
+]
+let now = self.getCurrentTime()
+centrality.map { descriptor ->
+    let name = descriptor.get(0)
+    let centrality = descriptor.get(1)
+    let leader = centrality == diameterBoundGossip(centrality, max)
+    let accumulated = C(distanceTo(leader), min, now, now)
+    if (leader) {
+        env.put("value-"+name, accumulated)
+        env.put("error-"+name, now - accumulated)
+    } else {
+        env.remove("value-"+name)
+        env.remove("value-"+name)
+    }
+}
