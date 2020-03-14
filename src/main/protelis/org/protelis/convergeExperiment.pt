@@ -4,19 +4,33 @@ import protelis:coord:nonselfstabilizing:accumulation
 import protelis:coord:meta
 import protelis:coord:spreading
 
-def pageRank() {
-  // Giorgio write here
-  1
-}
 
-def closeness() {
-  // Giorgio write here
-  1
-}
-
+// degree of a node, used as centrality measure
 def degree() {
-  // Giorgio write here
-  1
+  foldSum(0, nbr(1))
+}
+
+// page rank
+def pageRank() {
+  share (rnk <- 1) {
+  	foldSum(0.15, 0.85 / nbr(degree()) * rnk)
+  }
+}
+
+// closeness centrality, given neighbourhood counts
+def closeness(counts) {
+  acc = 0
+  for i in range(len(counts)):
+  	acc += counts[i] * i
+  return 1/acc
+}
+
+// harmonic centrality, given neighbourhood counts
+def harmonic(counts) {
+  acc = 0
+  for i in range(len(counts)):
+  	acc += counts[i] / i
+  return acc
 }
 
 def diameterBoundGossip(value, diameter, merge) {
@@ -42,7 +56,7 @@ let now = self.getCurrentTime()
 centrality.map { descriptor ->
     let name = descriptor.get(0)
     let centrality = descriptor.get(1)
-    let leader = centrality == diameterBoundGossip(centrality, max)
+    let leader = centrality == diameterBoundGossip([centrality, myId], max).get(0) // myId as tie breaker
     let accumulated = C(distanceTo(leader), min, now, now)
     if (leader) {
         env.put("value-"+name, accumulated)
