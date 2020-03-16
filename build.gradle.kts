@@ -71,7 +71,7 @@ val runAllBatch by tasks.register<DefaultTask>("runAllBatch") {
  * Scan the folder with the simulation files, and create a task for each one of them.
  */
 val variables = mapOf(
-    "simulation" to arrayOf("seed", "speed", "meanNeighbors", "nodeCount"),
+    "simulation" to arrayOf("speed", "meanNeighbors", "nodeCount"),
     "converge" to arrayOf("diameter")
 )
 File(rootProject.rootDir.path + "/src/main/yaml").listFiles()
