@@ -46,13 +46,13 @@ if (System.getProperty("os.name").toLowerCase().contains("linux")) {
         }
         output.toString().trim().toLong() / 1024
     }
-        .also { println("Detected ${it}MB RAM available.") }  * 9 / 10
+        .also { println("Detected ${it}MB RAM available.") }  * 8 / 10
 } else {
     // Guess 16GB RAM of which 2 used by the OS
     14 * 1024L
 }
 val taskSizeFromProject: Int? by project
-val taskSize = taskSizeFromProject ?: 10 * 1024 // 5K nodes with 10 neighbors require a lot of memory
+val taskSize = taskSizeFromProject ?: 5 * 1024 // 5K nodes with 10 neighbors require a lot of memory
 val threadCount = maxOf(1, minOf(Runtime.getRuntime().availableProcessors(), heap.toInt() / taskSize ))
 
 val alchemistGroup = "Run Alchemist"
