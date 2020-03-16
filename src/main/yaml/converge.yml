@@ -6,19 +6,19 @@ variables:
     max: 100
     step: 1
     default: 0
-  nodeCount:
+  nodeCount: &nodeCount
     formula: 1000
   diameter: &diameter
     type: ArbitraryVariable
-    parameters: [10, [10, 20, 25, 40, 50, 100, 125, 200, 250, 500, 1000]]
+    parameters: [40, [40, 50, 100, 125, 200, 250, 500, 1000]]
   height: &height
     formula: nodeCount / diameter
   commRange: &commRange
-    formula: 1.1
+    formula: 1.5
   log2m: &log2m
-    formula: 11
+    formula: 7
   regsize: &regsize
-    formula: 5
+    formula: 4
   stepsCheck: &stepsCheck
     formula: 3 * nodeCount
 
@@ -59,10 +59,14 @@ converge: &converge
 displacements:
   - in:
       type: Grid
-      parameters: [0, 0, *height, *diameter, 1, 1, 0, 0, 0, 0]
+      parameters: [0, 0, *diameter, *height, 1, 1, 0, 0, 0, 0]
     programs:
       - *converge
     contents:
+      - molecule: diameter
+        concentration: *diameter
+      - molecule: nodes
+        concentration: *nodeCount
       - molecule: regsize
         concentration: *regsize
       - molecule: log2m

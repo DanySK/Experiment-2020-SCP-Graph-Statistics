@@ -61,25 +61,6 @@ class HyperLogLog private constructor(val hll: HLL) {
     }
 }
 
-@ExperimentalUnsignedTypes
-object HarmonicCentrality {
-
-    @JvmStatic fun harmonicCentralityFromHLL(cardinalities: Iterable<HyperLogLog>): Double = cardinalities.asSequence()
-        .map { it.cardinality }
-        .zipWithNext { a, b -> b - a }
-        .withIndex()
-        .map { it.value.toDouble() / (it.index + 1) } // / (it.index + 2) }
-        .sum()
-
-    private val hCMol = SimpleMolecule("harmonicCentrality")
-    @JvmStatic fun recomputeHarmonicCentrality(context: AlchemistExecutionContext<*>): Unit {
-        with (context.getEnvironmentAccess()) {
-            getNodes().forEach {
-                it.setConcentration(hCMol, harmonicCentralityOf(it))
-            }
-        }
-    }
-}
 
 object FieldUtil {
     @JvmStatic fun <T> foldToMap(f: Field<T>) = f.toMap()
