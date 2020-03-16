@@ -24,7 +24,7 @@ class HyperLogLog private constructor(val hll: HLL) {
     }
 
     override fun equals(other: Any?): Boolean {
-        return other is HyperLogLog && bytes.contentEquals(other.bytes)
+        return other is HyperLogLog && cardinality == other.cardinality
     }
 
     override fun hashCode() = hashCode
@@ -33,28 +33,30 @@ class HyperLogLog private constructor(val hll: HLL) {
 
     companion object {
 
-        @JvmField val EMPTY_HLL = HyperLogLog(emptyHLL())
+        var EMPTY_HLL: HyperLogLog? = null
 
-        fun emptyHLL(log2m: Int = 11, regwidth: Int = 5) = HLL(log2m, regwidth)
+         @JvmStatic  fun emptyHLL(context: AlchemistExecutionContext<*>) =
+            EMPTY_HLL ?: with(context) { HyperLogLog(HLL(log2m, regwidth)) }.also { EMPTY_HLL = it }
+
+        @JvmStatic fun hyperLogLogFor(context: AlchemistExecutionContext<*>, id: Iterable<Long>) = HyperLogLog(
+            HLL(context.log2m, context.regwidth).apply { id.forEach { addRaw(rrmxmx(it.toULong()).toLong()) } }
+        )
+
+        @JvmStatic fun myself(context: AlchemistExecutionContext<*>) = with(context) {
+            HyperLogLog(
+                HLL(log2m, regwidth).apply {
+                    val node = context.getDeviceUID() as Node<*>
+                    addRaw(rrmxmx(node.id.toULong()).toLong())
+                }
+            )
+        }
+
         fun AlchemistExecutionContext<*>.intFromEnviroment(id: String, orElse: Int): Int =
             (getExecutionEnvironment().get(id, orElse) as Number).toInt()
 
-        @JvmOverloads @JvmStatic fun hyperLogLogFor(id: Iterable<Long>, log2m: Int = 11, regwidth: Int = 5) = HyperLogLog(
-            emptyHLL(log2m, regwidth).apply { id.forEach { addRaw(rrmxmx(it.toULong()).toLong()) } }
-        )
+        val AlchemistExecutionContext<*>.log2m get() = intFromEnviroment("log2m", 11)
 
-        @JvmOverloads @JvmStatic fun myself(
-            context: AlchemistExecutionContext<*>,
-            log2m: Int = context.intFromEnviroment("log2m", 11),
-            regwidth: Int = context.intFromEnviroment("regwidth", 5)
-        ) = HyperLogLog(
-            HLL(log2m, regwidth).apply {
-                val node = context.getDeviceUID() as Node<*>
-                addRaw(rrmxmx(node.id.toULong()).toLong())
-            }
-        )
-
-//        @JvmOverloads @JvmStatic fun printStats() = println(cache.stats())
+        val AlchemistExecutionContext<*>.regwidth get() = intFromEnviroment("regwidth", 5)
 
     }
 }

@@ -42,7 +42,7 @@ def hyperANFaccumulate(currentDepth, finalDepth, accumulator) =
       let lastRoundNbr = lastRound(emptyMap(), previousAsMap)
 //      env.put(self.getCurrentTime() + "depth-" + currentDepth + "-cur", previousAsMap)
 //      env.put(self.getCurrentTime() + "depth-" + currentDepth + "-old", lastRoundNbr)
-      let thisLevel = rep(x <- EMPTY_HLL) {
+      let thisLevel = rep(x <- emptyHLL()) {
         if (previousAsMap == lastRoundNbr) {
           x
         } else {

@@ -11,7 +11,7 @@ variables:
 # 1000 ~ 3*60 ~ 180
 # 500 ~ 60
     type: ArbitraryVariable
-    parameters: [500, [10, 20, 50, 100, 200, 500, 1000, 2000, 5000]]
+    parameters: [5000, [10, 20, 50, 100, 200, 500, 1000, 2000, 5000]]
   groupCount: &groupCount
     formula: nodeCount - 1
   meanNeighbors:
@@ -23,9 +23,9 @@ variables:
     type: ArbitraryVariable
     parameters: [10, [0, 1, 2, 5, 10]]
   log2m: &log2m
-    formula: 11
+    formula: 7
   regsize: &regsize
-    formula: 5
+    formula: 4
   stepsCheck: &stepsCheck
     formula: 3 * nodeCount
   samplingRate: &samplingRate
@@ -101,6 +101,11 @@ displacements:
       - *hyperanf
       - *staticOracle
       - *move
+    contents:
+      - molecule: regwidth
+        concentration: *regsize
+      - molecule: log2m
+        concentration: *log2m
   - in:
       type: Rectangle
       parameters: [*groupCount, 1, 1, 498, 498]
@@ -109,7 +114,7 @@ displacements:
 #      - *harmonicOracle
       - *move
     contents:
-      - molecule: regsize
+      - molecule: regwidth
         concentration: *regsize
       - molecule: log2m
         concentration: *log2m
