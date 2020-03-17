@@ -16,7 +16,7 @@ variables:
     formula: nodeCount - 1
   meanNeighbors:
     type: ArbitraryVariable
-    parameters: [10, [2, 3, 5, 7, 10]]
+    parameters: [5, [2, 3, 5, 7, 10]]
   commRange: &commRange
     formula: 500 * Math.sqrt(meanNeighbors / Math.PI / nodeCount)
   speed: &speed

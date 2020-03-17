@@ -52,7 +52,7 @@ if (System.getProperty("os.name").toLowerCase().contains("linux")) {
     14 * 1024L
 }
 val taskSizeFromProject: Int? by project
-val taskSize = taskSizeFromProject ?: 5 * 1024 // 5K nodes with 10 neighbors require a lot of memory
+val taskSize = taskSizeFromProject ?: (7.6 * 1024).toInt() // 5K nodes with 10 neighbors require a lot of memory
 val cpuCount = Runtime.getRuntime().availableProcessors()
 println("Detected $cpuCount processors")
 val threadCount = maxOf(1, minOf(cpuCount, heap.toInt() / taskSize ))
@@ -100,7 +100,13 @@ File(rootProject.rootDir.path + "/src/main/yaml").listFiles()
         runAllGraphic.dependsOn(graphic)
         val batch by basetask("run${capitalizedName}Batch") {
             description = "Launches batch experiments for $capitalizedName"
-            jvmArgs("-XX:+AggressiveHeap")
+            jvmArgs(
+                "-XX:+AggressiveHeap",
+                "-XX:+UseCMSInitiatingOccupancyOnly",
+                "-XX:CMSInitiatingOccupancyFraction=90",
+                "-XX:+ScavengeBeforeFullGC",
+                "-XX:+CMSScavengeBeforeRemark"
+            )
             val xmx = minOf(heap.toInt(), Runtime.getRuntime().availableProcessors() * taskSize)
             maxHeapSize = "${xmx}m"
             File("data").mkdirs()
