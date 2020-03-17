@@ -10,7 +10,7 @@ variables:
     formula: 1000
   diameter: &diameter
     type: ArbitraryVariable
-    parameters: [40, [40, 50, 100, 125, 200, 250, 500, 1000]]
+    parameters: [1000, [40, 50, 100, 125, 200, 250, 500, 1000]]
   height: &height
     formula: nodeCount / diameter
   commRange: &commRange
@@ -21,6 +21,8 @@ variables:
     formula: 4
   stepsCheck: &stepsCheck
     formula: 3 * nodeCount
+  maxtime: &maxtime
+    formula: diameter * 10
 
 seeds:
   simulation: *seed
@@ -32,18 +34,27 @@ network-model:
 
 export:
   - time
-  - molecule: "org:protelis:armonicCentralityHLL"
+  - molecule: "error-central"
     value-filter: onlyfinite
-    aggregators: [mean]
-  - molecule: "harmonicCentrality"
+    aggregators: [sum]
+  - molecule: "error-extreme"
     value-filter: onlyfinite
-    aggregators: [mean]
-  - molecule: harmonicCentrality
-    property: |
-      // msqer
-      sqrt((optionally(<value>).orElse(0) - env.get("org:protelis:armonicCentralityHLL", 0)) ^ 2)
+    aggregators: [sum]
+  - molecule: "error-random"
     value-filter: onlyfinite
-    aggregators: [mean, max, min, standarddeviation]
+    aggregators: [sum]
+  - molecule: "error-pageRank"
+    value-filter: onlyfinite
+    aggregators: [sum]
+  - molecule: "error-harmonic"
+    value-filter: onlyfinite
+    aggregators: [sum]
+  - molecule: "error-closeness"
+    value-filter: onlyfinite
+    aggregators: [sum]
+  - molecule: "error-degree"
+    value-filter: onlyfinite
+    aggregators: [sum]
 
 converge: &converge
   - time-distribution: 1
@@ -76,4 +87,4 @@ terminate:
   - type: StableForSteps
     parameters: [*stepsCheck, 3]
   - type: AfterTime
-    parameters: [5000]
+    parameters: [*maxtime]

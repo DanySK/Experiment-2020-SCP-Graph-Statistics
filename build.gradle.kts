@@ -70,13 +70,13 @@ val runAllBatch by tasks.register<DefaultTask>("runAllBatch") {
     group = alchemistGroup
     description = "Launches all experiments"
 }
-/*
- * Scan the folder with the simulation files, and create a task for each one of them.
- */
 val variables = mapOf(
     "simulation" to arrayOf("speed", "meanNeighbors", "nodeCount"),
     "converge" to arrayOf("diameter")
 )
+/*
+ * Scan the folder with the simulation files, and create a task for each one of them.
+ */
 File(rootProject.rootDir.path + "/src/main/yaml").listFiles()
     ?.filter { it.extension == "yml" }
     ?.sortedBy { it.nameWithoutExtension }

@@ -11,12 +11,19 @@ import protelis:lang:utils
 // degree of a node, used as centrality measure
 def degree() = foldSum(0, nbr(1))
 
-def pageRank() = share (rank <- 1) { foldSum(0.15, 0.85 / nbr(degree()) * rank) }
+def pageRank() = share (rank <- 1) {
+//env.putField("0"+self.getCurrentTime()+"-rank", rank)
+//env.putField("0"+self.getCurrentTime()+"-degree", max(nbr(degree()), 1))
+//env.putField("0"+self.getCurrentTime()+"-reduce", 0.85 / nbr(degree()) * rank)
+let actual = foldSum(0.15, 0.85 / nbr(max(degree(), 1)) * rank)
+env.put("pageRank", ceil(actual * 10000) / 10000)
+ceil(actual * 10000) / 10000
+}
 
 def diameterBoundGossip(value, diameter, merge) {
     let local = [value, 0]
     share (field <- local) {
-        let options = mux (field.get(1) <= diameter + 1) { field } else { local }
+        let options = mux (field.get(1) <= diameter + 2) { field } else { local }
 //        env.putField("options", options)
         let wanted = foldHood(local.get(0), options.get(0), merge)
 //        env.put("wanted", wanted)
@@ -47,19 +54,10 @@ centralities.map { descriptor ->
     let name = descriptor.get(0)
     let centrality = descriptor.get(1)
     let gossip = diameterBoundGossip([centrality, tieBreaker, myId], diameter, max)
-    env.put(name + "gossip", gossip)
+//    env.put(name + "gossip", gossip)
     let leader = myId == gossip.get(2) // myId as tie breaker
     let accumulated = C(distanceTo(leader), min, now, now)
-    let valueLabel = "value-"+name
-    let errorLabel = "error-"+name
-    if (leader) {
-        env.put(valueLabel, accumulated)
-        env.put(errorLabel, now - accumulated)
-    } else {
-        if (env.has(valueLabel)) {
-            env.remove(valueLabel)
-            env.remove(errorLabel)
-        } else { 0 }
-    }
-    [name, centrality, accumulated, now-accumulated]
+    let error = if (leader) { now - accumulated } else { NaN }
+    env.put("error-" + name, error)
+    [name, centrality, error]
 }
