@@ -103,11 +103,11 @@ File(rootProject.rootDir.path + "/src/main/yaml").listFiles()
         val batch by basetask("run${capitalizedName}Batch") {
             description = "Launches batch experiments for $capitalizedName"
             jvmArgs(
-                "-XX:+AggressiveHeap",
-                "-XX:+UseCMSInitiatingOccupancyOnly",
-                "-XX:CMSInitiatingOccupancyFraction=90",
-                "-XX:+ScavengeBeforeFullGC",
-                "-XX:+CMSScavengeBeforeRemark"
+//                "-XX:+UseCMSInitiatingOccupancyOnly",
+//                "-XX:CMSInitiatingOccupancyFraction=90",
+//                "-XX:+ScavengeBeforeFullGC",
+//                "-XX:+CMSScavengeBeforeRemark",
+                "-XX:+AggressiveHeap"
             )
             val experiment: Experiment = customization[it.nameWithoutExtension] ?: Experiment("")
             val threadCount = maxOf(1, minOf(cpuCount, heap.toInt() / experiment.maxTaskSize ))
