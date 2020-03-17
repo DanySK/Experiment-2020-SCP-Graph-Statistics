@@ -51,12 +51,8 @@ if (System.getProperty("os.name").toLowerCase().contains("linux")) {
     // Guess 16GB RAM of which 2 used by the OS
     14 * 1024L
 }
-val taskSizeFromProject: Int? by project
-val taskSize = taskSizeFromProject ?: (7.6 * 1024).toInt() // 5K nodes with 10 neighbors require a lot of memory
 val cpuCount = Runtime.getRuntime().availableProcessors()
 println("Detected $cpuCount processors")
-val threadCount = maxOf(1, minOf(cpuCount, heap.toInt() / taskSize ))
-println("Alchemist will be running $threadCount simulations in parallel")
 
 val alchemistGroup = "Run Alchemist"
 /*
@@ -70,10 +66,16 @@ val runAllBatch by tasks.register<DefaultTask>("runAllBatch") {
     group = alchemistGroup
     description = "Launches all experiments"
 }
-val variables = mapOf(
-    "simulation" to arrayOf("speed", "meanNeighbors", "nodeCount"),
-    "converge" to arrayOf("diameter")
+data class Experiment(
+    val name: String,
+    val maxTaskSize: Int = 512,
+    val samplingTime: Double = 1.0,
+    val variables: Array<String> = emptyArray()
 )
+val customization = listOf(
+    Experiment("simulation", (7.6 * 1024).toInt(), 0.5, arrayOf("speed", "meanNeighbors", "nodeCount")),
+    Experiment("converge", maxTaskSize = 1024, variables = arrayOf("diameter"))
+).groupBy { it.name }.mapValues { (_, list) -> list.first() }
 /*
  * Scan the folder with the simulation files, and create a task for each one of them.
  */
@@ -107,15 +109,17 @@ File(rootProject.rootDir.path + "/src/main/yaml").listFiles()
                 "-XX:+ScavengeBeforeFullGC",
                 "-XX:+CMSScavengeBeforeRemark"
             )
-            val xmx = minOf(heap.toInt(), Runtime.getRuntime().availableProcessors() * taskSize)
+            val experiment: Experiment = customization[it.nameWithoutExtension] ?: Experiment("")
+            val threadCount = maxOf(1, minOf(cpuCount, heap.toInt() / experiment.maxTaskSize ))
+            val xmx = minOf(heap.toInt(), Runtime.getRuntime().availableProcessors() * experiment.maxTaskSize)
             maxHeapSize = "${xmx}m"
             File("data").mkdirs()
             args(
                 "-e", "data/${it.nameWithoutExtension}",
                 "-b",
-                "-var", "seed", *variables[it.nameWithoutExtension]!!,
+                "-var", "seed", *experiment.variables,
                 "-p", threadCount,
-                "-i", 0.5
+                "-i", experiment.samplingTime
             )
             doFirst {
                 println("This batch will be using $xmx MB for the heap, and execute with $threadCount parallel threads")
