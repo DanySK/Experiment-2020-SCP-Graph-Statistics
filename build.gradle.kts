@@ -53,7 +53,10 @@ if (System.getProperty("os.name").toLowerCase().contains("linux")) {
 }
 val taskSizeFromProject: Int? by project
 val taskSize = taskSizeFromProject ?: 5 * 1024 // 5K nodes with 10 neighbors require a lot of memory
-val threadCount = maxOf(1, minOf(Runtime.getRuntime().availableProcessors(), heap.toInt() / taskSize ))
+val cpuCount = Runtime.getRuntime().availableProcessors()
+println("Detected $cpuCount processors")
+val threadCount = maxOf(1, minOf(cpuCount, heap.toInt() / taskSize ))
+println("Alchemist will be running $threadCount simulations in parallel")
 
 val alchemistGroup = "Run Alchemist"
 /*
@@ -98,7 +101,8 @@ File(rootProject.rootDir.path + "/src/main/yaml").listFiles()
         val batch by basetask("run${capitalizedName}Batch") {
             description = "Launches batch experiments for $capitalizedName"
             jvmArgs("-XX:+AggressiveHeap")
-            maxHeapSize = "${minOf(heap.toInt(), Runtime.getRuntime().availableProcessors() * taskSize)}m"
+            val xmx = minOf(heap.toInt(), Runtime.getRuntime().availableProcessors() * taskSize)
+            maxHeapSize = "${xmx}m"
             File("data").mkdirs()
             args(
                 "-e", "data/${it.nameWithoutExtension}",
@@ -107,6 +111,9 @@ File(rootProject.rootDir.path + "/src/main/yaml").listFiles()
                 "-p", threadCount,
                 "-i", 0.5
             )
+            doFirst {
+                println("This batch will be using $xmx MB for the heap, and execute with $threadCount parallel threads")
+            }
         }
         runAllBatch.dependsOn(batch)
     }
