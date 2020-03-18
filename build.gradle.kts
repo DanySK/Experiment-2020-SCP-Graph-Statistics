@@ -80,6 +80,7 @@ val customization = listOf(
  * Scan the folder with the simulation files, and create a task for each one of them.
  */
 File(rootProject.rootDir.path + "/src/main/yaml").listFiles()
+    ?.filterNot { it.name.startsWith("run") }
     ?.filter { it.extension == "yml" }
     ?.sortedBy { it.nameWithoutExtension }
     ?.forEach {
