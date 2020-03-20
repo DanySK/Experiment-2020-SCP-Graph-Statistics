@@ -3,18 +3,26 @@ incarnation: protelis
 variables:
   seed: &seed
     min: 0
-    max: 100
+    max: 99
     step: 1
     default: 0
-  nodeCount: &nodeCount
-    formula: 1000
   diameter: &diameter
     type: ArbitraryVariable
-    parameters: [1000, [40, 50, 100, 125, 200, 250, 500, 1000]]
+    parameters: [50, [5, 7, 10, 15, 20, 30, 50, 70, 100, 150, 200, 300, 500]]
   height: &height
-    formula: nodeCount / diameter
+    formula: 6.28318
+  diameterBound: &diameterBound
+    formula: 3 * diameter
+  xstart: &xstart
+    formula: 0 - diameter / 2
+  ystart: &ystart
+    formula: 0 - height / 2
+  density: &density
+    formula: 10
   commRange: &commRange
-    formula: 1.5
+    formula: 1
+  nodeCount: &nodeCount
+    formula: diameter * density * 2 # 2 == height / commRange / commRange / PI
   log2m: &log2m
     formula: 7
   regsize: &regsize
@@ -67,21 +75,35 @@ converge: &converge
     program: org:protelis:convergeExperiment
   - program: send
 
+contents: &contents
+  - molecule: diameter
+    concentration: *diameterBound
+  - molecule: nodes
+    concentration: *nodeCount
+  - molecule: regsize
+    concentration: *regsize
+  - molecule: log2m
+    concentration: *log2m
+
 displacements:
-  - in:
-      type: Grid
-      parameters: [0, 0, *diameter, *height, 1, 1, 0, 0, 0, 0]
+  - in:                                         # central
+      type: Point
+      parameters: [0, 0]
     programs:
       - *converge
-    contents:
-      - molecule: diameter
-        concentration: *diameter
-      - molecule: nodes
-        concentration: *nodeCount
-      - molecule: regsize
-        concentration: *regsize
-      - molecule: log2m
-        concentration: *log2m
+    contents: *contents
+  - in:                                         # extremal
+      type: Point
+      parameters: [*xstart,  *ystart]
+    programs:
+      - *converge
+    contents: *contents
+  - in:
+      type: Rectangle
+      parameters: [*nodeCount, *xstart, *ystart, *diameter, *height]
+    programs:
+      - *converge
+    contents: *contents
 
 terminate:
   - type: StableForSteps
