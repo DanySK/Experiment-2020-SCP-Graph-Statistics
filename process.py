@@ -184,13 +184,9 @@ if __name__ == '__main__':
     # How to name the summary of the processed data
     pickleOutput = 'data_summary'
     # Experiment prefixes: one per experiment (root of the file name)
-    experiments = ['simulation']
+    experiments = {'simulation': (None, None, 100), 'converge': (None, None, 1000)}
     floatPrecision = '{: 0.3f}'
-    # Number of time samples 
-    timeSamples = 100
     # time management
-    minTime = 0
-    maxTime = 50
     timeColumnName = 'time'
     logarithmicTime = False
     # One or more variables are considered random and "flattened"
@@ -232,6 +228,13 @@ if __name__ == '__main__':
         return r'\|' + x + r'\|'
 
     labels = {
+        'error-central[Sum]': Measure('opt'),
+        'error-extreme[Sum]': Measure('worst'),
+        'error-random[Sum]': Measure('rand'),
+        'error-pageRank[Sum]': Measure('p.r.'),
+        'error-harmonic[Sum]': Measure('harm'),
+        'error-closeness[Sum]': Measure('close'),
+        'error-degree[Sum]': Measure('deg'),
         'nodeCount': Measure(r'$n$', 'nodes'),
         'harmonicCentrality[Mean]': Measure(f'${expected("H")}$'),
         'meanNeighbors': Measure(f'${expected("N")}$', 'nodes'),
@@ -266,13 +269,14 @@ if __name__ == '__main__':
         try:
             means = pickle.load(open(pickleOutput + '_mean', 'rb'))
             stdevs = pickle.load(open(pickleOutput + '_std', 'rb'))
+            medians = pickle.load(open(pickleOutput + '_median', 'rb'))
         except:
             shouldRecompute = True
     if shouldRecompute:
         timefun = np.logspace if logarithmicTime else np.linspace
         means = {}
         stdevs = {}
-        for experiment in experiments:
+        for experiment, (minTime, maxTime, timeSamples) in experiments.items():
             # Collect all files for the experiment of interest
             import fnmatch
             allfiles = filter(lambda file: fnmatch.fnmatch(file, experiment + '_*.txt'), os.listdir(directory))
@@ -330,9 +334,11 @@ if __name__ == '__main__':
                 mergingVariables = [seed for seed in seedVars if seed in dataset.coords]
                 means[experiment] = dataset.mean(dim = mergingVariables, skipna=True)
                 stdevs[experiment] = dataset.std(dim = mergingVariables, skipna=True)
+                stdevs[experiment] = dataset.median(dim = mergingVariables, skipna=True)
         # Save the datasets
         pickle.dump(means, open(pickleOutput + '_mean', 'wb'), protocol=-1)
         pickle.dump(stdevs, open(pickleOutput + '_std', 'wb'), protocol=-1)
+        pickle.dump(stdevs, open(pickleOutput + '_median', 'wb'), protocol=-1)
         pickle.dump(newestFileTime, open('timeprocessed', 'wb'))
 
     # QUICK CHARTING
@@ -387,7 +393,7 @@ if __name__ == '__main__':
                                     for selector in [{comparison_variable: label, current_coordinate: current_coordinate_value}]
                                 },
                             )
-                            ax.set_xlim(minTime, maxTime)
+                            ax.set_xlim(min(merge_data_view[timeColumnName]), max(merge_data_view[timeColumnName]))
                             ax.legend()
                             fig.tight_layout()
                             by_time_output_directory = f'{output_directory}/{basedir}/{comparison_variable}'
@@ -401,5 +407,37 @@ if __name__ == '__main__':
         current_experiment_means = means[experiment]
         current_experiment_errors = stdevs[experiment]
         generate_all_charts(current_experiment_means, current_experiment_errors, basedir = f'{experiment}/all')
-        
+    
 # Custom charting
+
+    converge_data = medians['converge']
+    converge_error = stdevs['converge']
+    timeline = converge_data['time']
+    for diameter in converge_data['diameter']:
+        diameter_value = float(diameter)
+        nice_value = beautifyValue(diameter)
+        fig, ax = make_line_chart(
+            title = f"Median converge-cast delay when diameter={nice_value}",
+            xdata = timeline,
+            xlabel = unit_for(timeColumnName),
+            ylabel = unit_for("Delay (s)"),
+            ydata = {
+                label_for(metric): (
+                    converge_data.sel(diameter = diameter)[metric],
+                    None #converge_error.sel(diameter = diameter)[metric].clip(0, diameter_value)
+                )
+                for metric in converge_data.data_vars if not 'central' in metric
+            },
+            linewidth = 2
+        )
+        xmax = diameter_value*2.6
+        ax.set_xlim(0, min(max(timeline), xmax))
+        lim = diameter_value * 0.7
+        ax.set_yscale('symlog', linthreshy=lim)
+        ax.hlines(y=lim, xmin=0, xmax=xmax, color='black', linestyle='--', linewidth=1)
+        ax.set_ylim(0, lim)
+        ax.legend(ncol = 2)
+        fig.tight_layout()
+        fig.savefig(f'{output_directory}/converge_{nice_value}.pdf')
+#        plt.close(fig)
+    
