@@ -16,7 +16,7 @@ def pageRank() = share (rank <- 1) {
 //env.putField("0"+self.getCurrentTime()+"-degree", max(nbr(degree()), 1))
 //env.putField("0"+self.getCurrentTime()+"-reduce", 0.85 / nbr(degree()) * rank)
 let actual = foldSum(0.15, 0.85 / nbr(max(degree(), 1)) * rank)
-env.put("pageRank", ceil(actual * 10000) / 10000)
+//env.put("pageRank", ceil(actual * 10000) / 10000)
 ceil(actual * 10000) / 10000
 }
 
@@ -39,8 +39,9 @@ let myId = self.getDeviceUID().getId()
 let estimates = hyperANF2(1000)
 let nodes = env.get("nodes")
 let diameter = env.get("diameter")
+//env.put("isCentral", myId == ceil(nodes/2) + (1 - nodes/diameter % 2) * diameter / 2)
 let centralities = [
-    ["central", if(myId == ceil(nodes/2)) { 1 } else { 0 }],
+    ["central", if(myId == ceil(nodes/2) + (1 - nodes/diameter % 2) * diameter / 2) { 1 } else { 0 }],
     ["extreme", myId],
     ["random", rep(c <- self.nextRandomDouble()) { c }],
     ["pageRank", pageRank()],
