@@ -11,3 +11,4 @@ timeprocessed
 data_summary_mean
 data_summary_std
 .DS_Store
+data_summary_*
