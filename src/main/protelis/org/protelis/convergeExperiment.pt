@@ -39,9 +39,11 @@ let myId = self.getDeviceUID().getId()
 let estimates = hyperANF2(1000)
 let nodes = env.get("nodes")
 let diameter = env.get("diameter")
-//env.put("isCentral", myId == ceil(nodes/2) + (1 - nodes/diameter % 2) * diameter / 2)
+let centralNode = ceil(nodes/2 + (1 - nodes/diameter % 2) * diameter / 2)
+//env.put("central", centralNode)
+//env.put("isCentral", centralNode == myId)
 let centralities = [
-    ["central", if(myId == ceil(nodes/2) + (1 - nodes/diameter % 2) * diameter / 2) { 1 } else { 0 }],
+    ["central", if(myId == centralNode) { 1 } else { 0 }],
     ["extreme", myId],
     ["random", rep(c <- self.nextRandomDouble()) { c }],
     ["pageRank", pageRank()],

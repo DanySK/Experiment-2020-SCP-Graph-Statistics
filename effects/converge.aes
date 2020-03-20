@@ -34,8 +34,8 @@
       "val": 17
     },
     "molFilter": true,
-    "molString": "value-central",
-    "molPropertyFilter": false,
+    "molString": "isCentral",
+    "molPropertyFilter": true,
     "property": "",
     "writingPropertyValue": false,
     "c": "ALPHA",
