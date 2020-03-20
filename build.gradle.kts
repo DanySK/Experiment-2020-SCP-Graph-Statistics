@@ -74,7 +74,7 @@ data class Experiment(
 )
 val customization = listOf(
     Experiment("simulation", (7.6 * 1024).toInt(), 0.5, arrayOf("speed", "meanNeighbors", "nodeCount")),
-    Experiment("converge", maxTaskSize = 1024+512, variables = arrayOf("diameter"))
+    Experiment("converge", maxTaskSize = 2048 + 512, variables = arrayOf("diameter"))
 ).groupBy { it.name }.mapValues { (_, list) -> list.first() }
 /*
  * Scan the folder with the simulation files, and create a task for each one of them.
@@ -108,6 +108,7 @@ File(rootProject.rootDir.path + "/src/main/yaml").listFiles()
 //                "-XX:CMSInitiatingOccupancyFraction=90",
 //                "-XX:+ScavengeBeforeFullGC",
 //                "-XX:+CMSScavengeBeforeRemark",
+                "-XX:+UseParallelGC",
                 "-XX:+AggressiveHeap"
             )
             val experiment: Experiment = customization[it.nameWithoutExtension] ?: Experiment("")
