@@ -334,12 +334,17 @@ if __name__ == '__main__':
                 mergingVariables = [seed for seed in seedVars if seed in dataset.coords]
                 means[experiment] = dataset.mean(dim = mergingVariables, skipna=True)
                 stdevs[experiment] = dataset.std(dim = mergingVariables, skipna=True)
-                stdevs[experiment] = dataset.median(dim = mergingVariables, skipna=True)
+                medians[experiment] = dataset.median(dim = mergingVariables, skipna=True)
         # Save the datasets
         pickle.dump(means, open(pickleOutput + '_mean', 'wb'), protocol=-1)
         pickle.dump(stdevs, open(pickleOutput + '_std', 'wb'), protocol=-1)
         pickle.dump(stdevs, open(pickleOutput + '_median', 'wb'), protocol=-1)
         pickle.dump(newestFileTime, open('timeprocessed', 'wb'))
+
+    # NORMALIZE
+    norm_centrality_label = f'${expected("H")}$'
+    for collection in [means, stdevs, medians]:
+        collection['simulation'][norm_centrality_label] = collection['simulation']['msqer@harmonicCentrality[Mean]'] / (collection['simulation']['nodeCount'] - 1)
 
     # QUICK CHARTING
 
@@ -392,14 +397,16 @@ if __name__ == '__main__':
                                     for label in merge_data_view[comparison_variable].values
                                     for selector in [{comparison_variable: label, current_coordinate: current_coordinate_value}]
                                 },
-                            )
+                            ) 
+                            # logscale!!!
+                            ax.set_yscale('log')
                             ax.set_xlim(min(merge_data_view[timeColumnName]), max(merge_data_view[timeColumnName]))
                             ax.legend()
                             fig.tight_layout()
                             by_time_output_directory = f'{output_directory}/{basedir}/{comparison_variable}'
                             Path(by_time_output_directory).mkdir(parents=True, exist_ok=True)
                             figname = f'{comparison_variable}_{current_metric}_{current_coordinate}_{beautified_value}{"_err" if withErrors else ""}'
-                            for symbol in r".[]\/@:":
+                            for symbol in r".[]\/@:${}":
                                 figname = figname.replace(symbol, '_')
                             fig.savefig(f'{by_time_output_directory}/{figname}.pdf')
                             plt.close(fig)
@@ -410,7 +417,7 @@ if __name__ == '__main__':
     
 # Custom charting
 
-    converge_data = medians['converge']
+    converge_data = means['converge']
     converge_error = stdevs['converge']
     timeline = converge_data['time']
     for diameter in converge_data['diameter']:
@@ -426,7 +433,7 @@ if __name__ == '__main__':
                     converge_data.sel(diameter = diameter)[metric],
                     None #converge_error.sel(diameter = diameter)[metric].clip(0, diameter_value)
                 )
-                for metric in converge_data.data_vars if not 'central' in metric
+                for metric in converge_data.data_vars #if not 'central' in metric
             },
             linewidth = 2
         )
