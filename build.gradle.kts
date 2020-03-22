@@ -112,8 +112,8 @@ File(rootProject.rootDir.path + "/src/main/yaml").listFiles()
                 "-XX:+AggressiveHeap"
             )
             val experiment: Experiment = customization[it.nameWithoutExtension] ?: Experiment("")
-            val threadCount = maxOf(1, minOf(cpuCount, heap.toInt() / experiment.maxTaskSize ))
-            val xmx = minOf(heap.toInt(), Runtime.getRuntime().availableProcessors() * experiment.maxTaskSize)
+            val threadCount = 18 // maxOf(1, minOf(cpuCount, heap.toInt() / experiment.maxTaskSize ))
+            val xmx = 100000 // minOf(heap.toInt(), Runtime.getRuntime().availableProcessors() * experiment.maxTaskSize)
             maxHeapSize = "${xmx}m"
             File("data").mkdirs()
             args(
