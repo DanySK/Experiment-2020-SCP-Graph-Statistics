@@ -276,6 +276,7 @@ if __name__ == '__main__':
         timefun = np.logspace if logarithmicTime else np.linspace
         means = {}
         stdevs = {}
+        medians = {}
         for experiment, (minTime, maxTime, timeSamples) in experiments.items():
             # Collect all files for the experiment of interest
             import fnmatch
