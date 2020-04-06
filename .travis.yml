@@ -26,8 +26,8 @@ env:
   matrix:
     - JDK="adopt@1.11"
     - JDK="adopt-openj9@1.11"
-    - JDK="adopt@"
-    - JDK="adopt-openj9@"
+    - JDK="adopt@1.13"
+    - JDK="adopt-openj9@1.13"
 
 # Base configuration
 

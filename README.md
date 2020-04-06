@@ -10,9 +10,10 @@ Simulating 5000 mobile devices with 10 neighbors each requires up to 13GB of mem
 Underequipped hardware may not be able to complete the execution successfully.
 
 In order to run the experiments, the Java Development Kit 11 is required.
-It is very likely that they can run on any later version, but it is not guaranteed.
-We test using OpenJ9 11 and latest, and OpenJDK 11 and latest.
+We use a version of the Alchemist simulator and the Protelis language compatible with the JDK up to version 13.
+We test using OpenJ9 11 and 13, and OpenJDK 11 and 13.
 Original testing was performed with OpenJDK 13.
+Execution with JDK 14, and presumably later version, is known to fail.
 
 In order to produce the charts, Python 3 is required.
 We recommend Python 3.8.1,
