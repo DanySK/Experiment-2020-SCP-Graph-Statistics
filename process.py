@@ -228,13 +228,13 @@ if __name__ == '__main__':
         return r'\|' + x + r'\|'
 
     labels = {
-        'error-central[Sum]': Measure('opt'),
+        'error-central[Sum]': Measure('optimal'),
         'error-extreme[Sum]': Measure('worst'),
-        'error-random[Sum]': Measure('rand'),
-        'error-pageRank[Sum]': Measure('p.r.'),
-        'error-harmonic[Sum]': Measure('harm'),
-        'error-closeness[Sum]': Measure('close'),
-        'error-degree[Sum]': Measure('deg'),
+        'error-random[Sum]': Measure('random'),
+        'error-pageRank[Sum]': Measure('pagerank.'),
+        'error-harmonic[Sum]': Measure('harmonic'),
+        'error-closeness[Sum]': Measure('closeness'),
+        'error-degree[Sum]': Measure('degree'),
         'nodeCount': Measure(r'$n$', 'nodes'),
         'harmonicCentrality[Mean]': Measure(f'${expected("H")}$'),
         'meanNeighbors': Measure(f'${expected("N")}$', 'nodes'),
