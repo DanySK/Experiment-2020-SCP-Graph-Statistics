@@ -231,7 +231,7 @@ if __name__ == '__main__':
         'error-central[Sum]': Measure('optimal'),
         'error-extreme[Sum]': Measure('worst'),
         'error-random[Sum]': Measure('random'),
-        'error-pageRank[Sum]': Measure('pagerank.'),
+        'error-pageRank[Sum]': Measure('pagerank'),
         'error-harmonic[Sum]': Measure('harmonic'),
         'error-closeness[Sum]': Measure('closeness'),
         'error-degree[Sum]': Measure('degree'),
