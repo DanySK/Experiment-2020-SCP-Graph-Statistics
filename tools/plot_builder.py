@@ -502,17 +502,26 @@ def count_files(files):
         print "  0%   0/0 completed"
         exit(1)
     with open('src/main/yaml/'+name+'.yml') as f:
-        y = yaml.load(''.join(f.readlines()))['variables']
-    vars, vals = [], []
+        if hasattr(yaml, 'full_load'):
+            y = yaml.full_load(''.join(f.readlines()))['variables']
+        else:
+            y = yaml.load(''.join(f.readlines()))['variables']
+    vars, vals, vdef = [], [], []
     def rnd(f):
-        return round(f, 5)
+        f = round(f, 5)
+        return int(f) if f == int(f) else f
     for v in y:
         if 'formula' not in y[v]:
             vars.append(v)
-            l = [ y[v]['min'] ]
-            while l[-1] <= y[v]['max']:
-                l.append(l[-1] + y[v]['step'])
-            vals.append(map(rnd, l[:-1]))
+            if 'type' in y[v]:
+                vals.append(y[v]['parameters'][1])
+                vdef.append(y[v]['parameters'][0])
+            else:
+                l = [ y[v]['min'] ]
+                while l[-1] <= y[v]['max']:
+                    l.append(l[-1] + y[v]['step'])
+                vals.append(map(rnd, l[:-1]))
+                vdef.append(y[v]['default'])
     exp = set()      # vars expanded
     lst = set()      # results of expansion
     tot = 0          # files to be produced
@@ -525,9 +534,8 @@ def count_files(files):
             if len(frows) < 8:
                 continue
             fvars = [v.split(' = ') for v in frows[3][1:].strip().split(', ')]
-            fvars, fvals = [v[0] for v in fvars], [rnd(float(v[1])) for v in fvars]
-            fvals = tuple(fvals[fvars.index(v)] for v in vars)
-            fvars = tuple(DB.parse(basename(f)[len(name)+1:-4])[0])
+            fvars, fvals = tuple(v[0] for v in fvars), [rnd(float(v[1])) for v in fvars]
+            fvals = tuple((fvals[fvars.index(v)] if v in fvars else vdef[vars.index(v)]) for v in vars)
             if fvars not in exp:
                 exp.add(fvars)
                 cvals = [[v] for v in fvals]
