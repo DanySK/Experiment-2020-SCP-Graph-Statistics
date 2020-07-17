@@ -1,0 +1,88 @@
+incarnation: protelis
+
+variables:
+  seed: &seed
+    min: 0
+    max: 100
+    step: 1
+    default: 0
+  nodeCount: &nodeCount
+    formula: 1000
+  diameter: &diameter
+    type: ArbitraryVariable
+    parameters: [125, [40, 50, 100, 125, 200, 250, 500, 1000]]
+  height: &height
+    formula: nodeCount / diameter
+  commRange: &commRange
+    formula: 1.5
+  log2m: &log2m
+    formula: 7
+  regsize: &regsize
+    formula: 4
+  stepsCheck: &stepsCheck
+    formula: 3 * nodeCount
+  maxtime: &maxtime
+    formula: diameter * 10
+  grain: &grain
+    formula: 5
+
+seeds:
+  simulation: *seed
+  scenario: *seed
+
+network-model:
+  type: ConnectWithinDistance
+  parameters: [*commRange]
+
+export:
+  - time
+  - molecule: "leader-central"
+    value-filter: onlyfinite
+    aggregators: [sum]
+  - molecule: "leader-extreme"
+    value-filter: onlyfinite
+    aggregators: [sum]
+  - molecule: "leader-random"
+    value-filter: onlyfinite
+    aggregators: [sum]
+  - molecule: "leader-pageRank"
+    value-filter: onlyfinite
+    aggregators: [sum]
+  - molecule: "leader-harmonic"
+    value-filter: onlyfinite
+    aggregators: [sum]
+  - molecule: "leader-closeness"
+    value-filter: onlyfinite
+    aggregators: [sum]
+  - molecule: "leader-degree"
+    value-filter: onlyfinite
+    aggregators: [sum]
+
+deviceProgram: &leaderElection
+  - time-distribution: 1
+    program: org:protelis:leaderElection
+  - program: send
+
+displacements:
+  - in:
+      type: Grid
+      parameters: [0, 0, 50, 50, 1, 1, 0.2, 0.2, 0, 0]
+    programs:
+      - *leaderElection
+    contents:
+      - molecule: diameter
+        concentration: *diameter
+      - molecule: nodes
+        concentration: *nodeCount
+      - molecule: regsize
+        concentration: *regsize
+      - molecule: log2m
+        concentration: *log2m
+      - molecule: grain
+        concentration: *grain
+
+terminate:
+  - type: StableForSteps
+    parameters: [*stepsCheck, 3]
+  - type: AfterTime
+    parameters: [*maxtime]

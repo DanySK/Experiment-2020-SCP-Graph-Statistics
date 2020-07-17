@@ -1,0 +1,69 @@
+module org:protelis:leaderElection
+
+import org:protelis:armonicCentralityHLL
+import protelis:coord:spreading
+import it.unibo.hll.HarmonicCentrality.*
+import it.unibo.hll.ClosenessCentrality.*
+import protelis:lang:utils
+import org:protelis:convergeExperiment
+
+
+def tieBreakerOf(tuple) = [tuple.get(1).get(0), tuple.get(0)]
+def idOf(tuple) = tuple.get(0)
+def distanceOf(tuple) = tuple.get(1).get(1)
+def isAValidCandidate(tuple) = tuple.get(1).get(2)
+def replace(tuple, position, fun) = tuple.set(position, fun(tuple.get(position)))
+
+def localLeader2(uid, symmetryBreaker, grain) {
+    let default = [uid, [symmetryBreaker, 0]]
+    share (lead, nbrLead <- default) {
+        env.put("#DEBUG: lead", lead)
+        env.putField("#DEBUG: nbrLead", nbrLead)
+//        let sources = nbr(foldUnion([nbrLead]).filter { isAValidCandidate(it) } )//nbr(foldUnion([nbrLead]))
+        // {id : [[leader, [breaker, distance]]] }
+//        let sources = nbr(foldUnion([nbrLead]))
+        let sources = [nbrLead]
+        env.putField("#DEBUG: sources", sources)
+        // [[id, [breaker, distance]]]
+        let distances = alignedMap(
+            sources,
+            { candidate, breakDist -> candidate == uid || foldMin(POSITIVE_INFINITY, breakDist.get(1) + 1) < grain }, // +1 ~= +nbrRange
+            { candidate, breakDist ->
+                [foldMax(breakDist.get(0)), hopDistanceTo(uid == candidate && idOf(lead) == uid)]
+//                let leaderInfo = G(uid == candidate, [0, idOf(lead) == uid])
+//                [foldMax(breakDist.get(0)), leaderInfo.get(0), leaderInfo.get(1)]
+                // [foldMax(breakDist.get(0)), hopDistanceTo(uid == candidate), all(breakDist.get(2))]
+            },
+            [NEGATIVE_INFINITY, POSITIVE_INFINITY]
+        )
+        env.put("#DEBUG: distances", distances)
+        let closeEnough = distances.filter { distanceOf(it) < grain }
+        env.put("#DEBUG: closeEnough", closeEnough)
+        let best = closeEnough.fold(default) { a, b ->
+            if (tieBreakerOf(a) > tieBreakerOf(b)) { a } else { b }
+        }
+        env.put("#DEBUG: best", best)
+//        replace(best, 1) { descriptor -> replace(descriptor, 2) { best.get(0) == uid } }
+        best
+    }.get(0)
+}
+let myId = self.getDeviceUID().getId()
+let estimates = hyperANF2(1000)
+let nodes = env.get("nodes")
+let diameter = env.get("diameter")
+let centralNode = ceil(nodes/2 + (1 - nodes/diameter % 2) * diameter / 2)
+[
+    ["extreme", myId],
+    ["random", rep(c <- self.nextRandomDouble()) { c }],
+    ["pageRank", pageRank()],
+    ["harmonic", harmonicCentralityFromHLL(estimates)],
+    ["closeness", closenessCentralityFromHLL(estimates)],
+    ["degree", degree()]
+].map { descriptor ->
+    let name = descriptor.get(0)
+    let centrality = descriptor.get(1).floatValue()
+    env.put("centrality-" + name, centrality)
+    let leader = localLeader2(myId, centrality, env.get("grain"))
+    env.put("leader-" + name, leader)
+    [name, centrality, leader]
+}

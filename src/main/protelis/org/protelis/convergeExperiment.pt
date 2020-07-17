@@ -9,9 +9,9 @@ import it.unibo.hll.ClosenessCentrality.*
 import protelis:lang:utils
 
 // degree of a node, used as centrality measure
-def degree() = foldSum(0, nbr(1))
+public def degree() = foldSum(0, nbr(1))
 
-def pageRank() = share (rank <- 1) {
+public def pageRank() = share (rank <- 1) {
 //env.putField("0"+self.getCurrentTime()+"-rank", rank)
 //env.putField("0"+self.getCurrentTime()+"-degree", max(nbr(degree()), 1))
 //env.putField("0"+self.getCurrentTime()+"-reduce", 0.85 / nbr(degree()) * rank)

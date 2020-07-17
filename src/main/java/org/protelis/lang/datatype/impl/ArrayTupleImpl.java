@@ -8,32 +8,32 @@
  *******************************************************************************/
 package org.protelis.lang.datatype.impl;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.Objects;
-import java.util.Set;
-import java.util.function.BinaryOperator;
-import java.util.function.Function;
-import java.util.function.Predicate;
-
-import com.codepoetics.protonpack.StreamUtils;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Iterators;
+import com.google.common.collect.Sets;
+import com.google.common.hash.Hashing;
 import org.apache.commons.lang3.ArrayUtils;
+import org.jetbrains.annotations.NotNull;
 import org.protelis.lang.datatype.DatatypeFactory;
 import org.protelis.lang.datatype.FunctionDefinition;
 import org.protelis.lang.datatype.Tuple;
-import org.protelis.lang.interpreter.AnnotatedTree;
+import org.protelis.lang.interpreter.ProtelisAST;
 import org.protelis.lang.interpreter.impl.Constant;
 import org.protelis.lang.interpreter.impl.FunctionCall;
 import org.protelis.lang.interpreter.util.JavaInteroperabilityUtils;
 import org.protelis.vm.ExecutionContext;
 
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Iterators;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
-import com.google.common.hash.Hashing;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 /**
  * Implementation of a Tuple using an array data structure.
@@ -44,7 +44,7 @@ public final class ArrayTupleImpl implements Tuple {
     private static final Comparator<Object> COMPARE_TO = (a, b) -> {
         if (a instanceof Comparable && b instanceof Comparable) {
             try {
-                return ((Comparable<Object>) a).compareTo((Comparable<?>) b);
+                return ((Comparable<Object>) a).compareTo(b);
             } catch (RuntimeException e) { // NOPMD: this is done by purpose
                 return compareLexicographically(a, b);
             }
@@ -100,7 +100,7 @@ public final class ArrayTupleImpl implements Tuple {
             final Object o2 = o.get(i);
             if (o1 instanceof Comparable && o2 instanceof Comparable) {
                 try {
-                    res = ((Comparable<Object>) o1).compareTo((Comparable<?>) o2);
+                    res = ((Comparable<Object>) o1).compareTo(o2);
                 } catch (ClassCastException ex) {
                     /*
                      * Uncomparable, go lexicographically
@@ -148,7 +148,7 @@ public final class ArrayTupleImpl implements Tuple {
         }
         if (o instanceof Tuple) {
             final Tuple t = (Tuple) o;
-            if ((int) t.size() == arrayContents.length) {
+            if (t.size() == arrayContents.length) {
                 for (int i = 0; i < arrayContents.length; i++) {
                     if (!arrayContents[i].equals(t.get(i))) {
                         return false;
@@ -164,20 +164,21 @@ public final class ArrayTupleImpl implements Tuple {
     public Tuple filter(final ExecutionContext ctx, final FunctionDefinition fun) {
         Objects.requireNonNull(fun);
         if (fun.getParameterCount() == 1 || fun.invokerShouldInitializeIt()) {
-            return DatatypeFactory
-                    .createTuple(Arrays.stream(arrayContents)
-                            .map(it -> new Constant<>(JavaInteroperabilityUtils.METADATA, it))
-                            .filter(elem -> {
-                                final FunctionCall fc = new FunctionCall(JavaInteroperabilityUtils.METADATA, fun, Lists.newArrayList(elem));
-                                fc.eval(ctx);
-                                final Object outcome = fc.getAnnotation();
-                                if (outcome instanceof Boolean) {
-                                    return (Boolean) outcome;
-                                } else {
-                                    throw new IllegalArgumentException("Filtering function must return a boolean.");
-                                }
-                            })
-                            .map(AnnotatedTree::getAnnotation).toArray());
+            final List<Object> result = new ArrayList<>(arrayContents.length);
+            for (int i = 0; i< arrayContents.length; i++) {
+                final FunctionCall fc = new FunctionCall(JavaInteroperabilityUtils.METADATA, fun, elementAsArguments(arrayContents[i]));
+                final Object outcome = ctx.runInNewStackFrame(i, fc::eval);
+                if (outcome instanceof Boolean) {
+                    if ((Boolean) outcome) {
+                        result.add(arrayContents[i]);
+                    }
+                } else {
+                    throw new IllegalArgumentException("Illegal filtering result: '"
+                        + outcome + ": " + outcome.getClass().getName()
+                        + "' (must be a boolean).");
+                }
+            }
+            return result.size() == arrayContents.length ? this : new ArrayTupleImpl(result.toArray(), false);
         }
         throw new IllegalArgumentException("Filtering function must take one parameter.");
     }
@@ -186,6 +187,22 @@ public final class ArrayTupleImpl implements Tuple {
     public Tuple filter(final Predicate<Object> fun) {
         Objects.requireNonNull(fun);
         return DatatypeFactory.createTuple(Arrays.stream(arrayContents).filter(fun).toArray());
+    }
+
+    public Object fold(final ExecutionContext ctx, final Object defVal, final FunctionDefinition fun) {
+        Objects.requireNonNull(fun);
+        if (fun.getParameterCount() == 2) {
+            Object result = defVal;
+            for (int i = 0; i< arrayContents.length; i++) {
+                result = runBinaryFunctionWithElement(ctx, fun, result, i);
+            }
+            return result;
+        }
+        throw new IllegalArgumentException("Reducing function must take two parameters.");
+    }
+
+    public Object fold(final Object defVal, final BinaryOperator<Object> fun) {
+        return Arrays.stream(arrayContents).reduce(defVal, Objects.requireNonNull(fun));
     }
 
     /**
@@ -215,15 +232,15 @@ public final class ArrayTupleImpl implements Tuple {
         return arrayContents[i];
     }
 
+    @SuppressWarnings("UnstableApiUsage")
     @Override
     public int hashCode() {
         if (hash == 0) {
-            hash = Hashing.murmur3_32().newHasher()
-                    .putObject(arrayContents, (array, dest) -> {
-                        for (final Object it: array) {
-                            dest.putInt(it.hashCode());
-                        }
-                    }).hash().asInt();
+            hash = Hashing.murmur3_32().newHasher().putObject(arrayContents, (array, dest) -> {
+                for (final Object it: array) {
+                    dest.putInt(it.hashCode());
+                }
+            }).hash().asInt();
         }
         return hash;
     }
@@ -245,7 +262,7 @@ public final class ArrayTupleImpl implements Tuple {
 
     @Override
     public Tuple insert(final int i, final Object element) {
-        return new ArrayTupleImpl(ArrayUtils.insert((int) i, arrayContents, element), false);
+        return new ArrayTupleImpl(ArrayUtils.insert(i, arrayContents, element), false);
     }
 
     @Override
@@ -260,6 +277,7 @@ public final class ArrayTupleImpl implements Tuple {
         return arrayContents.length == 0;
     }
 
+    @NotNull
     @Override
     public Iterator<Object> iterator() {
         return Iterators.forArray(arrayContents);
@@ -268,16 +286,12 @@ public final class ArrayTupleImpl implements Tuple {
     @Override
     public Tuple map(final ExecutionContext ctx, final FunctionDefinition fun) {
         if (fun.getParameterCount() == 1 || fun.invokerShouldInitializeIt()) {
-            return DatatypeFactory.createTuple(StreamUtils.zipWithIndex(Arrays.stream(arrayContents)
-                    .map(it -> new Constant<>(JavaInteroperabilityUtils.METADATA, it)))
-                    .map(elem -> {
-                        final FunctionCall fc = new FunctionCall(JavaInteroperabilityUtils.METADATA, fun, ImmutableList.of(elem.getValue()));
-                        ctx.newCallStackFrame((int) elem.getIndex());
-                        fc.eval(ctx);
-                        ctx.returnFromCallFrame();
-                        return fc.getAnnotation();
-                    })
-                    .toArray());
+            final Object[] result = new Object[arrayContents.length];
+            for (int i = 0; i < result.length; i++) {
+                final FunctionCall fc = new FunctionCall(JavaInteroperabilityUtils.METADATA, fun, elementAsArguments(arrayContents[i]));
+                result[i] = ctx.runInNewStackFrame(i, fc::eval);
+            }
+            return new ArrayTupleImpl(result, false);
         }
         throw new IllegalArgumentException("Mapping function must take one parameter.");
     }
@@ -298,7 +312,7 @@ public final class ArrayTupleImpl implements Tuple {
         if (tuple instanceof ArrayTupleImpl) {
             return new ArrayTupleImpl(ArrayUtils.addAll(arrayContents, ((ArrayTupleImpl) tuple).arrayContents), false);
         }
-        final Object[] copy = new Object[arrayContents.length + (int) tuple.size()];
+        final Object[] copy = new Object[arrayContents.length + tuple.size()];
         System.arraycopy(arrayContents, 0, copy, 0, arrayContents.length);
         for (int i = 0; i < copy.length; i++) {
             copy[i] = tuple.get(i - arrayContents.length);
@@ -320,14 +334,30 @@ public final class ArrayTupleImpl implements Tuple {
     public Object reduce(final ExecutionContext ctx, final Object defVal, final FunctionDefinition fun) {
         Objects.requireNonNull(fun);
         if (fun.getParameterCount() == 2) {
-            return Arrays.stream(arrayContents).reduce((first, second) -> {
-                final FunctionCall fc = new FunctionCall(JavaInteroperabilityUtils.METADATA, fun,
-                        Lists.newArrayList(new Constant<>(JavaInteroperabilityUtils.METADATA, first), new Constant<>(JavaInteroperabilityUtils.METADATA, second)));
-                fc.eval(ctx);
-                return fc.getAnnotation();
-            }).orElse(defVal);
+            if (arrayContents.length == 0) {
+                return defVal;
+            }
+            Object result = arrayContents[0];
+            for (int i = 1; i< arrayContents.length; i++) {
+                result = runBinaryFunctionWithElement(ctx, fun, result, i);
+            }
+            return result;
         }
         throw new IllegalArgumentException("Reducing function must take two parameters.");
+    }
+
+    private Object runBinaryFunctionWithElement(
+            final ExecutionContext ctx,
+            final FunctionDefinition fun,
+            final Object param,
+            final int elementPosition
+    ) {
+        final List<ProtelisAST<?>> arguments = ImmutableList.of(
+                new Constant<>(JavaInteroperabilityUtils.METADATA, param),
+                new Constant<>(JavaInteroperabilityUtils.METADATA, arrayContents[elementPosition])
+        );
+        final FunctionCall call = new FunctionCall(JavaInteroperabilityUtils.METADATA, fun, arguments);
+        return ctx.runInNewStackFrame(elementPosition, call::eval);
     }
 
     @Override
@@ -340,7 +370,7 @@ public final class ArrayTupleImpl implements Tuple {
     @Override
     public Tuple set(final int i, final Object element) {
         final Object[] copy = Arrays.copyOf(arrayContents, arrayContents.length);
-        copy[(int) i] = element;
+        copy[i] = element;
         return new ArrayTupleImpl(copy, false);
     }
 
@@ -367,7 +397,7 @@ public final class ArrayTupleImpl implements Tuple {
 
     @Override
     public ArrayTupleImpl subTuple(final int i, final int j) {
-        return new ArrayTupleImpl(ArrayUtils.subarray(arrayContents, (int) i, (int) j), false);
+        return new ArrayTupleImpl(ArrayUtils.subarray(arrayContents, i, j), false);
     }
 
     @Override
@@ -437,6 +467,10 @@ public final class ArrayTupleImpl implements Tuple {
 
     private static int compareLexicographically(final Object a, final Object b) {
         return a.toString().compareTo(b.toString());
+    }
+
+    private static List<ProtelisAST<?>> elementAsArguments(final Object element) {
+        return ImmutableList.of(new Constant<>(JavaInteroperabilityUtils.METADATA, element));
     }
 
 }

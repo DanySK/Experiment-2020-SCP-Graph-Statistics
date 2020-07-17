@@ -26,11 +26,14 @@ sourceSets {
 }
 dependencies {
     implementation("com.codepoetics:protonpack:1.13")
+    implementation("de.ruedigermoeller:fst:2.57")
     implementation("it.unibo.alchemist:alchemist:9.3.0")
     implementation("net.agkn:hll:1.6.0")
     implementation("org.apache.commons:commons-lang3:3.9")
     implementation("org.jgrapht:jgrapht-core:1.3.1")
-    implementation("org.protelis:protelis-lang:13.1.0")
+    implementation("org.protelis:protelis-lang:14.0.0")
+    implementation("org.protelis:protelis-interpreter:14.0.0")
+    implementation("org.slf4j:slf4j-api:1.7.30")
     implementation(kotlin("stdlib-jdk8"))
 }
 
