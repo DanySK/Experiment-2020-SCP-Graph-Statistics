@@ -27,7 +27,9 @@ sourceSets {
 dependencies {
     implementation("com.codepoetics:protonpack:1.13")
     implementation("de.ruedigermoeller:fst:2.57")
-    implementation("it.unibo.alchemist:alchemist:9.3.0")
+    implementation("it.unibo.alchemist:alchemist:9.3.0-dev1bc+fd2c3a1c0")
+    implementation("it.unibo.alchemist:alchemist-incarnation-protelis:9.3.0-dev1bc+fd2c3a1c0")
+    implementation("it.unibo.alchemist:alchemist-swingui:9.3.0-dev1bc+fd2c3a1c0")
     implementation("net.agkn:hll:1.6.0")
     implementation("org.apache.commons:commons-lang3:3.9")
     implementation("org.jgrapht:jgrapht-core:1.3.1")
