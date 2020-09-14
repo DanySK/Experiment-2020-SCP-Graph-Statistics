@@ -1,11 +1,10 @@
 package it.unibo.alchemist.model.implementations.movestrategies
 
 import it.unibo.alchemist.model.implementations.positions.Euclidean2DPosition
-import it.unibo.alchemist.model.implementations.utils.nextDouble
 import it.unibo.alchemist.model.interfaces.Environment
-import it.unibo.alchemist.model.interfaces.Environment2DWithObstacles
 import it.unibo.alchemist.model.interfaces.Node
-import it.unibo.alchemist.model.interfaces.Position2D
+import it.unibo.alchemist.model.interfaces.environments.Environment2DWithObstacles
+import it.unibo.alchemist.nextDouble
 import kotlin.math.cos
 import kotlin.math.sin
 import org.apache.commons.math3.distribution.RealDistribution
@@ -38,10 +37,10 @@ class RandomTarget<T>(
         val delta = makePosition(distance * cos(this), distance * sin(this))
         val desired = current + delta
         when (environment) {
-            is Environment2DWithObstacles<*, T, Euclidean2DPosition> -> {
-                val (currentX, currentY) = current.cartesianCoordinates
-                val (desiredX, desiredY) = desired.cartesianCoordinates
-                environment.next(currentX, currentY, desiredX, desiredY)
+            is Environment2DWithObstacles<*, T> -> {
+                val (currentX, currentY) = current.coordinates
+                val (desiredX, desiredY) = desired.coordinates
+                environment.next(Euclidean2DPosition(currentX, currentY), Euclidean2DPosition(desiredX, desiredY))
             }
             else -> desired
         }
