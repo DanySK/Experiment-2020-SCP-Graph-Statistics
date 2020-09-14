@@ -38,6 +38,7 @@ dependencies {
     implementation("org.protelis:protelis-interpreter:14.0.0")
     implementation("org.slf4j:slf4j-api:1.7.30")
     implementation(kotlin("stdlib-jdk8"))
+    implementation(kotlin("reflect"))
 }
 
 // Heap size estimation for batches

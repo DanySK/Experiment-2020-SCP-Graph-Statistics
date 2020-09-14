@@ -8,8 +8,9 @@ import it.unibo.alchemist.model.interfaces.Time
 import org.jgrapht.alg.shortestpath.DijkstraShortestPath
 import org.jgrapht.graph.SimpleGraph
 import java.util.*
+import javax.print.attribute.standard.MediaSize
 
-class GuerreroClusterIntraDistance @JvmOverloads constructor(
+class GuerreroClosestNeighborDistance @JvmOverloads constructor(
         val useHopCount: Boolean = false,
         leaderIdMolecule: Molecule
 ) : ClusterBasedMetric(leaderIdMolecule) {
@@ -20,30 +21,34 @@ class GuerreroClusterIntraDistance @JvmOverloads constructor(
         time: Time,
         step: Long,
         clusters: Map<Int, List<Node<T>>>
-    ): DoubleArray = doubleArrayOf(
-        clusters.map { (leaderId, clusterNodes) ->
-            val center = environment.getNodeByID(leaderId)
-            val shortestPath = environment.shortestPathInCluster(clusterNodes, center) { first, other ->
-                if (useHopCount) 1.0 else environment.getDistanceBetweenNodes(first, other)
+    ): DoubleArray {
+        val shortestPaths = environment.shortestPaths { center, other ->
+            if (useHopCount) 1.0 else environment.getDistanceBetweenNodes(center, other)
+        }
+        val pairs = mutableListOf<Pair<Node<T>, Node<T>>>()
+        val leaders = clusters.map { (leaderId, _) -> environment.getNodeByID(leaderId) }
+        for (i in leaders.indices) {
+            for (j in i + 1 until leaders.size) {
+                pairs.add(leaders[i] to leaders [j])
             }
-            clusterNodes.asSequence()
-                .map { shortestPath.getPathWeight(center, it) }
+        }
+        return doubleArrayOf(
+            pairs.asSequence()
+                .map { (first, second) -> shortestPaths.getPathWeight(first, second) }
                 .average()
-        }.average()
-    )
+        )
+    }
 
-    private fun <T> Environment<T, *>.shortestPathInCluster(
-        cluster: List<Node<T>>,
-        center: Node<T>,
+    private fun <T> Environment<T, *>.shortestPaths(
         metric: (Node<T>, Node<T>) -> Double
     ): DijkstraShortestPath<Node<T>, Double> {
         val graph = SimpleGraph<Node<T>, Double>(null, null, true)
         val visited = mutableSetOf<Node<T>>()
-        val toVisit = ArrayDeque<Node<T>>().also { it.add(center) }
+        val toVisit = ArrayDeque(getNodes())
         while (toVisit.isNotEmpty()) {
             var current = toVisit.poll()
             graph.addVertex(current)
-            val neighbors = getNeighborhood(current).neighbors.filter { it in cluster && it !in visited }
+            val neighbors = getNeighborhood(current).neighbors.filter { it !in visited }
             neighbors.forEach {
                 graph.addVertex(it)
                 graph.addEdge(current, it, metric(current, it))
