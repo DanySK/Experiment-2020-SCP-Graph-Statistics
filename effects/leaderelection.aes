@@ -11,17 +11,17 @@
     "blue": {
       "max": 255,
       "min": 0,
-      "val": 255
+      "val": 0
     },
     "green": {
       "max": 255,
       "min": 0,
-      "val": 255
+      "val": 0
     },
     "alpha": {
       "max": 255,
       "min": 0,
-      "val": 106
+      "val": 255
     },
     "scaleFactor": {
       "max": 100,
@@ -31,14 +31,75 @@
     "size": {
       "max": 100,
       "min": 0,
-      "val": 14
+      "val": 30
     },
     "molFilter": true,
-    "molString": "leader-extreme",
+    "molString": "leader-random",
     "molPropertyFilter": true,
-    "property": "\u003cvalue\u003e * 31 % 29",
+    "property": "\u003cvalue\u003e \u003d\u003d self.getDeviceUID().getId()",
     "writingPropertyValue": false,
-    "c": "RED",
+    "c": "ALPHA",
+    "reverse": false,
+    "propoom": {
+      "max": 10,
+      "min": -10,
+      "val": 0
+    },
+    "minprop": {
+      "max": 10,
+      "min": -10,
+      "val": 0
+    },
+    "maxprop": {
+      "max": 10,
+      "min": -10,
+      "val": 1
+    },
+    "colorCache": {
+      "value": -65536,
+      "falpha": 0.0
+    }
+  },
+  {
+    "type": "class it.unibo.alchemist.boundary.gui.effects.DrawShape",
+    "curIncarnation": "protelis",
+    "mode": "FILL_ELLIPSE",
+    "red": {
+      "max": 255,
+      "min": 0,
+      "val": 0
+    },
+    "blue": {
+      "max": 255,
+      "min": 0,
+      "val": 0
+    },
+    "green": {
+      "max": 255,
+      "min": 0,
+      "val": 0
+    },
+    "alpha": {
+      "max": 255,
+      "min": 0,
+      "val": 255
+    },
+    "scaleFactor": {
+      "max": 100,
+      "min": 0,
+      "val": 50
+    },
+    "size": {
+      "max": 100,
+      "min": 0,
+      "val": 18
+    },
+    "molFilter": true,
+    "molString": "leader-random",
+    "molPropertyFilter": true,
+    "property": "\u003cvalue\u003e * 13 % 7",
+    "writingPropertyValue": false,
+    "c": "BRIGHTNESS",
     "reverse": false,
     "propoom": {
       "max": 10,
@@ -53,10 +114,10 @@
     "maxprop": {
       "max": 10,
       "min": -10,
-      "val": 3
+      "val": 1
     },
     "colorCache": {
-      "value": 1795162111,
+      "value": -16777216,
       "falpha": 0.0
     }
   },
@@ -72,7 +133,7 @@
     "blue": {
       "max": 255,
       "min": 0,
-      "val": 255
+      "val": 0
     },
     "green": {
       "max": 255,
@@ -82,7 +143,7 @@
     "alpha": {
       "max": 255,
       "min": 0,
-      "val": 106
+      "val": 159
     },
     "scaleFactor": {
       "max": 100,
@@ -95,11 +156,11 @@
       "val": 14
     },
     "molFilter": true,
-    "molString": "leader-extreme",
+    "molString": "leader-random",
     "molPropertyFilter": true,
     "property": "\u003cvalue\u003e * 31 % 29",
     "writingPropertyValue": false,
-    "c": "GREEN",
+    "c": "HUE",
     "reverse": false,
     "propoom": {
       "max": 10,
@@ -117,68 +178,7 @@
       "val": 3
     },
     "colorCache": {
-      "value": 1795162111,
-      "falpha": 0.0
-    }
-  },
-  {
-    "type": "class it.unibo.alchemist.boundary.gui.effects.DrawShape",
-    "curIncarnation": "protelis",
-    "mode": "FILL_ELLIPSE",
-    "red": {
-      "max": 255,
-      "min": 0,
-      "val": 255
-    },
-    "blue": {
-      "max": 255,
-      "min": 0,
-      "val": 255
-    },
-    "green": {
-      "max": 255,
-      "min": 0,
-      "val": 255
-    },
-    "alpha": {
-      "max": 255,
-      "min": 0,
-      "val": 106
-    },
-    "scaleFactor": {
-      "max": 100,
-      "min": 0,
-      "val": 50
-    },
-    "size": {
-      "max": 100,
-      "min": 0,
-      "val": 14
-    },
-    "molFilter": true,
-    "molString": "leader-extreme",
-    "molPropertyFilter": true,
-    "property": "\u003cvalue\u003e * 31 % 29",
-    "writingPropertyValue": false,
-    "c": "BLUE",
-    "reverse": false,
-    "propoom": {
-      "max": 10,
-      "min": -10,
-      "val": 1
-    },
-    "minprop": {
-      "max": 10,
-      "min": -10,
-      "val": 0
-    },
-    "maxprop": {
-      "max": 10,
-      "min": -10,
-      "val": 3
-    },
-    "colorCache": {
-      "value": 1795162111,
+      "value": -1610612992,
       "falpha": 0.0
     }
   }

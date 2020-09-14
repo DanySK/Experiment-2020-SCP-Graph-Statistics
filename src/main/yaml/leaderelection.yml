@@ -7,14 +7,10 @@ variables:
     step: 1
     default: 0
   nodeCount: &nodeCount
-    formula: 1000
+    formula: 400
   diameter: &diameter
     type: ArbitraryVariable
     parameters: [125, [40, 50, 100, 125, 200, 250, 500, 1000]]
-  height: &height
-    formula: nodeCount / diameter
-  commRange: &commRange
-    formula: 1.5
   log2m: &log2m
     formula: 7
   regsize: &regsize
@@ -24,15 +20,11 @@ variables:
   maxtime: &maxtime
     formula: diameter * 10
   grain: &grain
-    formula: 5
+    formula: 100
 
 seeds:
   simulation: *seed
   scenario: *seed
-
-network-model:
-  type: ConnectWithinDistance
-  parameters: [*commRange]
 
 export:
   - time
@@ -65,8 +57,8 @@ deviceProgram: &leaderElection
 
 displacements:
   - in:
-      type: Grid
-      parameters: [0, 0, 50, 50, 1, 1, 0.2, 0.2, 0, 0]
+      type: GraphStreamDisplacement
+      parameters: [*nodeCount, "Lobster", 2, 10]
     programs:
       - *leaderElection
     contents:

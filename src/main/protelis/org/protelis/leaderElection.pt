@@ -53,12 +53,12 @@ let nodes = env.get("nodes")
 let diameter = env.get("diameter")
 let centralNode = ceil(nodes/2 + (1 - nodes/diameter % 2) * diameter / 2)
 [
-    ["extreme", myId],
-    ["random", rep(c <- self.nextRandomDouble()) { c }],
+//    ["extreme", myId],
+    ["random", rep(c <- self.nextRandomDouble()) { c }]/*,
     ["pageRank", pageRank()],
     ["harmonic", harmonicCentralityFromHLL(estimates)],
     ["closeness", closenessCentralityFromHLL(estimates)],
-    ["degree", degree()]
+    ["degree", degree()]*/
 ].map { descriptor ->
     let name = descriptor.get(0)
     let centrality = descriptor.get(1).floatValue()
