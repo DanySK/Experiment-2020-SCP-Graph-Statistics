@@ -35,8 +35,6 @@ import java.util.TimeZone;
  * @param <P> {@link Position} type position type
  */
 @SuppressWarnings("serial")
-@SuppressFBWarnings(value = {"SE_BAD_FIELD", "SE_NO_SERIALVERSIONID"},
-        justification = "This class does not comply to Serializable.")
 public final class Exporter<T, P extends Position<? extends P>> implements OutputMonitor<T, P> {
 
     private static final String SEPARATOR = "#####################################################################";
