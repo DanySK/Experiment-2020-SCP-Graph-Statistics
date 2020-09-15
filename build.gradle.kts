@@ -32,6 +32,7 @@ dependencies {
     implementation("it.unibo.alchemist:alchemist-euclidean-geometry:$alchemistVersion")
     implementation("it.unibo.alchemist:alchemist-incarnation-protelis:$alchemistVersion")
     implementation("it.unibo.alchemist:alchemist-swingui:$alchemistVersion")
+    implementation("org.danilopianini:thread-inheritable-resource-loader:0.3.5")
     implementation("net.agkn:hll:1.6.0")
     implementation("org.apache.commons:commons-lang3:3.9")
     implementation("org.jgrapht:jgrapht-core:1.5.0")
@@ -83,7 +84,7 @@ data class Experiment(
 val customization = listOf(
     Experiment("simulation", (7.6 * 1024).toInt(), 0.5, arrayOf("speed", "meanNeighbors", "nodeCount")),
     Experiment("converge", maxTaskSize = 2048 + 512, variables = arrayOf("diameter")),
-    Experiment("leaderelection", maxTaskSize = 4096, variables = arrayOf())
+    Experiment("leaderelection", maxTaskSize = 2048, variables = arrayOf("grain", "nodeCount", "deploymentType"))
 ).groupBy { it.name }.mapValues { (_, list) -> list.first() }
 /*
  * Scan the folder with the simulation files, and create a task for each one of them.
@@ -100,8 +101,8 @@ File(rootProject.rootDir.path + "/src/main/yaml").listFiles()
             classpath = sourceSets["main"].runtimeClasspath
             args(
                 "-y", it.absolutePath,
-                "-g", "effects/${it.nameWithoutExtension}.aes",
-                "-e", "export-from-graphical-sim.txt"
+                "-g", "effects/${it.nameWithoutExtension}.aes"
+//                "-e", "export-from-graphical-sim.txt"
             )
             if (System.getenv("CI") == "true") {
                 args("-hl", "-t", "2")

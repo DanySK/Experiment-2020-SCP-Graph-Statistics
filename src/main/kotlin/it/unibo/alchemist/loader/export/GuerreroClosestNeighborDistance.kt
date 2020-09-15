@@ -38,12 +38,18 @@ class GuerreroClosestNeighborDistance @JvmOverloads constructor(
         return doubleArrayOf(
             pairs.asSequence()
                 .map { nodes ->
-                    if (immutableEnvironment) {
-                        pathCache.computeIfAbsent(nodes) { shortestPaths.getPathWeight(nodes.first, nodes.second) }
-                    } else {
-                        shortestPaths.getPathWeight(nodes.first, nodes.second)
+                    runCatching {
+                        if (immutableEnvironment) {
+                            pathCache.computeIfAbsent(nodes) {
+                                shortestPaths.getPathWeight(nodes.first, nodes.second)
+                            }
+                        } else {
+                            shortestPaths.getPathWeight(nodes.first, nodes.second)
+                        }
                     }
                 }
+                .filter { it.isSuccess }
+                .map { it.getOrThrow() }
                 .average()
         )
     }

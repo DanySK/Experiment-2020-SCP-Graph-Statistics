@@ -24,30 +24,30 @@ class GuerreroClusterIntraDistance @JvmOverloads constructor(
     ): DoubleArray = doubleArrayOf(
         clusters.map { (leaderId, clusterNodes) ->
             val center = environment.getNodeByID(leaderId)
-            val shortestPath = environment.shortestPathInCluster(clusterNodes, center) { first, other ->
-                if (useHopCount) 1.0 else environment.getDistanceBetweenNodes(first, other)
-            }
+            val shortestPath = environment
+                .shortestPathInCluster(clusterNodes.toSet(), center) { first, other ->
+                    if (useHopCount) 1.0 else environment.getDistanceBetweenNodes(first, other)
+                }
             clusterNodes.asSequence()
-                .flatMap {
-                    try {
-                        sequenceOf(shortestPath.getPathWeight(center, it))
-                    } catch (e: IllegalArgumentException) {
-                        // The cluster is not well formed, some node got cut off
-                        emptySequence<Double>()
+                .map {
+                    runCatching {
+                        shortestPath.getPathWeight(center, it)
                     }
                 }
+                .filter { it.isSuccess }
+                .map { it.getOrThrow() }
                 .average()
         }.average()
     )
 
     private fun <T> Environment<T, *>.shortestPathInCluster(
-        cluster: List<Node<T>>,
+        cluster: Collection<Node<T>>,
         center: Node<T>,
         metric: (Node<T>, Node<T>) -> Double
     ): DijkstraShortestPath<Node<T>, Any> {
         val graph = SimpleWeightedGraph<Node<T>, Any>(null, { Any() })
         val visited = mutableSetOf<Node<T>>()
-        val toVisit = ArrayDeque<Node<T>>().also { it.add(center) }
+        val toVisit = ArrayDeque<Node<T>>(getNodeCount()).also { it.add(center) }
         while (toVisit.isNotEmpty()) {
             var current = toVisit.poll()
             graph.addVertex(current)
