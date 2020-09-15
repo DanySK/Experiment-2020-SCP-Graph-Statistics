@@ -37,13 +37,9 @@ install:
   - source $GRAVIS/install-jdk
 script:
   - travis_retry ./gradlew clean runAllGraphic
-before_cache:
-  - $GRAVIS/clean-gradle-cache
 cache:
   directories:
     - $HOME/.pyenv
-    - $HOME/.gradle/caches/
-    - $HOME/.gradle/wrapper/
 
 # Stages
 
