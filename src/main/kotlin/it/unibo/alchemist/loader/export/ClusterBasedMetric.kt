@@ -11,26 +11,24 @@ import java.lang.IllegalStateException
 abstract class ClusterBasedMetric @JvmOverloads constructor(
         val leaderIdMolecule: Molecule
 ) : Extractor {
-    final override fun extractData(environment: Environment<*, *>, reaction: Reaction<*>, time: Time, step: Long): DoubleArray {
+
+    final override fun <T> extractData(
+        environment: Environment<T, *>,
+        reaction: Reaction<T>?,
+        time: Time,
+        step: Long
+    ): DoubleArray {
         val clusters = environment.getNodes().asSequence()
             .map { it.leaderId to it }
             .filterNot { (leaderId, _) -> leaderId == null }
-            .map {
-                @Suppress("UNCHECKED_CAST") // checked right before this call
-                it as Pair<Int, Node<*>>
-            }
+            .map { it as Pair<Int, Node<T>> }
             .groupBy({it.component1()}, {it.component2()})
-        return extractData(
-                environment as Environment<Any, *>,
-                reaction as Reaction<Any>,
-                time,
-                step,
-                clusters as Map<Int, List<Node<Any>>>)
+        return extractData(environment, reaction, time, step, clusters)
     }
 
     protected abstract fun <T> extractData(
         environment: Environment<T, *>,
-        reaction: Reaction<T>,
+        reaction: Reaction<T>?,
         time: Time,
         step: Long,
         clusters: Map<Int, List<Node<T>>>

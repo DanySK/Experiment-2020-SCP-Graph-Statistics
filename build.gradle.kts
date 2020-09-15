@@ -24,16 +24,17 @@ sourceSets {
         }
     }
 }
+val alchemistVersion = "9.3.0-dev1bn+1fc9a8ebd" // "9.3.0-dev1bc+fd2c3a1c0" // "9.3.0-dev1bn+1fc9a8ebd"
 dependencies {
     implementation("com.codepoetics:protonpack:1.13")
     implementation("de.ruedigermoeller:fst:2.57")
-    implementation("it.unibo.alchemist:alchemist:9.3.0-dev1bc+fd2c3a1c0")
-    implementation("it.unibo.alchemist:alchemist-euclidean-geometry:9.3.0-dev1bc+fd2c3a1c0")
-    implementation("it.unibo.alchemist:alchemist-incarnation-protelis:9.3.0-dev1bc+fd2c3a1c0")
-    implementation("it.unibo.alchemist:alchemist-swingui:9.3.0-dev1bc+fd2c3a1c0")
+    implementation("it.unibo.alchemist:alchemist:$alchemistVersion")
+    implementation("it.unibo.alchemist:alchemist-euclidean-geometry:$alchemistVersion")
+    implementation("it.unibo.alchemist:alchemist-incarnation-protelis:$alchemistVersion")
+    implementation("it.unibo.alchemist:alchemist-swingui:$alchemistVersion")
     implementation("net.agkn:hll:1.6.0")
     implementation("org.apache.commons:commons-lang3:3.9")
-    implementation("org.jgrapht:jgrapht-core:1.3.1")
+    implementation("org.jgrapht:jgrapht-core:1.5.0")
     implementation("org.protelis:protelis-lang:14.0.0")
     implementation("org.protelis:protelis-interpreter:14.0.0")
     implementation("org.slf4j:slf4j-api:1.7.30")
@@ -99,7 +100,8 @@ File(rootProject.rootDir.path + "/src/main/yaml").listFiles()
             classpath = sourceSets["main"].runtimeClasspath
             args(
                 "-y", it.absolutePath,
-                "-g", "effects/${it.nameWithoutExtension}.aes"
+                "-g", "effects/${it.nameWithoutExtension}.aes",
+                "-e", "export-from-graphical-sim.txt"
             )
             if (System.getenv("CI") == "true") {
                 args("-hl", "-t", "2")

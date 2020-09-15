@@ -17,13 +17,13 @@ def replace(tuple, position, fun) = tuple.set(position, fun(tuple.get(position))
 def localLeader2(uid, symmetryBreaker, grain) {
     let default = [uid, [symmetryBreaker, 0]]
     share (lead, nbrLead <- default) {
-        env.put("#DEBUG: lead", lead)
-        env.putField("#DEBUG: nbrLead", nbrLead)
+//        env.put("#DEBUG: lead", lead)
+//        env.putField("#DEBUG: nbrLead", nbrLead)
 //        let sources = nbr(foldUnion([nbrLead]).filter { isAValidCandidate(it) } )//nbr(foldUnion([nbrLead]))
         // {id : [[leader, [breaker, distance]]] }
 //        let sources = nbr(foldUnion([nbrLead]))
         let sources = [nbrLead]
-        env.putField("#DEBUG: sources", sources)
+//        env.putField("#DEBUG: sources", sources)
         // [[id, [breaker, distance]]]
         let distances = alignedMap(
             sources,
@@ -36,13 +36,13 @@ def localLeader2(uid, symmetryBreaker, grain) {
             },
             [NEGATIVE_INFINITY, POSITIVE_INFINITY]
         )
-        env.put("#DEBUG: distances", distances)
+//        env.put("#DEBUG: distances", distances)
         let closeEnough = distances.filter { distanceOf(it) < grain }
-        env.put("#DEBUG: closeEnough", closeEnough)
+//        env.put("#DEBUG: closeEnough", closeEnough)
         let best = closeEnough.fold(default) { a, b ->
             if (tieBreakerOf(a) > tieBreakerOf(b)) { a } else { b }
         }
-        env.put("#DEBUG: best", best)
+//        env.put("#DEBUG: best", best)
 //        replace(best, 1) { descriptor -> replace(descriptor, 2) { best.get(0) == uid } }
         best
     }.get(0)
@@ -50,15 +50,13 @@ def localLeader2(uid, symmetryBreaker, grain) {
 let myId = self.getDeviceUID().getId()
 let estimates = hyperANF2(1000)
 let nodes = env.get("nodes")
-let diameter = env.get("diameter")
-let centralNode = ceil(nodes/2 + (1 - nodes/diameter % 2) * diameter / 2)
 [
 //    ["extreme", myId],
-    ["random", rep(c <- self.nextRandomDouble()) { c }]/*,
+    ["random", rep(c <- self.nextRandomDouble()) { c }],
     ["pageRank", pageRank()],
     ["harmonic", harmonicCentralityFromHLL(estimates)],
     ["closeness", closenessCentralityFromHLL(estimates)],
-    ["degree", degree()]*/
+    ["degree", degree()]
 ].map { descriptor ->
     let name = descriptor.get(0)
     let centrality = descriptor.get(1).floatValue()

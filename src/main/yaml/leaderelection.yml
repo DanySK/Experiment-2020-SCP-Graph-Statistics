@@ -7,20 +7,30 @@ variables:
     step: 1
     default: 0
   nodeCount: &nodeCount
-    formula: 400
-  diameter: &diameter
     type: ArbitraryVariable
-    parameters: [125, [40, 50, 100, 125, 200, 250, 500, 1000]]
+    parameters: [800, [25, 50, 100, 200, 400, 800]]
+  grain: &grain
+    type: ArbitraryVariable
+    parameters: [2, [2, 4, 8, 16, 32]]
   log2m: &log2m
     formula: 7
   regsize: &regsize
     formula: 4
   stepsCheck: &stepsCheck
     formula: 3 * nodeCount
-  maxtime: &maxtime
-    formula: diameter * 10
-  grain: &grain
-    formula: 100
+  deployment_type:
+    type: ArbitraryVariable
+    parameters: ["BarabasiAlbert", ["Lobster", "RandomEuclidean", "BarabasiAlbert"]]
+  deployment_quality:
+    formula: 0.1
+  deployment_parameters: &deployment_parameters
+    language: kotlin
+    formula: |
+      when(deployment_type) {
+        "Lobster" -> listOf(nodeCount, deployment_quality, "Lobster", 2, 10)
+        "RandomEuclidean" -> listOf(nodeCount, deployment_quality, "RandomEuclidean")
+        "BarabasiAlbert" -> listOf(nodeCount, deployment_quality, "BarabasiAlbert", 2)
+      }
 
 seeds:
   simulation: *seed
@@ -28,27 +38,41 @@ seeds:
 
 export:
   - time
-  - molecule: "leader-central"
-    value-filter: onlyfinite
-    aggregators: [sum]
-  - molecule: "leader-extreme"
-    value-filter: onlyfinite
-    aggregators: [sum]
   - molecule: "leader-random"
     value-filter: onlyfinite
-    aggregators: [sum]
+    aggregators: [countDistinct]
+  - type: GuerreroClosestNeighborDistance
+    parameters: [true, "leader-random", true]
+  - type: GuerreroClusterIntraDistance
+    parameters: [true, "leader-random"]
   - molecule: "leader-pageRank"
     value-filter: onlyfinite
-    aggregators: [sum]
+    aggregators: [countDistinct]
+  - type: GuerreroClosestNeighborDistance
+    parameters: [true, "leader-pageRank", true]
+  - type: GuerreroClusterIntraDistance
+    parameters: [true, "leader-pageRank"]
   - molecule: "leader-harmonic"
     value-filter: onlyfinite
-    aggregators: [sum]
+    aggregators: [countDistinct]
+  - type: GuerreroClosestNeighborDistance
+    parameters: [true, "leader-harmonic", true]
+  - type: GuerreroClusterIntraDistance
+    parameters: [true, "leader-harmonic"]
   - molecule: "leader-closeness"
     value-filter: onlyfinite
-    aggregators: [sum]
+    aggregators: [countDistinct]
+  - type: GuerreroClosestNeighborDistance
+    parameters: [true, "leader-closeness", true]
+  - type: GuerreroClusterIntraDistance
+    parameters: [true, "leader-closeness"]
   - molecule: "leader-degree"
     value-filter: onlyfinite
-    aggregators: [sum]
+    aggregators: [countDistinct]
+  - type: GuerreroClosestNeighborDistance
+    parameters: [true, "leader-degree", true]
+  - type: GuerreroClusterIntraDistance
+    parameters: [true, "leader-degree"]
 
 deviceProgram: &leaderElection
   - time-distribution: 1
@@ -58,12 +82,10 @@ deviceProgram: &leaderElection
 displacements:
   - in:
       type: GraphStreamDisplacement
-      parameters: [*nodeCount, "Lobster", 2, 10]
+      parameters: *deployment_parameters
     programs:
       - *leaderElection
     contents:
-      - molecule: diameter
-        concentration: *diameter
       - molecule: nodes
         concentration: *nodeCount
       - molecule: regsize
@@ -76,5 +98,3 @@ displacements:
 terminate:
   - type: StableForSteps
     parameters: [*stepsCheck, 3]
-  - type: AfterTime
-    parameters: [*maxtime]

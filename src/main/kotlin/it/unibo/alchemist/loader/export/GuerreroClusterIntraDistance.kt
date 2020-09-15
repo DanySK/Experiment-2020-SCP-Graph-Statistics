@@ -7,16 +7,17 @@ import it.unibo.alchemist.model.interfaces.Reaction
 import it.unibo.alchemist.model.interfaces.Time
 import org.jgrapht.alg.shortestpath.DijkstraShortestPath
 import org.jgrapht.graph.SimpleGraph
+import org.jgrapht.graph.SimpleWeightedGraph
 import java.util.*
 
 class GuerreroClusterIntraDistance @JvmOverloads constructor(
-        val useHopCount: Boolean = false,
+        private val useHopCount: Boolean = false,
         leaderIdMolecule: Molecule
 ) : ClusterBasedMetric(leaderIdMolecule) {
 
     override fun <T> extractData(
         environment: Environment<T, *>,
-        reaction: Reaction<T>,
+        reaction: Reaction<T>?,
         time: Time,
         step: Long,
         clusters: Map<Int, List<Node<T>>>
@@ -27,7 +28,14 @@ class GuerreroClusterIntraDistance @JvmOverloads constructor(
                 if (useHopCount) 1.0 else environment.getDistanceBetweenNodes(first, other)
             }
             clusterNodes.asSequence()
-                .map { shortestPath.getPathWeight(center, it) }
+                .flatMap {
+                    try {
+                        sequenceOf(shortestPath.getPathWeight(center, it))
+                    } catch (e: IllegalArgumentException) {
+                        // The cluster is not well formed, some node got cut off
+                        emptySequence<Double>()
+                    }
+                }
                 .average()
         }.average()
     )
@@ -36,8 +44,8 @@ class GuerreroClusterIntraDistance @JvmOverloads constructor(
         cluster: List<Node<T>>,
         center: Node<T>,
         metric: (Node<T>, Node<T>) -> Double
-    ): DijkstraShortestPath<Node<T>, Double> {
-        val graph = SimpleGraph<Node<T>, Double>(null, null, true)
+    ): DijkstraShortestPath<Node<T>, Any> {
+        val graph = SimpleWeightedGraph<Node<T>, Any>(null, { Any() })
         val visited = mutableSetOf<Node<T>>()
         val toVisit = ArrayDeque<Node<T>>().also { it.add(center) }
         while (toVisit.isNotEmpty()) {
@@ -46,13 +54,17 @@ class GuerreroClusterIntraDistance @JvmOverloads constructor(
             val neighbors = getNeighborhood(current).neighbors.filter { it in cluster && it !in visited }
             neighbors.forEach {
                 graph.addVertex(it)
-                graph.addEdge(current, it, metric(current, it))
+                graph.addEdge(current, it)
+                graph.setEdgeWeight(current, it, metric(current, it))
             }
+            visited.add(current)
             toVisit.addAll(neighbors)
         }
         return DijkstraShortestPath(graph)
     }
 
-    override fun getNames(): List<String> = listOf("ClusterIntraDistance")
+    override fun getNames(): List<String> = listOf(
+        "${"HopCount".takeIf { useHopCount } ?: "" }ClusterIntraDistance[$leaderIdMolecule]"
+    )
 
 }
