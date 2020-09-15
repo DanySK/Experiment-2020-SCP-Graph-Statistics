@@ -1,0 +1,44 @@
+#####################################################################
+# Alchemist log file - simulation started at: 2020-09-15T21:10+0000 #
+#####################################################################
+# seed = 18.0, nodeCount = 25, grain = 10, deploymentType = Lobster
+#
+# The columns have the following meaning: 
+# time leader-random[CountDistinct] HopCountClusterClosestNeighborDistance[leader-random] HopCountClusterIntraDistance[leader-random] leader-pageRank[CountDistinct] HopCountClusterClosestNeighborDistance[leader-pageRank] HopCountClusterIntraDistance[leader-pageRank] leader-harmonic[CountDistinct] HopCountClusterClosestNeighborDistance[leader-harmonic] HopCountClusterIntraDistance[leader-harmonic] leader-closeness[CountDistinct] HopCountClusterClosestNeighborDistance[leader-closeness] HopCountClusterIntraDistance[leader-closeness] leader-degree[CountDistinct] HopCountClusterClosestNeighborDistance[leader-degree] HopCountClusterIntraDistance[leader-degree] 
+0.0 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+1.0067713218599703 14.0 4.241758241758242 0.31190476190476196 19.0 3.5789473684210527 0.05263157894736842 20.0 3.636842105263158 0.065 8.0 3.857142857142857 0.6496212121212122 20.0 3.636842105263158 0.065 
+2.0067713218599703 4.0 5.666666666666667 1.6186868686868687 6.0 2.2 0.800925925925926 7.0 2.4761904761904763 0.7976190476190476 2.0 6.0 1.4736842105263157 5.0 2.2 0.95 
+3.0067713218599703 2.0 4.0 1.4736842105263157 2.0 1.0 1.486842105263158 2.0 1.0 1.486842105263158 1.0 NaN 3.56 2.0 1.0 1.486842105263158 
+4.00677132185997 1.0 NaN 3.56 1.0 NaN 1.96 1.0 NaN 1.96 1.0 NaN 3.56 1.0 NaN 1.96 
+5.00677132185997 1.0 NaN 3.56 1.0 NaN 1.96 1.0 NaN 1.96 1.0 NaN 3.56 1.0 NaN 1.96 
+6.00677132185997 1.0 NaN 3.56 1.0 NaN 1.96 1.0 NaN 1.96 1.0 NaN 3.56 1.0 NaN 1.96 
+7.00677132185997 1.0 NaN 3.56 1.0 NaN 1.96 1.0 NaN 1.96 1.0 NaN 3.56 1.0 NaN 1.96 
+8.00677132185997 1.0 NaN 3.56 1.0 NaN 1.96 1.0 NaN 1.96 1.0 NaN 3.56 1.0 NaN 1.96 
+9.00677132185997 1.0 NaN 3.56 1.0 NaN 1.96 1.0 NaN 1.96 1.0 NaN 3.56 1.0 NaN 1.96 
+10.00677132185997 1.0 NaN 3.56 1.0 NaN 1.96 1.0 NaN 1.96 1.0 NaN 3.56 1.0 NaN 1.96 
+11.00677132185997 1.0 NaN 3.56 1.0 NaN 1.96 1.0 NaN 1.96 1.0 NaN 3.56 1.0 NaN 1.96 
+12.00677132185997 1.0 NaN 3.56 1.0 NaN 1.96 1.0 NaN 1.96 1.0 NaN 3.56 1.0 NaN 1.96 
+13.00677132185997 1.0 NaN 3.56 1.0 NaN 1.96 1.0 NaN 1.96 1.0 NaN 3.56 1.0 NaN 1.96 
+14.00677132185997 1.0 NaN 3.56 1.0 NaN 1.96 1.0 NaN 1.96 1.0 NaN 3.56 1.0 NaN 1.96 
+15.00677132185997 1.0 NaN 3.56 1.0 NaN 1.96 1.0 NaN 1.96 1.0 NaN 3.56 1.0 NaN 1.96 
+16.006771321859972 1.0 NaN 3.56 1.0 NaN 1.96 1.0 NaN 1.96 1.0 NaN 3.56 1.0 NaN 1.96 
+17.006771321859972 1.0 NaN 3.56 1.0 NaN 1.96 1.0 NaN 1.96 1.0 NaN 3.56 1.0 NaN 1.96 
+18.006771321859972 1.0 NaN 3.56 1.0 NaN 1.96 1.0 NaN 1.96 1.0 NaN 3.56 1.0 NaN 1.96 
+19.006771321859972 1.0 NaN 3.56 1.0 NaN 1.96 1.0 NaN 1.96 1.0 NaN 3.56 1.0 NaN 1.96 
+20.006771321859972 1.0 NaN 3.56 1.0 NaN 1.96 1.0 NaN 1.96 1.0 NaN 3.56 1.0 NaN 1.96 
+21.006771321859972 1.0 NaN 3.56 1.0 NaN 1.96 1.0 NaN 1.96 1.0 NaN 3.56 1.0 NaN 1.96 
+22.006771321859972 1.0 NaN 3.56 1.0 NaN 1.96 1.0 NaN 1.96 1.0 NaN 3.56 1.0 NaN 1.96 
+23.006771321859972 1.0 NaN 3.56 1.0 NaN 1.96 1.0 NaN 1.96 1.0 NaN 3.56 1.0 NaN 1.96 
+24.006771321859972 1.0 NaN 3.56 1.0 NaN 1.96 1.0 NaN 1.96 1.0 NaN 3.56 1.0 NaN 1.96 
+25.006771321859972 1.0 NaN 3.56 1.0 NaN 1.96 1.0 NaN 1.96 1.0 NaN 3.56 1.0 NaN 1.96 
+26.006771321859972 1.0 NaN 3.56 1.0 NaN 1.96 1.0 NaN 1.96 1.0 NaN 3.56 1.0 NaN 1.96 
+27.006771321859972 1.0 NaN 3.56 1.0 NaN 1.96 1.0 NaN 1.96 1.0 NaN 3.56 1.0 NaN 1.96 
+28.006771321859972 1.0 NaN 3.56 1.0 NaN 1.96 1.0 NaN 1.96 1.0 NaN 3.56 1.0 NaN 1.96 
+29.006771321859972 1.0 NaN 3.56 1.0 NaN 1.96 1.0 NaN 1.96 1.0 NaN 3.56 1.0 NaN 1.96 
+30.006771321859972 1.0 NaN 3.56 1.0 NaN 1.96 1.0 NaN 1.96 1.0 NaN 3.56 1.0 NaN 1.96 
+31.006771321859972 1.0 NaN 3.56 1.0 NaN 1.96 1.0 NaN 1.96 1.0 NaN 3.56 1.0 NaN 1.96 
+32.00677132185997 1.0 NaN 3.56 1.0 NaN 1.96 1.0 NaN 1.96 1.0 NaN 3.56 1.0 NaN 1.96 
+33.00677132185997 1.0 NaN 3.56 1.0 NaN 1.96 1.0 NaN 1.96 1.0 NaN 3.56 1.0 NaN 1.96 
+#####################################################################
+# End of data export. Simulation finished at: 2020-09-15T21:11+0000 #
+#####################################################################
