@@ -434,7 +434,6 @@ if __name__ == '__main__':
                                 },
                             ) 
                             # logscale!!!
-                            ax.set_yscale('log')
                             ax.set_xlim(min(merge_data_view[timeColumnName]), max(merge_data_view[timeColumnName]))
                             ax.legend()
                             fig.tight_layout()
@@ -444,6 +443,8 @@ if __name__ == '__main__':
                             for symbol in r".[]\/@:${}":
                                 figname = figname.replace(symbol, '_')
                             fig.savefig(f'{by_time_output_directory}/{figname}.pdf')
+                            ax.set_yscale('log')
+                            fig.savefig(f'{by_time_output_directory}/{figname}_log.pdf')
                             plt.close(fig)
     for experiment in experiments:
         current_experiment_means = means[experiment]
