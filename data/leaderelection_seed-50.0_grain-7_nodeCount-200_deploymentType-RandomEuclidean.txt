@@ -1,15 +1,20 @@
 #####################################################################
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Alchemist log file - simulation started at: 2020-09-16T16:30+0000 #
 =======
 # Alchemist log file - simulation started at: 2020-09-16T13:46+0000 #
 >>>>>>> 78924d21d0b7204abe0b4659dbd7d51811d4c31f
+=======
+# Alchemist log file - simulation started at: 2020-09-16T13:46+0000 #
+>>>>>>> 88c275fcf8f22bc4848b0f8b119a18abbf9e12ef
 #####################################################################
 # seed = 50.0, nodeCount = 200, grain = 7, deploymentType = RandomEuclidean
 #
 # The columns have the following meaning: 
 # time leader-random[CountDistinct] HopCountClusterClosestNeighborDistance[leader-random] HopCountClusterIntraDistance[leader-random] leader-pageRank[CountDistinct] HopCountClusterClosestNeighborDistance[leader-pageRank] HopCountClusterIntraDistance[leader-pageRank] leader-harmonic[CountDistinct] HopCountClusterClosestNeighborDistance[leader-harmonic] HopCountClusterIntraDistance[leader-harmonic] leader-closeness[CountDistinct] HopCountClusterClosestNeighborDistance[leader-closeness] HopCountClusterIntraDistance[leader-closeness] leader-degree[CountDistinct] HopCountClusterClosestNeighborDistance[leader-degree] HopCountClusterIntraDistance[leader-degree] 
 0.0 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+<<<<<<< HEAD
 <<<<<<< HEAD
 1.0017531864652565 70.0 Infinity 0.4080581323438467 151.0 Infinity 0.12373068432671079 185.0 Infinity 0.04054054054054054 34.0 Infinity 0.8704231754404764 151.0 Infinity 0.1248344370860927 
 2.0017531864652565 21.0 Infinity NaN 47.0 Infinity NaN 95.0 Infinity NaN 22.0 Infinity NaN 50.0 Infinity NaN 
@@ -23,6 +28,8 @@
 10.001753186465256 11.0 NaN NaN 9.0 NaN 1.2400464709494257 25.0 Infinity NaN 9.0 NaN 1.9218294301924987 9.0 NaN 1.2400464709494257 
 11.001753186465256 10.0 NaN 1.5640684015541702 9.0 NaN 1.2400464709494257 40.0 Infinity NaN 9.0 NaN 1.9218294301924987 9.0 NaN 1.2400464709494257 
 =======
+=======
+>>>>>>> 88c275fcf8f22bc4848b0f8b119a18abbf9e12ef
 1.0017531864652565 70.0 2.8333333333333335 0.4080581323438467 151.0 3.473684210526316 0.12373068432671079 185.0 3.5968379446640317 0.04054054054054054 34.0 3.4 0.8704231754404764 151.0 3.142857142857143 0.1248344370860927 
 2.0017531864652565 21.0 4.0 NaN 47.0 3.466666666666667 NaN 95.0 3.5357142857142856 NaN 22.0 4.0 NaN 50.0 2.6666666666666665 NaN 
 3.0017531864652565 16.0 NaN NaN 20.0 5.0 NaN 65.0 3.7142857142857144 NaN 13.0 NaN NaN 22.0 2.0 NaN 
@@ -34,7 +41,10 @@
 9.001753186465256 13.0 4.0 NaN 9.0 NaN 1.2400464709494257 11.0 NaN NaN 9.0 NaN 1.9218294301924987 9.0 NaN 1.2400464709494257 
 10.001753186465256 11.0 NaN NaN 9.0 NaN 1.2400464709494257 25.0 5.333333333333333 NaN 9.0 NaN 1.9218294301924987 9.0 NaN 1.2400464709494257 
 11.001753186465256 10.0 NaN 1.5640684015541702 9.0 NaN 1.2400464709494257 40.0 5.2 NaN 9.0 NaN 1.9218294301924987 9.0 NaN 1.2400464709494257 
+<<<<<<< HEAD
 >>>>>>> 78924d21d0b7204abe0b4659dbd7d51811d4c31f
+=======
+>>>>>>> 88c275fcf8f22bc4848b0f8b119a18abbf9e12ef
 12.001753186465256 10.0 NaN 1.5640684015541702 9.0 NaN 1.2400464709494257 20.0 NaN 0.9029669943820224 9.0 NaN 1.9218294301924987 9.0 NaN 1.2400464709494257 
 13.001753186465256 10.0 NaN 1.5640684015541702 9.0 NaN 1.2400464709494257 12.0 NaN NaN 9.0 NaN 1.9218294301924987 9.0 NaN 1.2400464709494257 
 14.001753186465256 10.0 NaN 1.5640684015541702 9.0 NaN 1.2400464709494257 9.0 NaN 1.484078700965898 9.0 NaN 1.9218294301924987 9.0 NaN 1.2400464709494257 
@@ -65,8 +75,12 @@
 39.00175318646526 10.0 NaN 1.5640684015541702 9.0 NaN 1.2400464709494257 10.0 NaN 1.2470630210221096 9.0 NaN 1.9218294301924987 9.0 NaN 1.2400464709494257 
 #####################################################################
 <<<<<<< HEAD
+<<<<<<< HEAD
 # End of data export. Simulation finished at: 2020-09-16T16:36+0000 #
 =======
 # End of data export. Simulation finished at: 2020-09-16T13:52+0000 #
 >>>>>>> 78924d21d0b7204abe0b4659dbd7d51811d4c31f
+=======
+# End of data export. Simulation finished at: 2020-09-16T13:52+0000 #
+>>>>>>> 88c275fcf8f22bc4848b0f8b119a18abbf9e12ef
 #####################################################################

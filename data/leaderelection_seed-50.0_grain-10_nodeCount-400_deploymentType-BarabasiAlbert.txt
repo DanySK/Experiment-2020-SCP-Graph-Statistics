@@ -1,15 +1,20 @@
 #####################################################################
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Alchemist log file - simulation started at: 2020-09-16T16:24+0000 #
 =======
 # Alchemist log file - simulation started at: 2020-09-16T13:43+0000 #
 >>>>>>> 78924d21d0b7204abe0b4659dbd7d51811d4c31f
+=======
+# Alchemist log file - simulation started at: 2020-09-16T13:43+0000 #
+>>>>>>> 88c275fcf8f22bc4848b0f8b119a18abbf9e12ef
 #####################################################################
 # seed = 50.0, nodeCount = 400, grain = 10, deploymentType = BarabasiAlbert
 #
 # The columns have the following meaning: 
 # time leader-random[CountDistinct] HopCountClusterClosestNeighborDistance[leader-random] HopCountClusterIntraDistance[leader-random] leader-pageRank[CountDistinct] HopCountClusterClosestNeighborDistance[leader-pageRank] HopCountClusterIntraDistance[leader-pageRank] leader-harmonic[CountDistinct] HopCountClusterClosestNeighborDistance[leader-harmonic] HopCountClusterIntraDistance[leader-harmonic] leader-closeness[CountDistinct] HopCountClusterClosestNeighborDistance[leader-closeness] HopCountClusterIntraDistance[leader-closeness] leader-degree[CountDistinct] HopCountClusterClosestNeighborDistance[leader-degree] HopCountClusterIntraDistance[leader-degree] 
 0.0 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+<<<<<<< HEAD
 <<<<<<< HEAD
 1.0007849973987737 173.0 Infinity 0.24088515713241646 233.0 Infinity 0.07760658319636585 285.0 Infinity 0.07420994210467896 116.0 NaN 0.45894205554894507 219.0 Infinity 0.0946506955700216 
 2.0007849973987737 37.0 NaN NaN 49.0 Infinity NaN 83.0 Infinity NaN 21.0 NaN NaN 38.0 Infinity NaN 
@@ -18,13 +23,18 @@
 5.000784997398774 2.0 NaN NaN 1.0 NaN 2.7630922693266835 3.0 Infinity NaN 2.0 NaN NaN 1.0 NaN 2.7630922693266835 
 6.000784997398774 1.0 NaN 4.7007481296758105 1.0 NaN 2.7630922693266835 2.0 Infinity NaN 1.0 NaN 5.114713216957606 1.0 NaN 2.7630922693266835 
 =======
+=======
+>>>>>>> 88c275fcf8f22bc4848b0f8b119a18abbf9e12ef
 1.0007849973987737 173.0 4.0 0.24088515713241646 233.0 2.9555555555555557 0.07760658319636585 285.0 3.4095238095238094 0.07420994210467896 116.0 NaN 0.45894205554894507 219.0 2.9555555555555557 0.0946506955700216 
 2.0007849973987737 37.0 NaN NaN 49.0 2.7777777777777777 NaN 83.0 3.4095238095238094 NaN 21.0 NaN NaN 38.0 2.9285714285714284 NaN 
 3.0007849973987737 13.0 NaN NaN 15.0 2.5714285714285716 NaN 22.0 3.6 NaN 7.0 NaN NaN 13.0 2.8 NaN 
 4.000784997398774 6.0 NaN NaN 6.0 2.6 NaN 9.0 3.392857142857143 NaN 4.0 NaN NaN 5.0 2.6 NaN 
 5.000784997398774 2.0 NaN NaN 1.0 NaN 2.7630922693266835 3.0 2.6666666666666665 NaN 2.0 NaN NaN 1.0 NaN 2.7630922693266835 
 6.000784997398774 1.0 NaN 4.7007481296758105 1.0 NaN 2.7630922693266835 2.0 2.0 NaN 1.0 NaN 5.114713216957606 1.0 NaN 2.7630922693266835 
+<<<<<<< HEAD
 >>>>>>> 78924d21d0b7204abe0b4659dbd7d51811d4c31f
+=======
+>>>>>>> 88c275fcf8f22bc4848b0f8b119a18abbf9e12ef
 7.000784997398774 1.0 NaN 4.7007481296758105 1.0 NaN 2.7630922693266835 1.0 NaN 2.7630922693266835 1.0 NaN 5.114713216957606 1.0 NaN 2.7630922693266835 
 8.000784997398775 1.0 NaN 4.7007481296758105 1.0 NaN 2.7630922693266835 1.0 NaN 2.7630922693266835 1.0 NaN 5.114713216957606 1.0 NaN 2.7630922693266835 
 9.000784997398775 1.0 NaN 4.7007481296758105 1.0 NaN 2.7630922693266835 1.0 NaN 2.7630922693266835 1.0 NaN 5.114713216957606 1.0 NaN 2.7630922693266835 
@@ -59,8 +69,12 @@
 38.000784997398775 1.0 NaN 4.7007481296758105 1.0 NaN 2.7630922693266835 1.0 NaN 2.7630922693266835 1.0 NaN 5.114713216957606 1.0 NaN 2.7630922693266835 
 #####################################################################
 <<<<<<< HEAD
+<<<<<<< HEAD
 # End of data export. Simulation finished at: 2020-09-16T16:38+0000 #
 =======
 # End of data export. Simulation finished at: 2020-09-16T13:50+0000 #
 >>>>>>> 78924d21d0b7204abe0b4659dbd7d51811d4c31f
+=======
+# End of data export. Simulation finished at: 2020-09-16T13:50+0000 #
+>>>>>>> 88c275fcf8f22bc4848b0f8b119a18abbf9e12ef
 #####################################################################
