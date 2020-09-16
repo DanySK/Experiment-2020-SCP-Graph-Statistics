@@ -184,7 +184,7 @@ if __name__ == '__main__':
     # How to name the summary of the processed data
     pickleOutput = 'data_summary'
     # Experiment prefixes: one per experiment (root of the file name)
-    experiments = {'simulation': (None, None, 100), 'converge': (None, None, 1000), 'leaderelection': (None, 35, 50)}
+    experiments = {'simulation': (None, None, 100), 'converge': (None, None, 1000)}
     floatPrecision = '{: 0.3f}'
     # time management
     timeColumnName = 'time'
@@ -227,13 +227,6 @@ if __name__ == '__main__':
     def cardinality(x):
         return r'\|' + x + r'\|'
 
-    cluster_intra_distance = r'\pi' #\mathcal{I}
-    cluster_neighbor_distance = r'\sigma' # mathcal{N}
-    degree = '{degree}'
-    closeness = '{closeness}'
-    harmonic = '{harmonic}'
-    pagerank = '{pagerank}'
-    random = '{random}'
     labels = {
         'error-central[Sum]': Measure('optimal'),
         'error-extreme[Sum]': Measure('worst'),
@@ -251,16 +244,6 @@ if __name__ == '__main__':
         'msqer@harmonicCentrality[Mean]': Measure(f'${mae(centrality_label)}$'),
         'msqer@harmonicCentrality[StandardDeviation]': Measure(f'${stdev_of(mse(centrality_label))}$'),
         'org:protelis:armonicCentralityHLL[Mean]': Measure(f'${expected(centrality_label)}$'),
-        'HopCountClusterIntraDistance[leader-closeness]': Measure(f'${cluster_intra_distance}_{closeness}$'),
-        'HopCountClusterIntraDistance[leader-degree]': Measure(f'${cluster_intra_distance}_{degree}$'),
-        'HopCountClusterIntraDistance[leader-harmonic]': Measure(f'${cluster_intra_distance}_{harmonic}$'),
-        'HopCountClusterIntraDistance[leader-pageRank]': Measure(f'${cluster_intra_distance}_{pagerank}$'),
-        'HopCountClusterIntraDistance[leader-random]': Measure(f'${cluster_intra_distance}_{random}$'),
-        'HopCountClusterClosestNeighborDistance[leader-closeness]': Measure(f'{cluster_neighbor_distance}_{closeness}'),
-        'HopCountClusterClosestNeighborDistance[leader-degree]': Measure(f'${cluster_neighbor_distance}_{degree}$'),
-        'HopCountClusterClosestNeighborDistance[leader-harmonic]': Measure(f'${cluster_neighbor_distance}_{harmonic}$'),
-        'HopCountClusterClosestNeighborDistance[leader-pageRank]': Measure(f'${cluster_neighbor_distance}_{pagerank}$'),
-        'HopCountClusterClosestNeighborDistance[leader-random]': Measure(f'${cluster_neighbor_distance}_{random}$'),
     }
     def derivativeOrMeasure(variable_name):
         if variable_name.endswith('dt'):
