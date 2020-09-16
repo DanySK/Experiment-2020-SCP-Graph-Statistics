@@ -1,0 +1,45 @@
+#####################################################################
+# Alchemist log file - simulation started at: 2020-09-16T19:37+0000 #
+#####################################################################
+# seed = 62.0, nodeCount = 100, grain = 1, deploymentType = BarabasiAlbert
+#
+# The columns have the following meaning: 
+# time leader-random[CountDistinct] HopCountClusterClosestNeighborDistance[leader-random] HopCountClusterIntraDistance[leader-random] leader-pageRank[CountDistinct] HopCountClusterClosestNeighborDistance[leader-pageRank] HopCountClusterIntraDistance[leader-pageRank] leader-harmonic[CountDistinct] HopCountClusterClosestNeighborDistance[leader-harmonic] HopCountClusterIntraDistance[leader-harmonic] leader-closeness[CountDistinct] HopCountClusterClosestNeighborDistance[leader-closeness] HopCountClusterIntraDistance[leader-closeness] leader-degree[CountDistinct] HopCountClusterClosestNeighborDistance[leader-degree] HopCountClusterIntraDistance[leader-degree] 
+0.0 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+1.003808500302469 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 
+2.003808500302469 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 
+3.003808500302469 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 
+4.003808500302469 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 
+5.003808500302469 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 
+6.003808500302469 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 
+7.003808500302469 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 
+8.003808500302469 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 
+9.003808500302469 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 
+10.003808500302469 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 
+11.003808500302469 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 
+12.003808500302469 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 
+13.003808500302469 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 
+14.003808500302469 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 
+15.003808500302469 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 
+16.00380850030247 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 
+17.00380850030247 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 
+18.00380850030247 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 
+19.00380850030247 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 
+20.00380850030247 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 
+21.00380850030247 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 
+22.00380850030247 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 
+23.00380850030247 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 
+24.00380850030247 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 
+25.00380850030247 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 
+26.00380850030247 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 
+27.00380850030247 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 
+28.00380850030247 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 
+29.00380850030247 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 
+30.00380850030247 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 
+31.00380850030247 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 
+32.00380850030247 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 
+33.00380850030247 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 
+34.00380850030247 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 101.0 Infinity 0.0 
+#####################################################################
+# End of data export. Simulation finished at: 2020-09-16T19:39+0000 #
+#####################################################################
