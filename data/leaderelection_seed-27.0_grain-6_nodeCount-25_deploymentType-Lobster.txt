@@ -1,0 +1,42 @@
+#####################################################################
+# Alchemist log file - simulation started at: 2020-09-16T08:36+0000 #
+#####################################################################
+# seed = 27.0, nodeCount = 25, grain = 6, deploymentType = Lobster
+#
+# The columns have the following meaning: 
+# time leader-random[CountDistinct] HopCountClusterClosestNeighborDistance[leader-random] HopCountClusterIntraDistance[leader-random] leader-pageRank[CountDistinct] HopCountClusterClosestNeighborDistance[leader-pageRank] HopCountClusterIntraDistance[leader-pageRank] leader-harmonic[CountDistinct] HopCountClusterClosestNeighborDistance[leader-harmonic] HopCountClusterIntraDistance[leader-harmonic] leader-closeness[CountDistinct] HopCountClusterClosestNeighborDistance[leader-closeness] HopCountClusterIntraDistance[leader-closeness] leader-degree[CountDistinct] HopCountClusterClosestNeighborDistance[leader-degree] HopCountClusterIntraDistance[leader-degree] 
+0.0 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+1.015733414317151 19.0 3.625730994152047 0.14035087719298245 19.0 3.4853801169590644 0.09210526315789473 19.0 3.4853801169590644 0.09210526315789473 9.0 3.611111111111111 0.6148148148148148 19.0 3.4853801169590644 0.09210526315789473 
+2.0157334143171513 4.0 3.0 NaN 5.0 2.4 0.8933333333333333 6.0 2.1333333333333333 0.7777777777777777 4.0 3.6666666666666665 1.0073529411764706 5.0 2.4 0.8933333333333333 
+3.0157334143171513 1.0 NaN 2.84 1.0 NaN 1.92 3.0 2.0 1.3627450980392155 6.0 4.4 0.625 1.0 NaN 1.92 
+4.015733414317151 1.0 NaN 2.84 1.0 NaN 1.92 1.0 NaN 1.92 6.0 4.4 0.625 1.0 NaN 1.92 
+5.015733414317151 1.0 NaN 2.84 1.0 NaN 1.92 1.0 NaN 1.92 6.0 4.4 0.625 1.0 NaN 1.92 
+6.015733414317151 1.0 NaN 2.84 1.0 NaN 1.92 1.0 NaN 1.92 6.0 4.4 0.625 1.0 NaN 1.92 
+7.015733414317151 1.0 NaN 2.84 1.0 NaN 1.92 1.0 NaN 1.92 6.0 4.4 0.625 1.0 NaN 1.92 
+8.01573341431715 1.0 NaN 2.84 1.0 NaN 1.92 1.0 NaN 1.92 6.0 4.4 0.625 1.0 NaN 1.92 
+9.01573341431715 1.0 NaN 2.84 1.0 NaN 1.92 1.0 NaN 1.92 6.0 4.4 0.625 1.0 NaN 1.92 
+10.01573341431715 1.0 NaN 2.84 1.0 NaN 1.92 1.0 NaN 1.92 6.0 4.4 0.625 1.0 NaN 1.92 
+11.01573341431715 1.0 NaN 2.84 1.0 NaN 1.92 1.0 NaN 1.92 6.0 4.4 0.625 1.0 NaN 1.92 
+12.01573341431715 1.0 NaN 2.84 1.0 NaN 1.92 1.0 NaN 1.92 6.0 4.4 0.625 1.0 NaN 1.92 
+13.01573341431715 1.0 NaN 2.84 1.0 NaN 1.92 1.0 NaN 1.92 6.0 4.4 0.625 1.0 NaN 1.92 
+14.01573341431715 1.0 NaN 2.84 1.0 NaN 1.92 1.0 NaN 1.92 6.0 4.4 0.625 1.0 NaN 1.92 
+15.01573341431715 1.0 NaN 2.84 1.0 NaN 1.92 1.0 NaN 1.92 6.0 4.4 0.625 1.0 NaN 1.92 
+16.01573341431715 1.0 NaN 2.84 1.0 NaN 1.92 1.0 NaN 1.92 6.0 4.4 0.625 1.0 NaN 1.92 
+17.01573341431715 1.0 NaN 2.84 1.0 NaN 1.92 1.0 NaN 1.92 6.0 4.4 0.625 1.0 NaN 1.92 
+18.01573341431715 1.0 NaN 2.84 1.0 NaN 1.92 1.0 NaN 1.92 6.0 4.4 0.625 1.0 NaN 1.92 
+19.01573341431715 1.0 NaN 2.84 1.0 NaN 1.92 1.0 NaN 1.92 6.0 4.4 0.625 1.0 NaN 1.92 
+20.01573341431715 1.0 NaN 2.84 1.0 NaN 1.92 1.0 NaN 1.92 6.0 4.4 0.625 1.0 NaN 1.92 
+21.01573341431715 1.0 NaN 2.84 1.0 NaN 1.92 1.0 NaN 1.92 6.0 4.4 0.625 1.0 NaN 1.92 
+22.01573341431715 1.0 NaN 2.84 1.0 NaN 1.92 1.0 NaN 1.92 6.0 4.4 0.625 1.0 NaN 1.92 
+23.01573341431715 1.0 NaN 2.84 1.0 NaN 1.92 1.0 NaN 1.92 6.0 4.4 0.625 1.0 NaN 1.92 
+24.01573341431715 1.0 NaN 2.84 1.0 NaN 1.92 1.0 NaN 1.92 6.0 4.4 0.625 1.0 NaN 1.92 
+25.01573341431715 1.0 NaN 2.84 1.0 NaN 1.92 1.0 NaN 1.92 6.0 4.4 0.625 1.0 NaN 1.92 
+26.01573341431715 1.0 NaN 2.84 1.0 NaN 1.92 1.0 NaN 1.92 6.0 4.4 0.625 1.0 NaN 1.92 
+27.01573341431715 1.0 NaN 2.84 1.0 NaN 1.92 1.0 NaN 1.92 6.0 4.4 0.625 1.0 NaN 1.92 
+28.01573341431715 1.0 NaN 2.84 1.0 NaN 1.92 1.0 NaN 1.92 6.0 4.4 0.625 1.0 NaN 1.92 
+29.01573341431715 1.0 NaN 2.84 1.0 NaN 1.92 1.0 NaN 1.92 6.0 4.4 0.625 1.0 NaN 1.92 
+30.01573341431715 1.0 NaN 2.84 1.0 NaN 1.92 1.0 NaN 1.92 6.0 4.4 0.625 1.0 NaN 1.92 
+31.01573341431715 1.0 NaN 2.84 1.0 NaN 1.92 1.0 NaN 1.92 6.0 4.4 0.625 1.0 NaN 1.92 
+#####################################################################
+# End of data export. Simulation finished at: 2020-09-16T08:36+0000 #
+#####################################################################
