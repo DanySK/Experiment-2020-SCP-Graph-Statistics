@@ -1,0 +1,42 @@
+#####################################################################
+# Alchemist log file - simulation started at: 2020-09-16T21:39+0000 #
+#####################################################################
+# seed = 70.0, nodeCount = 25, grain = 10, deploymentType = Lobster
+#
+# The columns have the following meaning: 
+# time leader-random[CountDistinct] HopCountClusterClosestNeighborDistance[leader-random] HopCountClusterIntraDistance[leader-random] leader-pageRank[CountDistinct] HopCountClusterClosestNeighborDistance[leader-pageRank] HopCountClusterIntraDistance[leader-pageRank] leader-harmonic[CountDistinct] HopCountClusterClosestNeighborDistance[leader-harmonic] HopCountClusterIntraDistance[leader-harmonic] leader-closeness[CountDistinct] HopCountClusterClosestNeighborDistance[leader-closeness] HopCountClusterIntraDistance[leader-closeness] leader-degree[CountDistinct] HopCountClusterClosestNeighborDistance[leader-degree] HopCountClusterIntraDistance[leader-degree] 
+0.0 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+1.0684449647950254 11.0 Infinity 0.446969696969697 24.0 Infinity 0.020833333333333332 24.0 Infinity 0.020833333333333332 8.0 Infinity 0.75 22.0 Infinity 0.06818181818181818 
+2.0684449647950256 6.0 Infinity 1.053030303030303 7.0 Infinity 0.9540816326530612 7.0 Infinity 0.9540816326530612 4.0 Infinity 1.3696428571428572 8.0 Infinity 0.6625 
+3.0684449647950256 3.0 Infinity NaN 4.0 Infinity NaN 3.0 Infinity 1.215277777777778 3.0 Infinity 1.3222222222222222 5.0 Infinity 1.0757575757575757 
+4.068444964795026 2.0 Infinity NaN 3.0 Infinity NaN 2.0 Infinity NaN 2.0 Infinity NaN 2.0 Infinity NaN 
+5.068444964795026 1.0 NaN 2.92 2.0 1.0 NaN 2.0 Infinity NaN 1.0 NaN 3.84 2.0 Infinity NaN 
+6.068444964795026 1.0 NaN 2.92 2.0 1.0 NaN 1.0 NaN 2.24 1.0 NaN 3.84 1.0 NaN 2.24 
+7.068444964795026 1.0 NaN 2.92 2.0 1.0 NaN 1.0 NaN 2.24 1.0 NaN 3.84 1.0 NaN 2.24 
+8.068444964795026 1.0 NaN 2.92 1.0 NaN 2.24 1.0 NaN 2.24 1.0 NaN 3.84 1.0 NaN 2.24 
+9.068444964795026 1.0 NaN 2.92 1.0 NaN 2.24 1.0 NaN 2.24 1.0 NaN 3.84 1.0 NaN 2.24 
+10.068444964795026 1.0 NaN 2.92 1.0 NaN 2.24 1.0 NaN 2.24 1.0 NaN 3.84 1.0 NaN 2.24 
+11.068444964795026 1.0 NaN 2.92 1.0 NaN 2.24 1.0 NaN 2.24 1.0 NaN 3.84 1.0 NaN 2.24 
+12.068444964795026 1.0 NaN 2.92 1.0 NaN 2.24 1.0 NaN 2.24 1.0 NaN 3.84 1.0 NaN 2.24 
+13.068444964795026 1.0 NaN 2.92 1.0 NaN 2.24 1.0 NaN 2.24 1.0 NaN 3.84 1.0 NaN 2.24 
+14.068444964795026 1.0 NaN 2.92 1.0 NaN 2.24 1.0 NaN 2.24 1.0 NaN 3.84 1.0 NaN 2.24 
+15.068444964795026 1.0 NaN 2.92 1.0 NaN 2.24 1.0 NaN 2.24 1.0 NaN 3.84 1.0 NaN 2.24 
+16.068444964795027 1.0 NaN 2.92 1.0 NaN 2.24 1.0 NaN 2.24 1.0 NaN 3.84 1.0 NaN 2.24 
+17.068444964795027 1.0 NaN 2.92 1.0 NaN 2.24 1.0 NaN 2.24 1.0 NaN 3.84 1.0 NaN 2.24 
+18.068444964795027 1.0 NaN 2.92 1.0 NaN 2.24 1.0 NaN 2.24 1.0 NaN 3.84 1.0 NaN 2.24 
+19.068444964795027 1.0 NaN 2.92 1.0 NaN 2.24 1.0 NaN 2.24 1.0 NaN 3.84 1.0 NaN 2.24 
+20.068444964795027 1.0 NaN 2.92 1.0 NaN 2.24 1.0 NaN 2.24 1.0 NaN 3.84 1.0 NaN 2.24 
+21.068444964795027 1.0 NaN 2.92 1.0 NaN 2.24 1.0 NaN 2.24 1.0 NaN 3.84 1.0 NaN 2.24 
+22.068444964795027 1.0 NaN 2.92 1.0 NaN 2.24 1.0 NaN 2.24 1.0 NaN 3.84 1.0 NaN 2.24 
+23.068444964795027 1.0 NaN 2.92 1.0 NaN 2.24 1.0 NaN 2.24 1.0 NaN 3.84 1.0 NaN 2.24 
+24.068444964795027 1.0 NaN 2.92 1.0 NaN 2.24 1.0 NaN 2.24 1.0 NaN 3.84 1.0 NaN 2.24 
+25.068444964795027 1.0 NaN 2.92 1.0 NaN 2.24 1.0 NaN 2.24 1.0 NaN 3.84 1.0 NaN 2.24 
+26.068444964795027 1.0 NaN 2.92 1.0 NaN 2.24 1.0 NaN 2.24 1.0 NaN 3.84 1.0 NaN 2.24 
+27.068444964795027 1.0 NaN 2.92 1.0 NaN 2.24 1.0 NaN 2.24 1.0 NaN 3.84 1.0 NaN 2.24 
+28.068444964795027 1.0 NaN 2.92 1.0 NaN 2.24 1.0 NaN 2.24 1.0 NaN 3.84 1.0 NaN 2.24 
+29.068444964795027 1.0 NaN 2.92 1.0 NaN 2.24 1.0 NaN 2.24 1.0 NaN 3.84 1.0 NaN 2.24 
+30.068444964795027 1.0 NaN 2.92 1.0 NaN 2.24 1.0 NaN 2.24 1.0 NaN 3.84 1.0 NaN 2.24 
+31.068444964795027 1.0 NaN 2.92 1.0 NaN 2.24 1.0 NaN 2.24 1.0 NaN 3.84 1.0 NaN 2.24 
+#####################################################################
+# End of data export. Simulation finished at: 2020-09-16T21:40+0000 #
+#####################################################################
