@@ -1,0 +1,60 @@
+#####################################################################
+# Alchemist log file - simulation started at: 2020-09-16T20:45+0000 #
+#####################################################################
+# seed = 66.0, nodeCount = 800, grain = 1, deploymentType = RandomEuclidean
+#
+# The columns have the following meaning: 
+# time leader-random[CountDistinct] HopCountClusterClosestNeighborDistance[leader-random] HopCountClusterIntraDistance[leader-random] leader-pageRank[CountDistinct] HopCountClusterClosestNeighborDistance[leader-pageRank] HopCountClusterIntraDistance[leader-pageRank] leader-harmonic[CountDistinct] HopCountClusterClosestNeighborDistance[leader-harmonic] HopCountClusterIntraDistance[leader-harmonic] leader-closeness[CountDistinct] HopCountClusterClosestNeighborDistance[leader-closeness] HopCountClusterIntraDistance[leader-closeness] leader-degree[CountDistinct] HopCountClusterClosestNeighborDistance[leader-degree] HopCountClusterIntraDistance[leader-degree] 
+0.0 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+1.001024448257943 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 
+2.001024448257943 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 
+3.001024448257943 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 
+4.001024448257943 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 
+5.001024448257943 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 
+6.001024448257943 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 
+7.001024448257943 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 
+8.001024448257944 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 
+9.001024448257944 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 
+10.001024448257944 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 
+11.001024448257944 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 
+12.001024448257944 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 
+13.001024448257944 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 
+14.001024448257944 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 
+15.001024448257944 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 
+16.001024448257944 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 
+17.001024448257944 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 
+18.001024448257944 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 
+19.001024448257944 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 
+20.001024448257944 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 
+21.001024448257944 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 
+22.001024448257944 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 
+23.001024448257944 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 
+24.001024448257944 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 
+25.001024448257944 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 
+26.001024448257944 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 
+27.001024448257944 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 
+28.001024448257944 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 
+29.001024448257944 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 
+30.001024448257944 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 
+31.001024448257944 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 
+32.001024448257944 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 
+33.001024448257944 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 
+34.001024448257944 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 
+35.001024448257944 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 
+36.001024448257944 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 
+37.001024448257944 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 
+38.001024448257944 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 
+39.001024448257944 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 
+40.001024448257944 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 
+41.001024448257944 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 
+42.001024448257944 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 
+43.001024448257944 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 
+44.001024448257944 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 
+45.001024448257944 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 
+46.001024448257944 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 
+47.001024448257944 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 
+48.001024448257944 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 
+49.001024448257944 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 800.0 Infinity 0.0 
+#####################################################################
+# End of data export. Simulation finished at: 2020-09-16T22:09+0000 #
+#####################################################################
