@@ -123,7 +123,3 @@ jobs:
       os: windows
     - <<: *test_charts
       os: windows
-
-notifications:
-  email:
-    on_success: never
