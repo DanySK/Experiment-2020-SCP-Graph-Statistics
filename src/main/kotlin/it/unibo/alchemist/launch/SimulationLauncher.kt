@@ -75,7 +75,7 @@ abstract class SimulationLauncher : AbstractLauncher() {
             val variablesDescriptor = variables
                 .map { (name, value) -> "$name-$value" }
                 .joinToString(separator = "_")
-            val filename = "${parameters.export}${if (variables.isEmpty()) "" else "_"}$variablesDescriptor"
+            val filename = "${parameters.export}${if (variables.isEmpty()) "" else "_"}$variablesDescriptor.txt"
             val header = loader.variables
                 .mapValues { (variableName, variable) -> variables[variableName] ?: variable.default }
                 .map { (variableName, variableValue) -> "$variableName = $variableValue" }
