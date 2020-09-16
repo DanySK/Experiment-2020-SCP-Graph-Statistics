@@ -184,7 +184,11 @@ if __name__ == '__main__':
     # How to name the summary of the processed data
     pickleOutput = 'data_summary'
     # Experiment prefixes: one per experiment (root of the file name)
-    experiments = {'simulation': (None, None, 100), 'converge': (None, None, 1000), 'leaderelection': (None, 35, 50)}
+    experiments = {
+        'simulation': (None, None, 100),
+        'converge': (None, None, 1000),
+        'leaderelection': (0, 30, 31),
+    }
     floatPrecision = '{: 0.3f}'
     # time management
     timeColumnName = 'time'
@@ -227,8 +231,9 @@ if __name__ == '__main__':
     def cardinality(x):
         return r'\|' + x + r'\|'
 
-    cluster_intra_distance = r'\pi' #\mathcal{I}
-    cluster_neighbor_distance = r'\sigma' # mathcal{N}
+    cluster_intra_distance = r'\overline{IntraDist}'
+    cluster_neighbor_distance = r'\overline{ClosestNeighDist}'
+    cluster_count = r'\mathcal{C}'
     degree = '{degree}'
     closeness = '{closeness}'
     harmonic = '{harmonic}'
@@ -251,17 +256,28 @@ if __name__ == '__main__':
         'msqer@harmonicCentrality[Mean]': Measure(f'${mae(centrality_label)}$'),
         'msqer@harmonicCentrality[StandardDeviation]': Measure(f'${stdev_of(mse(centrality_label))}$'),
         'org:protelis:armonicCentralityHLL[Mean]': Measure(f'${expected(centrality_label)}$'),
-        'HopCountClusterIntraDistance[leader-closeness]': Measure(f'${cluster_intra_distance}_{closeness}$'),
-        'HopCountClusterIntraDistance[leader-degree]': Measure(f'${cluster_intra_distance}_{degree}$'),
-        'HopCountClusterIntraDistance[leader-harmonic]': Measure(f'${cluster_intra_distance}_{harmonic}$'),
-        'HopCountClusterIntraDistance[leader-pageRank]': Measure(f'${cluster_intra_distance}_{pagerank}$'),
-        'HopCountClusterIntraDistance[leader-random]': Measure(f'${cluster_intra_distance}_{random}$'),
-        'HopCountClusterClosestNeighborDistance[leader-closeness]': Measure(f'{cluster_neighbor_distance}_{closeness}'),
-        'HopCountClusterClosestNeighborDistance[leader-degree]': Measure(f'${cluster_neighbor_distance}_{degree}$'),
-        'HopCountClusterClosestNeighborDistance[leader-harmonic]': Measure(f'${cluster_neighbor_distance}_{harmonic}$'),
-        'HopCountClusterClosestNeighborDistance[leader-pageRank]': Measure(f'${cluster_neighbor_distance}_{pagerank}$'),
-        'HopCountClusterClosestNeighborDistance[leader-random]': Measure(f'${cluster_neighbor_distance}_{random}$'),
+        # Additional experiment
+        'HopCountClusterIntraDistance[leader-closeness]': Measure(f'${cluster_intra_distance}_{closeness}$', 'hops'),
+        'HopCountClusterIntraDistance[leader-degree]': Measure(f'${cluster_intra_distance}_{degree}$', 'hops'),
+        'HopCountClusterIntraDistance[leader-harmonic]': Measure(f'${cluster_intra_distance}_{harmonic}$', 'hops'),
+        'HopCountClusterIntraDistance[leader-pageRank]': Measure(f'${cluster_intra_distance}_{pagerank}$', 'hops'),
+        'HopCountClusterIntraDistance[leader-random]': Measure(f'${cluster_intra_distance}_{random}$', 'hops'),
+        'HopCountClusterClosestNeighborDistance[leader-closeness]': Measure(f'${cluster_neighbor_distance}_{closeness}$', 'hops'),
+        'HopCountClusterClosestNeighborDistance[leader-degree]': Measure(f'${cluster_neighbor_distance}_{degree}$', 'hops'),
+        'HopCountClusterClosestNeighborDistance[leader-harmonic]': Measure(f'${cluster_neighbor_distance}_{harmonic}$', 'hops'),
+        'HopCountClusterClosestNeighborDistance[leader-pageRank]': Measure(f'${cluster_neighbor_distance}_{pagerank}$', 'hops'),
+        'HopCountClusterClosestNeighborDistance[leader-random]': Measure(f'${cluster_count}_{random}$', 'hops'),
+        'leader-closeness[CountDistinct]': Measure(f'${cluster_count}_{closeness}$', 'clusters'),
+        'leader-degree[CountDistinct]': Measure(f'${cluster_count}_{degree}$', 'clusters'),
+        'leader-harmonic[CountDistinct]': Measure(f'${cluster_count}_{harmonic}$', 'clusters'),
+        'leader-pageRank[CountDistinct]': Measure(f'${cluster_count}_{pagerank}$', 'clusters'),
+        'leader-random[CountDistinct]': Measure(f'${cluster_count}_{random}$', 'clusters'),
+        'grain': Measure('cluster radius', 'hops'),
+        'deploymentType': Measure(r'$\mathcal{D}$'),
     }
+    print(labels['harmonicCentrality[Mean]'])
+    print(labels['HopCountClusterClosestNeighborDistance[leader-random]'])
+
     def derivativeOrMeasure(variable_name):
         if variable_name.endswith('dt'):
             return labels.get(variable_name[:-2], Measure(variable_name)).derivative()
@@ -401,6 +417,7 @@ if __name__ == '__main__':
                     beautified_value = beautifyValue(current_coordinate_value)
                     for current_metric in merge_data_view.data_vars:
                         title = f'{label_for(current_metric)} for diverse {label_for(comparison_variable)} when {label_for(current_coordinate)}={beautified_value}'
+                        print(title)
                         for withErrors in [True, False]:
                             fig, ax = make_line_chart(
                                 title = title,
