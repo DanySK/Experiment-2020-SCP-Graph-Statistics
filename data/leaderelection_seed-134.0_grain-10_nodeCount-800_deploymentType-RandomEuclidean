@@ -1,0 +1,15 @@
+#####################################################################
+# Alchemist log file - simulation started at: 2020-09-17T11:13+0000 #
+#####################################################################
+# seed = 134.0, nodeCount = 800, grain = 10, deploymentType = RandomEuclidean
+#
+# The columns have the following meaning: 
+# time leader-random[CountDistinct] HopCountClusterClosestNeighborDistance[leader-random] HopCountClusterIntraDistance[leader-random] leader-pageRank[CountDistinct] HopCountClusterClosestNeighborDistance[leader-pageRank] HopCountClusterIntraDistance[leader-pageRank] leader-harmonic[CountDistinct] HopCountClusterClosestNeighborDistance[leader-harmonic] HopCountClusterIntraDistance[leader-harmonic] leader-closeness[CountDistinct] HopCountClusterClosestNeighborDistance[leader-closeness] HopCountClusterIntraDistance[leader-closeness] leader-degree[CountDistinct] HopCountClusterClosestNeighborDistance[leader-degree] HopCountClusterIntraDistance[leader-degree] 
+0.0 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+1.0008856835812374 73.0 NaN 0.8157077071816856 314.0 4.714285714285714 0.379995107759778 549.0 4.133333333333334 0.18742952554427966 33.0 NaN 1.5490434806656144 352.0 4.107142857142857 0.36539866179731995 
+2.000885683581237 7.0 NaN NaN 23.0 NaN NaN 120.0 6.166666666666667 NaN 5.0 NaN NaN 34.0 NaN NaN 
+3.000885683581237 4.0 NaN NaN 4.0 NaN NaN 19.0 NaN NaN 3.0 NaN 4.078914141414142 7.0 NaN NaN 
+4.000885683581237 6.0 NaN NaN 2.0 NaN NaN 9.0 NaN NaN 3.0 NaN 4.1187831309059435 2.0 NaN 2.397997496871089 
+5.000885683581237 10.0 NaN NaN 2.0 NaN NaN 11.0 NaN #####################################################################
+# End of data export. Simulation finished at: 2020-09-17T19:11+0000 #
+#####################################################################
