@@ -187,7 +187,7 @@ if __name__ == '__main__':
     experiments = {
         'simulation': (None, None, 100),
         'converge': (None, None, 1000),
-        'leaderelection': (None, None, 50),
+        'leaderelection': (0, 30, 31),
     }
     floatPrecision = '{: 0.3f}'
     # time management
@@ -366,9 +366,6 @@ if __name__ == '__main__':
                             darray.loc[experimentVars] = data[:, idx].A1
                 # Fold the dataset along the seed variables, producing the mean and stdev datasets
                 mergingVariables = [seed for seed in seedVars if seed in dataset.coords]
-                # Deal with speciality of third experiment!!!
-                if experiment == 'leaderelection':
-                    dataset = dataset.fillna(0)
                 means[experiment] = dataset.mean(dim = mergingVariables, skipna=True)
                 stdevs[experiment] = dataset.std(dim = mergingVariables, skipna=True)
                 medians[experiment] = dataset.median(dim = mergingVariables, skipna=True)
@@ -485,45 +482,5 @@ if __name__ == '__main__':
         ax.legend(ncol = 2)
         fig.tight_layout()
         fig.savefig(f'{output_directory}/converge_{nice_value}.pdf')
-        plt.close(fig)
-
-# Additional experiment
-    leader_data = medians['leaderelection']
-    last_time = max(leader_data['time'])
-    last_time_data = leader_data.sel(time = last_time)
-
-    def total_distance_for(algorithm, label = None):
-        if label is None:
-            label = algorithm
-        last_time_data[r'$\overline{Distance}_{' + label + '}$ (hops)'] = last_time_data[f'HopCountClusterClosestNeighborDistance[leader-{algorithm}]'] + last_time_data[f'HopCountClusterIntraDistance[leader-{algorithm}]']
-
-    total_distance_for('random')
-    total_distance_for('pageRank', 'pagerank')
-    total_distance_for('harmonic')
-    total_distance_for('closeness')
-    total_distance_for('degree')
-    grains = leader_data['grain']
-    for deployment in last_time_data['deploymentType']:
-        deployment_data = last_time_data.sel(deploymentType = deployment)
-        deployName = str(deployment.values)[:-1]
-        for metric in last_time_data.data_vars:
-            fig, ax = make_line_chart(
-                title = f"{label_for(metric)} on a {deployName} topology",
-                xdata = grains,
-                xlabel = unit_for('grain'),
-                ylabel = unit_for(metric),
-                ydata = {
-                    f'$n={beautifyValue(count)}$': (
-                        deployment_data.sel(nodeCount = count)[metric],
-                        None #converge_error.sel(diameter = diameter)[metric].clip(0, diameter_value)
-                    )
-                    for count in deployment_data['nodeCount']
-                },
-                linewidth = 2
-            )
-            ax.legend(ncol=3)
-            fig.tight_layout()
-            figname = f'leader_{deployName}_{metric}'
-            for symbol in r".[]\/@:${}":
-                figname = figname.replace(symbol, '_')
-            fig.savefig(f'{output_directory}/leaderelection/{figname}.pdf')
+#        plt.close(fig)
+    

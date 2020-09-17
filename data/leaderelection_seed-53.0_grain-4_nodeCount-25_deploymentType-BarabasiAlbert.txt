@@ -1,0 +1,45 @@
+#####################################################################
+# Alchemist log file - simulation started at: 2020-09-16T17:22+0000 #
+#####################################################################
+# seed = 53.0, nodeCount = 25, grain = 4, deploymentType = BarabasiAlbert
+#
+# The columns have the following meaning: 
+# time leader-random[CountDistinct] HopCountClusterClosestNeighborDistance[leader-random] HopCountClusterIntraDistance[leader-random] leader-pageRank[CountDistinct] HopCountClusterClosestNeighborDistance[leader-pageRank] HopCountClusterIntraDistance[leader-pageRank] leader-harmonic[CountDistinct] HopCountClusterClosestNeighborDistance[leader-harmonic] HopCountClusterIntraDistance[leader-harmonic] leader-closeness[CountDistinct] HopCountClusterClosestNeighborDistance[leader-closeness] HopCountClusterIntraDistance[leader-closeness] leader-degree[CountDistinct] HopCountClusterClosestNeighborDistance[leader-degree] HopCountClusterIntraDistance[leader-degree] 
+0.0 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+1.0063875281852375 14.0 Infinity 0.2285714285714286 20.0 Infinity 0.09583333333333333 23.0 Infinity 0.05072463768115942 11.0 Infinity 0.47186147186147187 19.0 Infinity 0.10526315789473684 
+2.0063875281852375 6.0 Infinity 0.905448717948718 5.0 Infinity 1.075 5.0 Infinity 1.1916666666666667 4.0 Infinity 0.5568181818181818 4.0 Infinity 1.25 
+3.0063875281852375 5.0 Infinity 0.9865384615384615 3.0 Infinity 1.1403508771929824 3.0 Infinity NaN 4.0 Infinity 0.5652173913043478 3.0 Infinity NaN 
+4.006387528185238 5.0 Infinity 0.9865384615384615 2.0 1.0 1.3977272727272727 2.0 Infinity 0.86 4.0 Infinity 0.5652173913043478 2.0 Infinity 0.86 
+5.006387528185238 5.0 Infinity 0.9865384615384615 2.0 Infinity 0.86 2.0 Infinity 0.86 4.0 Infinity 0.5652173913043478 2.0 Infinity 0.86 
+6.006387528185238 5.0 Infinity 0.9865384615384615 2.0 Infinity 0.86 2.0 Infinity 0.86 4.0 Infinity 0.5652173913043478 2.0 Infinity 0.86 
+7.006387528185238 5.0 Infinity 0.9865384615384615 2.0 Infinity 0.86 2.0 Infinity 0.86 4.0 Infinity 0.5652173913043478 2.0 Infinity 0.86 
+8.006387528185238 5.0 Infinity 0.9865384615384615 2.0 Infinity 0.86 2.0 Infinity 0.86 4.0 Infinity 0.5652173913043478 2.0 Infinity 0.86 
+9.006387528185238 5.0 Infinity 0.9865384615384615 2.0 Infinity 0.86 2.0 Infinity 0.86 4.0 Infinity 0.5652173913043478 2.0 Infinity 0.86 
+10.006387528185238 5.0 Infinity 0.9865384615384615 2.0 Infinity 0.86 2.0 Infinity 0.86 4.0 Infinity 0.5652173913043478 2.0 Infinity 0.86 
+11.006387528185238 5.0 Infinity 0.9865384615384615 2.0 Infinity 0.86 2.0 Infinity 0.86 4.0 Infinity 0.5652173913043478 2.0 Infinity 0.86 
+12.006387528185238 5.0 Infinity 0.9865384615384615 2.0 Infinity 0.86 2.0 Infinity 0.86 4.0 Infinity 0.5652173913043478 2.0 Infinity 0.86 
+13.006387528185238 5.0 Infinity 0.9865384615384615 2.0 Infinity 0.86 2.0 Infinity 0.86 4.0 Infinity 0.5652173913043478 2.0 Infinity 0.86 
+14.006387528185238 5.0 Infinity 0.9865384615384615 2.0 Infinity 0.86 2.0 Infinity 0.86 4.0 Infinity 0.5652173913043478 2.0 Infinity 0.86 
+15.006387528185238 5.0 Infinity 0.9865384615384615 2.0 Infinity 0.86 2.0 Infinity 0.86 4.0 Infinity 0.5652173913043478 2.0 Infinity 0.86 
+16.006387528185236 5.0 Infinity 0.9865384615384615 2.0 Infinity 0.86 2.0 Infinity 0.86 4.0 Infinity 0.5652173913043478 2.0 Infinity 0.86 
+17.006387528185236 5.0 Infinity 0.9865384615384615 2.0 Infinity 0.86 2.0 Infinity 0.86 4.0 Infinity 0.5652173913043478 2.0 Infinity 0.86 
+18.006387528185236 5.0 Infinity 0.9865384615384615 2.0 Infinity 0.86 2.0 Infinity 0.86 4.0 Infinity 0.5652173913043478 2.0 Infinity 0.86 
+19.006387528185236 5.0 Infinity 0.9865384615384615 2.0 Infinity 0.86 2.0 Infinity 0.86 4.0 Infinity 0.5652173913043478 2.0 Infinity 0.86 
+20.006387528185236 5.0 Infinity 0.9865384615384615 2.0 Infinity 0.86 2.0 Infinity 0.86 4.0 Infinity 0.5652173913043478 2.0 Infinity 0.86 
+21.006387528185236 5.0 Infinity 0.9865384615384615 2.0 Infinity 0.86 2.0 Infinity 0.86 4.0 Infinity 0.5652173913043478 2.0 Infinity 0.86 
+22.006387528185236 5.0 Infinity 0.9865384615384615 2.0 Infinity 0.86 2.0 Infinity 0.86 4.0 Infinity 0.5652173913043478 2.0 Infinity 0.86 
+23.006387528185236 5.0 Infinity 0.9865384615384615 2.0 Infinity 0.86 2.0 Infinity 0.86 4.0 Infinity 0.5652173913043478 2.0 Infinity 0.86 
+24.006387528185236 5.0 Infinity 0.9865384615384615 2.0 Infinity 0.86 2.0 Infinity 0.86 4.0 Infinity 0.5652173913043478 2.0 Infinity 0.86 
+25.006387528185236 5.0 Infinity 0.9865384615384615 2.0 Infinity 0.86 2.0 Infinity 0.86 4.0 Infinity 0.5652173913043478 2.0 Infinity 0.86 
+26.006387528185236 5.0 Infinity 0.9865384615384615 2.0 Infinity 0.86 2.0 Infinity 0.86 4.0 Infinity 0.5652173913043478 2.0 Infinity 0.86 
+27.006387528185236 5.0 Infinity 0.9865384615384615 2.0 Infinity 0.86 2.0 Infinity 0.86 4.0 Infinity 0.5652173913043478 2.0 Infinity 0.86 
+28.006387528185236 5.0 Infinity 0.9865384615384615 2.0 Infinity 0.86 2.0 Infinity 0.86 4.0 Infinity 0.5652173913043478 2.0 Infinity 0.86 
+29.006387528185236 5.0 Infinity 0.9865384615384615 2.0 Infinity 0.86 2.0 Infinity 0.86 4.0 Infinity 0.5652173913043478 2.0 Infinity 0.86 
+30.006387528185236 5.0 Infinity 0.9865384615384615 2.0 Infinity 0.86 2.0 Infinity 0.86 4.0 Infinity 0.5652173913043478 2.0 Infinity 0.86 
+31.006387528185236 5.0 Infinity 0.9865384615384615 2.0 Infinity 0.86 2.0 Infinity 0.86 4.0 Infinity 0.5652173913043478 2.0 Infinity 0.86 
+32.006387528185236 5.0 Infinity 0.9865384615384615 2.0 Infinity 0.86 2.0 Infinity 0.86 4.0 Infinity 0.5652173913043478 2.0 Infinity 0.86 
+33.006387528185236 5.0 Infinity 0.9865384615384615 2.0 Infinity 0.86 2.0 Infinity 0.86 4.0 Infinity 0.5652173913043478 2.0 Infinity 0.86 
+34.006387528185236 5.0 Infinity 0.9865384615384615 2.0 Infinity 0.86 2.0 Infinity 0.86 4.0 Infinity 0.5652173913043478 2.0 Infinity 0.86 
+#####################################################################
+# End of data export. Simulation finished at: 2020-09-16T17:22+0000 #
+#####################################################################
