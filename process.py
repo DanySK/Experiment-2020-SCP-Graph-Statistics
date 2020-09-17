@@ -367,8 +367,9 @@ if __name__ == '__main__':
                 # Fold the dataset along the seed variables, producing the mean and stdev datasets
                 mergingVariables = [seed for seed in seedVars if seed in dataset.coords]
                 # Deal with the particular third experiment
-                if experiment == 'leaderelection':
-                    dataset = dataset.fillna(0)
+                # if experiment == 'leaderelection':
+                #     dataset = dataset.fillna(0)
+                dataset = dataset.where(lambda x: np.isfinite(x), float('nan'))
                 means[experiment] = dataset.mean(dim = mergingVariables, skipna=True)
                 stdevs[experiment] = dataset.std(dim = mergingVariables, skipna=True)
                 medians[experiment] = dataset.median(dim = mergingVariables, skipna=True)
@@ -496,10 +497,17 @@ if __name__ == '__main__':
     grains = last_time_data['grain']
     centralities = ['random', 'pageRank', 'harmonic', 'closeness', 'degree']
     metric_functions = [
-        (cluster_count, lambda label: f'leader-{label}[CountDistinct]'),
         (cluster_neighbor_distance, lambda label: f'HopCountClusterClosestNeighborDistance[leader-{label}]'),
         (cluster_intra_distance, lambda label: f'HopCountClusterIntraDistance[leader-{label}]'),
+        (cluster_count, lambda label: f'leader-{label}[CountDistinct]'),
+        ('network distance', lambda label: f'distance-{label}'),
     ]
+    for centrality in centralities:
+        v1 = last_time_data[metric_functions[0][-1](centrality)]
+        # v1 = v1.where(lambda x: np.isfinite(x), 0)
+        v2 = last_time_data[metric_functions[1][-1](centrality)]
+        # v2 = v2.where(lambda x: np.isfinite(x), 0)
+        last_time_data['distance-' + centrality] = v1 + v2
     for deployment in last_time_data['deploymentType']:
         deployment_name = str(deployment.values)[:-1]
         for count in last_time_data['nodeCount']:
@@ -507,12 +515,14 @@ if __name__ == '__main__':
             for (metric_name, metric_function) in metric_functions:
                 fig, ax = make_line_chart(
                     title = f"${metric_name}$, {deployment_name} topology, {count_name} nodes",
+                    # title = f"{deployment_name} topology, {count_name} nodes",
                     xdata = grains,
                     xlabel = unit_for('grain'),
-                    ylabel = f'${metric_name}$ (hops)',
+                    ylabel = 'network distance (hops)',
                     ydata = {
                         centrality: (
                             last_time_data.sel(deploymentType = deployment, nodeCount = count)[metric_function(centrality)],
+                            # last_time_data.sel(deploymentType = deployment, nodeCount = count)['distance-' + centrality],
                             None #converge_error.sel(diameter = diameter)[metric].clip(0, diameter_value)
                         )
                         for centrality in centralities #if not 'central' in metric
@@ -520,11 +530,10 @@ if __name__ == '__main__':
                     linewidth = 2
                 )
                 ax.legend(ncol = 2)
-                ax.set_xlim(0, max(grains))
-                ax.set_ylim(0, None)
                 fig.tight_layout()
                 metric_printable = metric_name
-                for symbol in r".[]\/@:${}":
+                # metric_printable = 'networkdist'
+                for symbol in r".[]\/@:${} ":
                     metric_printable = metric_printable.replace(symbol, '')
                 fig.savefig(f'{output_directory}/leaderelection/leader_{metric_printable}_{deployment_name}_{count_name}.pdf')
                 plt.close(fig)
