@@ -1,6 +1,7 @@
 #####################################################################
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Alchemist log file - simulation started at: 2020-09-16T15:28+0000 #
 =======
 # Alchemist log file - simulation started at: 2020-09-16T12:22+0000 #
@@ -8,12 +9,16 @@
 =======
 # Alchemist log file - simulation started at: 2020-09-16T12:22+0000 #
 >>>>>>> 88c275fcf8f22bc4848b0f8b119a18abbf9e12ef
+=======
+# Alchemist log file - simulation started at: 2020-09-16T12:22+0000 #
+>>>>>>> bd84e30be4412ccf95e8dc6e8e60fffac085de1d
 #####################################################################
 # seed = 46.0, nodeCount = 800, grain = 3, deploymentType = Lobster
 #
 # The columns have the following meaning: 
 # time leader-random[CountDistinct] HopCountClusterClosestNeighborDistance[leader-random] HopCountClusterIntraDistance[leader-random] leader-pageRank[CountDistinct] HopCountClusterClosestNeighborDistance[leader-pageRank] HopCountClusterIntraDistance[leader-pageRank] leader-harmonic[CountDistinct] HopCountClusterClosestNeighborDistance[leader-harmonic] HopCountClusterIntraDistance[leader-harmonic] leader-closeness[CountDistinct] HopCountClusterClosestNeighborDistance[leader-closeness] HopCountClusterIntraDistance[leader-closeness] leader-degree[CountDistinct] HopCountClusterClosestNeighborDistance[leader-degree] HopCountClusterIntraDistance[leader-degree] 
 0.0 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 1.0013593402149898 505.0 Infinity 0.2021687883074022 616.0 Infinity 0.07502319109461966 664.0 Infinity 0.054214936669755964 349.0 Infinity 0.386405499944182 624.0 Infinity 0.07058913308913309 
@@ -58,6 +63,8 @@
 =======
 =======
 >>>>>>> 88c275fcf8f22bc4848b0f8b119a18abbf9e12ef
+=======
+>>>>>>> bd84e30be4412ccf95e8dc6e8e60fffac085de1d
 1.0013593402149898 505.0 3.977777777777778 0.2021687883074022 616.0 3.5142857142857142 0.07502319109461966 664.0 3.406926406926407 0.054214936669755964 349.0 3.9047619047619047 0.386405499944182 624.0 3.466666666666667 0.07058913308913309 
 2.00135934021499 221.0 4.333333333333333 0.6274906562103795 185.0 3.142857142857143 NaN 132.0 2.9583333333333335 0.8923775521996067 180.0 3.0 0.7973581048581053 188.0 3.123809523809524 NaN 
 3.00135934021499 261.0 4.6 NaN 343.0 3.2564102564102564 NaN 49.0 2.488888888888889 NaN 190.0 3.0 0.7646024151287314 364.0 3.1025641025641026 NaN 
@@ -98,7 +105,10 @@
 #####################################################################
 # End of data export. Simulation finished at: 2020-09-16T12:50+0000 #
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 78924d21d0b7204abe0b4659dbd7d51811d4c31f
 =======
 >>>>>>> 88c275fcf8f22bc4848b0f8b119a18abbf9e12ef
+=======
+>>>>>>> bd84e30be4412ccf95e8dc6e8e60fffac085de1d
 #####################################################################

@@ -1,4 +1,6 @@
-# Configuration
+# Do not double-build branches and PRs from this repo
+# Do not build auto-tagged versions
+if: repo != head_repo AND tag !~ /^[\w\.]+-\d+-\w+/
 
 _python_reference_version: &python_reference_version PYTHON="3.8.1"
 
@@ -123,3 +125,7 @@ jobs:
       os: windows
     - <<: *test_charts
       os: windows
+
+notifications:
+  email:
+    on_success: never
