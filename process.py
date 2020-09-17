@@ -366,6 +366,9 @@ if __name__ == '__main__':
                             darray.loc[experimentVars] = data[:, idx].A1
                 # Fold the dataset along the seed variables, producing the mean and stdev datasets
                 mergingVariables = [seed for seed in seedVars if seed in dataset.coords]
+                # Deal with the particular third experiment
+                if experiment == 'leaderelection':
+                    dataset = dataset.fillna(0)
                 means[experiment] = dataset.mean(dim = mergingVariables, skipna=True)
                 stdevs[experiment] = dataset.std(dim = mergingVariables, skipna=True)
                 medians[experiment] = dataset.median(dim = mergingVariables, skipna=True)
@@ -482,5 +485,46 @@ if __name__ == '__main__':
         ax.legend(ncol = 2)
         fig.tight_layout()
         fig.savefig(f'{output_directory}/converge_{nice_value}.pdf')
-#        plt.close(fig)
+        plt.close(fig)
     
+# Charts for the third experiment
+
+    leader_data = means['leaderelection']
+    leader_error = stdevs['leaderelection']
+    last_time = max(leader_data['time'])
+    last_time_data = leader_data.sel(time = last_time)
+    grains = last_time_data['grain']
+    centralities = ['random', 'pageRank', 'harmonic', 'closeness', 'degree']
+    metric_functions = [
+        (cluster_count, lambda label: f'leader-{label}[CountDistinct]'),
+        (cluster_neighbor_distance, lambda label: f'HopCountClusterClosestNeighborDistance[leader-{label}]'),
+        (cluster_intra_distance, lambda label: f'HopCountClusterIntraDistance[leader-{label}]'),
+    ]
+    for deployment in last_time_data['deploymentType']:
+        deployment_name = str(deployment.values)[:-1]
+        for count in last_time_data['nodeCount']:
+            count_name = beautifyValue(count)
+            for (metric_name, metric_function) in metric_functions:
+                fig, ax = make_line_chart(
+                    title = f"${metric_name}$, {deployment_name} topology, {count_name} nodes",
+                    xdata = grains,
+                    xlabel = unit_for('grain'),
+                    ylabel = f'${metric_name}$ (hops)',
+                    ydata = {
+                        centrality: (
+                            last_time_data.sel(deploymentType = deployment, nodeCount = count)[metric_function(centrality)],
+                            None #converge_error.sel(diameter = diameter)[metric].clip(0, diameter_value)
+                        )
+                        for centrality in centralities #if not 'central' in metric
+                    },
+                    linewidth = 2
+                )
+                ax.legend(ncol = 2)
+                ax.set_xlim(0, max(grains))
+                ax.set_ylim(0, None)
+                fig.tight_layout()
+                metric_printable = metric_name
+                for symbol in r".[]\/@:${}":
+                    metric_printable = metric_printable.replace(symbol, '')
+                fig.savefig(f'{output_directory}/leaderelection/leader_{metric_printable}_{deployment_name}_{count_name}.pdf')
+                plt.close(fig)
