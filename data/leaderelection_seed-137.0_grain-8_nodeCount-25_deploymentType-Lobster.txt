@@ -1,0 +1,42 @@
+#####################################################################
+# Alchemist log file - simulation started at: 2020-09-18T19:14+0000 #
+#####################################################################
+# seed = 137.0, nodeCount = 25, grain = 8, deploymentType = Lobster
+#
+# The columns have the following meaning: 
+# time leader-random[CountDistinct] HopCountClusterClosestNeighborDistance[leader-random] HopCountClusterIntraDistance[leader-random] leader-pageRank[CountDistinct] HopCountClusterClosestNeighborDistance[leader-pageRank] HopCountClusterIntraDistance[leader-pageRank] leader-harmonic[CountDistinct] HopCountClusterClosestNeighborDistance[leader-harmonic] HopCountClusterIntraDistance[leader-harmonic] leader-closeness[CountDistinct] HopCountClusterClosestNeighborDistance[leader-closeness] HopCountClusterIntraDistance[leader-closeness] leader-degree[CountDistinct] HopCountClusterClosestNeighborDistance[leader-degree] HopCountClusterIntraDistance[leader-degree] 
+0.0 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
+1.124582025117794 17.0 Infinity 0.23529411764705882 23.0 Infinity 0.043478260869565216 24.0 Infinity 0.020833333333333332 11.0 Infinity 0.43636363636363634 21.0 Infinity 0.09523809523809523 
+2.1245820251177943 5.0 Infinity 1.0 6.0 Infinity 0.9191919191919192 6.0 Infinity 0.9191919191919192 4.0 Infinity 1.0476190476190477 6.0 Infinity 0.9191919191919192 
+3.1245820251177943 2.0 Infinity 1.9749999999999999 2.0 Infinity 1.2324561403508771 2.0 Infinity 1.225 2.0 Infinity 2.325 2.0 Infinity 1.225 
+4.124582025117794 1.0 NaN 3.0 2.0 Infinity 1.225 1.0 NaN 2.08 1.0 NaN 4.44 1.0 NaN 2.08 
+5.124582025117794 1.0 NaN 3.0 2.0 Infinity 1.225 1.0 NaN 2.08 1.0 NaN 4.44 1.0 NaN 2.08 
+6.124582025117794 1.0 NaN 3.0 1.0 NaN 2.08 1.0 NaN 2.08 1.0 NaN 4.44 1.0 NaN 2.08 
+7.124582025117794 1.0 NaN 3.0 1.0 NaN 2.08 1.0 NaN 2.08 1.0 NaN 4.44 1.0 NaN 2.08 
+8.124582025117794 1.0 NaN 3.0 1.0 NaN 2.08 1.0 NaN 2.08 1.0 NaN 4.44 1.0 NaN 2.08 
+9.124582025117794 1.0 NaN 3.0 1.0 NaN 2.08 1.0 NaN 2.08 1.0 NaN 4.44 1.0 NaN 2.08 
+10.124582025117794 1.0 NaN 3.0 1.0 NaN 2.08 1.0 NaN 2.08 1.0 NaN 4.44 1.0 NaN 2.08 
+11.124582025117794 1.0 NaN 3.0 1.0 NaN 2.08 1.0 NaN 2.08 1.0 NaN 4.44 1.0 NaN 2.08 
+12.124582025117794 1.0 NaN 3.0 1.0 NaN 2.08 1.0 NaN 2.08 1.0 NaN 4.44 1.0 NaN 2.08 
+13.124582025117794 1.0 NaN 3.0 1.0 NaN 2.08 1.0 NaN 2.08 1.0 NaN 4.44 1.0 NaN 2.08 
+14.124582025117794 1.0 NaN 3.0 1.0 NaN 2.08 1.0 NaN 2.08 1.0 NaN 4.44 1.0 NaN 2.08 
+15.124582025117794 1.0 NaN 3.0 1.0 NaN 2.08 1.0 NaN 2.08 1.0 NaN 4.44 1.0 NaN 2.08 
+16.124582025117796 1.0 NaN 3.0 1.0 NaN 2.08 1.0 NaN 2.08 1.0 NaN 4.44 1.0 NaN 2.08 
+17.124582025117796 1.0 NaN 3.0 1.0 NaN 2.08 1.0 NaN 2.08 1.0 NaN 4.44 1.0 NaN 2.08 
+18.124582025117796 1.0 NaN 3.0 1.0 NaN 2.08 1.0 NaN 2.08 1.0 NaN 4.44 1.0 NaN 2.08 
+19.124582025117796 1.0 NaN 3.0 1.0 NaN 2.08 1.0 NaN 2.08 1.0 NaN 4.44 1.0 NaN 2.08 
+20.124582025117796 1.0 NaN 3.0 1.0 NaN 2.08 1.0 NaN 2.08 1.0 NaN 4.44 1.0 NaN 2.08 
+21.124582025117796 1.0 NaN 3.0 1.0 NaN 2.08 1.0 NaN 2.08 1.0 NaN 4.44 1.0 NaN 2.08 
+22.124582025117796 1.0 NaN 3.0 1.0 NaN 2.08 1.0 NaN 2.08 1.0 NaN 4.44 1.0 NaN 2.08 
+23.124582025117796 1.0 NaN 3.0 1.0 NaN 2.08 1.0 NaN 2.08 1.0 NaN 4.44 1.0 NaN 2.08 
+24.124582025117796 1.0 NaN 3.0 1.0 NaN 2.08 1.0 NaN 2.08 1.0 NaN 4.44 1.0 NaN 2.08 
+25.124582025117796 1.0 NaN 3.0 1.0 NaN 2.08 1.0 NaN 2.08 1.0 NaN 4.44 1.0 NaN 2.08 
+26.124582025117796 1.0 NaN 3.0 1.0 NaN 2.08 1.0 NaN 2.08 1.0 NaN 4.44 1.0 NaN 2.08 
+27.124582025117796 1.0 NaN 3.0 1.0 NaN 2.08 1.0 NaN 2.08 1.0 NaN 4.44 1.0 NaN 2.08 
+28.124582025117796 1.0 NaN 3.0 1.0 NaN 2.08 1.0 NaN 2.08 1.0 NaN 4.44 1.0 NaN 2.08 
+29.124582025117796 1.0 NaN 3.0 1.0 NaN 2.08 1.0 NaN 2.08 1.0 NaN 4.44 1.0 NaN 2.08 
+30.124582025117796 1.0 NaN 3.0 1.0 NaN 2.08 1.0 NaN 2.08 1.0 NaN 4.44 1.0 NaN 2.08 
+31.124582025117796 1.0 NaN 3.0 1.0 NaN 2.08 1.0 NaN 2.08 1.0 NaN 4.44 1.0 NaN 2.08 
+#####################################################################
+# End of data export. Simulation finished at: 2020-09-18T19:14+0000 #
+#####################################################################
