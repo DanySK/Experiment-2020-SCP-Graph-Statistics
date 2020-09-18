@@ -1,20 +1,20 @@
 #####################################################################
-# Alchemist log file - simulation started at: 2020-09-17T03:13+0000 #
+# Alchemist log file - simulation started at: 2020-09-18T16:22+0000 #
 #####################################################################
 # seed = 132.0, nodeCount = 400, grain = 7, deploymentType = RandomEuclidean
 #
 # The columns have the following meaning: 
 # time leader-random[CountDistinct] HopCountClusterClosestNeighborDistance[leader-random] HopCountClusterIntraDistance[leader-random] leader-pageRank[CountDistinct] HopCountClusterClosestNeighborDistance[leader-pageRank] HopCountClusterIntraDistance[leader-pageRank] leader-harmonic[CountDistinct] HopCountClusterClosestNeighborDistance[leader-harmonic] HopCountClusterIntraDistance[leader-harmonic] leader-closeness[CountDistinct] HopCountClusterClosestNeighborDistance[leader-closeness] HopCountClusterIntraDistance[leader-closeness] leader-degree[CountDistinct] HopCountClusterClosestNeighborDistance[leader-degree] HopCountClusterIntraDistance[leader-degree] 
 0.0 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
-1.0010635705302053 74.0 5.0 0.5888690563032668 238.0 3.9766081871345027 0.21438247235653152 320.0 3.961904761904762 0.10645833333333332 38.0 5.0 1.2829769507378879 232.0 4.3238095238095235 0.23192733990147787 
-2.0010635705302056 11.0 NaN NaN 43.0 3.3333333333333335 NaN 125.0 3.8 NaN 12.0 NaN NaN 55.0 3.6666666666666665 NaN 
-3.0010635705302056 6.0 NaN NaN 9.0 3.0 NaN 50.0 2.2 NaN 8.0 NaN NaN 12.0 NaN NaN 
-4.001063570530206 7.0 NaN NaN 7.0 3.0 NaN 25.0 2.5 NaN 17.0 NaN NaN 9.0 NaN NaN 
-5.001063570530206 18.0 NaN NaN 8.0 3.0 NaN 13.0 2.0 NaN 14.0 NaN NaN 12.0 NaN NaN 
-6.001063570530206 61.0 3.2666666666666666 NaN 32.0 3.4 NaN 22.0 3.0 NaN 14.0 NaN NaN 42.0 2.8333333333333335 NaN 
-7.001063570530206 51.0 8.0 0.34240756248481363 85.0 3.238095238095238 NaN 75.0 3.0714285714285716 NaN 53.0 4.0 NaN 31.0 NaN NaN 
-8.001063570530206 15.0 NaN 1.573003824161215 47.0 5.333333333333333 NaN 50.0 3.6 NaN 23.0 NaN NaN 62.0 4.0 NaN 
-9.001063570530206 7.0 NaN NaN 14.0 NaN NaN 32.0 4.0 NaN 7.0 NaN NaN 28.0 5.0 NaN 
+1.0010635705302053 74.0 Infinity 0.5888690563032668 238.0 Infinity 0.21438247235653152 320.0 Infinity 0.10645833333333332 38.0 Infinity 1.2829769507378879 232.0 Infinity 0.23192733990147787 
+2.0010635705302056 11.0 NaN NaN 43.0 Infinity NaN 125.0 Infinity NaN 12.0 NaN NaN 55.0 Infinity NaN 
+3.0010635705302056 6.0 NaN NaN 9.0 Infinity NaN 50.0 Infinity NaN 8.0 NaN NaN 12.0 NaN NaN 
+4.001063570530206 7.0 NaN NaN 7.0 Infinity NaN 25.0 Infinity NaN 17.0 NaN NaN 9.0 NaN NaN 
+5.001063570530206 18.0 NaN NaN 8.0 Infinity NaN 13.0 Infinity NaN 14.0 NaN NaN 12.0 NaN NaN 
+6.001063570530206 61.0 Infinity NaN 32.0 Infinity NaN 22.0 Infinity NaN 14.0 NaN NaN 42.0 Infinity NaN 
+7.001063570530206 51.0 Infinity 0.34240756248481363 85.0 Infinity NaN 75.0 Infinity NaN 53.0 Infinity NaN 31.0 NaN NaN 
+8.001063570530206 15.0 NaN 1.573003824161215 47.0 Infinity NaN 50.0 Infinity NaN 23.0 NaN NaN 62.0 Infinity NaN 
+9.001063570530206 7.0 NaN NaN 14.0 NaN NaN 32.0 Infinity NaN 7.0 NaN NaN 28.0 Infinity NaN 
 10.001063570530206 7.0 NaN NaN 6.0 NaN 2.2026217110775934 8.0 NaN 1.767242254810053 6.0 NaN 3.238839584332625 11.0 NaN NaN 
 11.001063570530206 6.0 NaN 2.5159240476917937 5.0 NaN 2.4814793866264457 5.0 NaN 2.581378553592294 6.0 NaN 3.238839584332625 7.0 NaN NaN 
 12.001063570530206 6.0 NaN 2.5159240476917937 5.0 NaN 2.4814793866264457 5.0 NaN 2.581378553592294 6.0 NaN 3.238839584332625 6.0 NaN NaN 
@@ -53,5 +53,5 @@
 45.00106357053021 6.0 NaN 2.3909240476917937 5.0 NaN 2.4814793866264457 5.0 NaN 2.581378553592294 6.0 NaN 3.238839584332625 6.0 NaN 2.5732807476745507 
 46.00106357053021 6.0 NaN 2.3909240476917937 5.0 NaN 2.4814793866264457 5.0 NaN 2.581378553592294 6.0 NaN 3.238839584332625 6.0 NaN 2.5732807476745507 
 #####################################################################
-# End of data export. Simulation finished at: 2020-09-17T04:53+0000 #
+# End of data export. Simulation finished at: 2020-09-18T16:36+0000 #
 #####################################################################

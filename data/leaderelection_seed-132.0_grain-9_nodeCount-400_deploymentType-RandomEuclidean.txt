@@ -1,20 +1,20 @@
 #####################################################################
-# Alchemist log file - simulation started at: 2020-09-17T02:39+0000 #
+# Alchemist log file - simulation started at: 2020-09-18T16:02+0000 #
 #####################################################################
 # seed = 132.0, nodeCount = 400, grain = 9, deploymentType = RandomEuclidean
 #
 # The columns have the following meaning: 
 # time leader-random[CountDistinct] HopCountClusterClosestNeighborDistance[leader-random] HopCountClusterIntraDistance[leader-random] leader-pageRank[CountDistinct] HopCountClusterClosestNeighborDistance[leader-pageRank] HopCountClusterIntraDistance[leader-pageRank] leader-harmonic[CountDistinct] HopCountClusterClosestNeighborDistance[leader-harmonic] HopCountClusterIntraDistance[leader-harmonic] leader-closeness[CountDistinct] HopCountClusterClosestNeighborDistance[leader-closeness] HopCountClusterIntraDistance[leader-closeness] leader-degree[CountDistinct] HopCountClusterClosestNeighborDistance[leader-degree] HopCountClusterIntraDistance[leader-degree] 
 0.0 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
-1.0010635705302053 74.0 5.0 0.5928642529562305 238.0 3.9766081871345027 0.21438247235653152 320.0 3.961904761904762 0.10645833333333332 38.0 5.0 1.2908625997511236 232.0 4.3238095238095235 0.23192733990147787 
-2.0010635705302056 10.0 NaN NaN 43.0 3.3333333333333335 NaN 124.0 4.055555555555555 NaN 12.0 NaN NaN 55.0 3.6666666666666665 NaN 
-3.0010635705302056 7.0 NaN NaN 9.0 3.0 NaN 42.0 3.0 NaN 8.0 NaN NaN 13.0 NaN NaN 
-4.001063570530206 6.0 NaN NaN 6.0 3.0 NaN 19.0 2.6666666666666665 NaN 7.0 NaN NaN 7.0 NaN NaN 
-5.001063570530206 6.0 NaN NaN 9.0 3.3333333333333335 NaN 9.0 NaN NaN 6.0 NaN NaN 10.0 NaN NaN 
-6.001063570530206 6.0 NaN NaN 11.0 3.0 NaN 10.0 4.0 NaN 37.0 NaN NaN 10.0 NaN NaN 
-7.001063570530206 46.0 3.0 NaN 49.0 3.1666666666666665 NaN 25.0 3.0 NaN 20.0 NaN 0.9786301070135659 30.0 NaN NaN 
-8.001063570530206 31.0 4.0 0.4299428180744607 52.0 4.166666666666667 0.24864607965873792 21.0 NaN NaN 7.0 NaN NaN 28.0 4.0 NaN 
-9.001063570530206 10.0 NaN 1.3283386090467015 14.0 NaN NaN 23.0 4.0 NaN 6.0 NaN NaN 18.0 NaN 0.5724462182198572 
+1.0010635705302053 74.0 Infinity 0.5928642529562305 238.0 Infinity 0.21438247235653152 320.0 Infinity 0.10645833333333332 38.0 Infinity 1.2908625997511236 232.0 Infinity 0.23192733990147787 
+2.0010635705302056 10.0 NaN NaN 43.0 Infinity NaN 124.0 Infinity NaN 12.0 NaN NaN 55.0 Infinity NaN 
+3.0010635705302056 7.0 NaN NaN 9.0 Infinity NaN 42.0 Infinity NaN 8.0 NaN NaN 13.0 NaN NaN 
+4.001063570530206 6.0 NaN NaN 6.0 Infinity NaN 19.0 Infinity NaN 7.0 NaN NaN 7.0 NaN NaN 
+5.001063570530206 6.0 NaN NaN 9.0 Infinity NaN 9.0 NaN NaN 6.0 NaN NaN 10.0 NaN NaN 
+6.001063570530206 6.0 NaN NaN 11.0 Infinity NaN 10.0 Infinity NaN 37.0 NaN NaN 10.0 NaN NaN 
+7.001063570530206 46.0 Infinity NaN 49.0 Infinity NaN 25.0 Infinity NaN 20.0 NaN 0.9786301070135659 30.0 NaN NaN 
+8.001063570530206 31.0 Infinity 0.4299428180744607 52.0 Infinity 0.24864607965873792 21.0 NaN NaN 7.0 NaN NaN 28.0 Infinity NaN 
+9.001063570530206 10.0 NaN 1.3283386090467015 14.0 NaN NaN 23.0 Infinity NaN 6.0 NaN NaN 18.0 NaN 0.5724462182198572 
 10.001063570530206 8.0 NaN 1.4754034200385355 7.0 NaN NaN 9.0 NaN 1.0342481787366333 5.0 NaN 3.3789648724987074 7.0 NaN NaN 
 11.001063570530206 7.0 NaN 1.6378560094558055 5.0 NaN NaN 6.0 NaN 1.6763722681049498 5.0 NaN 3.3789648724987074 6.0 NaN 1.7155879543794594 
 12.001063570530206 7.0 NaN 1.6378560094558055 4.0 NaN 2.6083772240417806 6.0 NaN 1.6763722681049498 5.0 NaN 3.3789648724987074 6.0 NaN 1.7155879543794594 
@@ -53,5 +53,5 @@
 45.00106357053021 7.0 NaN 1.6378560094558055 4.0 NaN 2.6083772240417806 6.0 NaN 1.6763722681049498 5.0 NaN 3.3789648724987074 6.0 NaN 1.7155879543794594 
 46.00106357053021 7.0 NaN 1.6378560094558055 4.0 NaN 2.6083772240417806 6.0 NaN 1.6763722681049498 5.0 NaN 3.3789648724987074 6.0 NaN 1.7155879543794594 
 #####################################################################
-# End of data export. Simulation finished at: 2020-09-17T04:19+0000 #
+# End of data export. Simulation finished at: 2020-09-18T16:33+0000 #
 #####################################################################
