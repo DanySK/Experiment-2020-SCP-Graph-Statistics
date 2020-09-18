@@ -1,21 +1,21 @@
 #####################################################################
-# Alchemist log file - simulation started at: 2020-09-17T04:42+0000 #
+# Alchemist log file - simulation started at: 2020-09-18T16:23+0000 #
 #####################################################################
 # seed = 77.0, nodeCount = 400, grain = 8, deploymentType = RandomEuclidean
 #
 # The columns have the following meaning: 
 # time leader-random[CountDistinct] HopCountClusterClosestNeighborDistance[leader-random] HopCountClusterIntraDistance[leader-random] leader-pageRank[CountDistinct] HopCountClusterClosestNeighborDistance[leader-pageRank] HopCountClusterIntraDistance[leader-pageRank] leader-harmonic[CountDistinct] HopCountClusterClosestNeighborDistance[leader-harmonic] HopCountClusterIntraDistance[leader-harmonic] leader-closeness[CountDistinct] HopCountClusterClosestNeighborDistance[leader-closeness] HopCountClusterIntraDistance[leader-closeness] leader-degree[CountDistinct] HopCountClusterClosestNeighborDistance[leader-degree] HopCountClusterIntraDistance[leader-degree] 
 0.0 NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN 
-1.0008627412927418 73.0 Infinity 0.6909550663463041 230.0 Infinity 0.2610869565217391 318.0 Infinity 0.1160901467505241 35.0 NaN 0.9194556247885088 239.0 Infinity 0.25315301852958755 
-2.0008627412927416 15.0 NaN NaN 46.0 Infinity NaN 140.0 Infinity NaN 8.0 NaN NaN 51.0 NaN NaN 
-3.0008627412927416 8.0 NaN NaN 9.0 Infinity NaN 69.0 Infinity NaN 6.0 NaN 2.383341944372686 12.0 NaN NaN 
-4.0008627412927416 8.0 NaN NaN 5.0 NaN NaN 36.0 Infinity NaN 6.0 NaN NaN 5.0 NaN NaN 
+1.0008627412927418 73.0 3.3333333333333335 0.6909550663463041 230.0 Infinity 0.2610869565217391 318.0 4.140350877192983 0.1160901467505241 35.0 NaN 0.9194556247885088 239.0 Infinity 0.25315301852958755 
+2.0008627412927416 15.0 NaN NaN 46.0 Infinity NaN 140.0 4.607142857142857 NaN 8.0 NaN NaN 51.0 NaN NaN 
+3.0008627412927416 8.0 NaN NaN 9.0 Infinity NaN 69.0 5.0 NaN 6.0 NaN 2.383341944372686 12.0 NaN NaN 
+4.0008627412927416 8.0 NaN NaN 5.0 NaN NaN 36.0 2.6666666666666665 NaN 6.0 NaN NaN 5.0 NaN NaN 
 5.0008627412927416 26.0 NaN NaN 5.0 NaN NaN 10.0 NaN NaN 8.0 NaN NaN 5.0 NaN NaN 
-6.0008627412927416 52.0 Infinity NaN 4.0 NaN NaN 7.0 NaN NaN 12.0 NaN NaN 4.0 NaN NaN 
+6.0008627412927416 52.0 3.0 NaN 4.0 NaN NaN 7.0 NaN NaN 12.0 NaN NaN 4.0 NaN NaN 
 7.0008627412927416 27.0 NaN NaN 17.0 NaN NaN 5.0 NaN NaN 14.0 NaN NaN 4.0 NaN NaN 
 8.000862741292742 10.0 NaN 1.7599376136107772 18.0 NaN 0.7581423721281035 26.0 NaN NaN 5.0 NaN 2.32769193915439 20.0 NaN NaN 
-9.000862741292742 7.0 NaN NaN 4.0 NaN 3.2449740079098 90.0 Infinity NaN 5.0 NaN 2.3381659714759295 26.0 NaN NaN 
-10.000862741292742 4.0 NaN 3.7129483172658224 4.0 NaN 3.2449740079098 40.0 Infinity 0.5779937478588557 5.0 NaN 2.3381659714759295 13.0 NaN 0.9263338879057297 
+9.000862741292742 7.0 NaN NaN 4.0 NaN 3.2449740079098 90.0 5.833333333333333 NaN 5.0 NaN 2.3381659714759295 26.0 NaN NaN 
+10.000862741292742 4.0 NaN 3.7129483172658224 4.0 NaN 3.2449740079098 40.0 6.0 0.5779937478588557 5.0 NaN 2.3381659714759295 13.0 NaN 0.9263338879057297 
 11.000862741292742 4.0 NaN 3.687981395306669 4.0 NaN 3.2449740079098 10.0 NaN NaN 5.0 NaN 2.3381659714759295 6.0 NaN NaN 
 12.000862741292742 4.0 NaN 3.713383181020954 4.0 NaN 3.2449740079098 7.0 NaN NaN 5.0 NaN 2.3381659714759295 4.0 NaN 2.832734258500639 
 13.000862741292742 4.0 NaN 3.713383181020954 4.0 NaN 3.2449740079098 6.0 NaN NaN 5.0 NaN 2.3381659714759295 4.0 NaN 2.832734258500639 
@@ -49,5 +49,5 @@
 41.00086274129274 4.0 NaN 3.713383181020954 4.0 NaN 3.2449740079098 4.0 NaN 2.849058514099536 5.0 NaN 2.3381659714759295 4.0 NaN 2.832734258500639 
 42.00086274129274 4.0 NaN 3.713383181020954 4.0 NaN 3.2449740079098 4.0 NaN 2.849058514099536 5.0 NaN 2.3381659714759295 4.0 NaN 2.832734258500639 
 #####################################################################
-# End of data export. Simulation finished at: 2020-09-17T09:33+0000 #
+# End of data export. Simulation finished at: 2020-09-18T16:39+0000 #
 #####################################################################
